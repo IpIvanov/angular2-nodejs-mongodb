@@ -1,4 +1,4 @@
-<img width="50" src="https://angular.io/resources/images/logos/angular2/angular.svg" />
+<img width="50" src="https://hackbulgaria.com/media/angilar2_75BKQAg.png" />
 <img width="150" src="https://i.cloudup.com/zfY6lL7eFa-3000x3000.png" />
 <img width="150" src="https://upload.wikimedia.org/wikipedia/en/4/45/MongoDB-Logo.svg" />
 <img width="150" src="http://logos-download.com/wp-content/uploads/2016/09/Heroku_logo.png" />
