@@ -1,0 +1,41 @@
+<h2>Dashboard component</h2>
+
+<h3>Feeds</h3>
+<app-ui-notes *ngIf="!(feeds$ | async)?.length" type="info" text="No feed, add one."></app-ui-notes>
+
+<div class="feed animation" *ngFor="let item of feeds$ | async">
+  <a>{{item.name}}</a>
+  <div class="text">
+    {{item.text}}
+  </div>
+  <div class="actions">
+    <a class="reply"><button class="ui button icon basic red" (click)="removeFeed(item.id)">Remove</button></a>
+  </div>
+  <div class="comments">
+
+    <div class="comment animation animation-comment" *ngFor="let comment of item?.comments">
+      <div class="text">
+        {{comment.text}}
+      </div>
+    </div>
+
+    <form class="form" #commentForm="ngForm" (submit)="submitCommentOnFeed(item.id, commentForm)" [ngClass]="{'error': commentForm.errors && (commentForm.dirty || commentForm.touched)}">
+      <div class="field">
+        <input placeholder="Enter comment..." type="text" name="text" required ngModel />
+      </div>
+      <button [disabled]="!commentForm.valid" class="ui blue labeled submit icon button">
+        <i class="icon edit"></i> Add comment
+      </button>
+    </form>
+  </div>
+  <div class="clear"></div>
+</div>
+
+<br/>
+
+<form class="form" [formGroup]="form">
+  <app-ui-input label="Name" placeholder="Enter name...." [control]="form.get('name')"></app-ui-input>
+  <app-ui-input label="Text" placeholder="Enter text...." [control]="form.get('text')"></app-ui-input>
+
+  <app-ui-button [disabled]="!form.valid"  text="Add Feed" (click)="submitFeed()"></app-ui-button>
+</form>
