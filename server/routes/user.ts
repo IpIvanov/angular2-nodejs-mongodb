@@ -4,7 +4,14 @@ let MongoClient = require('mongodb').MongoClient
 
 
 let mongoose = require('mongoose');
-let User = require('../schemas/user.schema.js');
+let Schema = mongoose.Schema;
+
+let userSchema = new Schema({
+    username: {type: String, required: true, unique: true},
+    password: {type: String, required: true}
+});
+
+let User = mongoose.model('userSchema', userSchema);
 
 
 // Connection URL
@@ -20,38 +27,14 @@ db.once('open', function () {
 
 const userRouter: Router = Router();
 
-const userStatic = {
-    "id": 1,
-    "name": "Leanne Graham",
+const userStatic = new User({
     "username": "Bret",
-    "email": "Sincere@april.biz",
-    "address": {
-        "street": "Kulas Light",
-        "suite": "Apt. 556",
-        "city": "Gwenborough",
-        "zipcode": "92998-3874",
-        "geo": {
-            "lat": "-37.3159",
-            "lng": "81.1496"
-        }
-    },
-    "phone": "1-770-736-8031 x56442",
-    "website": "hildegard.org",
-    "company": {
-        "name": "Romaguera-Crona",
-        "catchPhrase": "Multi-layered client-server neural-net",
-        "bs": "harness real-time e-markets"
-    }
-};
+    "password": "Sincere@april.biz"
+});
 
 
 userRouter.get("/", (request: Request, response: Response) => {
-    // Use connect method to connect to the Server
-    const user = new User({
-        "name": "Leanne Graham1",
-        "password": "Bret"
-    });
-    user.save(function (err, data) {
+    userStatic.save(function (err, data) {
         if (err) {
             console.log(err);
             response.json(err);
