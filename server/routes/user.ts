@@ -4,7 +4,7 @@ let MongoClient = require('mongodb').MongoClient
 
 
 let mongoose = require('mongoose');
-let User = require('../schemas/user.schema');
+let User = require('../schemas/user.schema.js');
 
 
 // Connection URL
