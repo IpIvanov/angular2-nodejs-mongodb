@@ -1,16 +1,26 @@
 import {Router, Response, Request} from "express";
-var MongoClient = require('mongodb').MongoClient
+let MongoClient = require('mongodb').MongoClient
     , assert = require('assert');
 
 
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
+let User = require('../schemas/user.schema');
+
 
 // Connection URL
 let url = 'mongodb://heroku_mglrv19b:5infqoqqes5dro3etjqvv28l04@ds135689.mlab.com:35689/heroku_mglrv19b';
+mongoose.connect(url);
+var db = mongoose.connection;
+db.on('error', function (err) {
+    console.log('connection error', err);
+});
+db.once('open', function () {
+    console.log('connected.');
+});
 
 const userRouter: Router = Router();
 
-const user = {
+const userStatic = {
     "id": 1,
     "name": "Leanne Graham",
     "username": "Bret",
@@ -34,17 +44,23 @@ const user = {
     }
 };
 
+
 userRouter.get("/", (request: Request, response: Response) => {
     // Use connect method to connect to the Server
-    MongoClient.connect(url, function (err, db) {
-        assert.equal(null, err);
-        db.collection('users').insertOne(user);
-        console.log("User inserted successfully!");
-
-        db.close();
+    const user = new User({
+        "name": "Leanne Graham1",
+        "password": "Bret"
     });
-
-    response.json(user);
+    user.save(function (err, data) {
+        if (err) {
+            console.log(err);
+            response.json(err);
+        }
+        else {
+            response.json(data);
+            console.log('Saved ', data);
+        }
+    });
 });
 
 export {userRouter};
