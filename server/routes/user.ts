@@ -3,6 +3,8 @@ var MongoClient = require('mongodb').MongoClient
     , assert = require('assert');
 
 
+var mongoose = require('mongoose');
+
 // Connection URL
 let url = 'mongodb://heroku_mglrv19b:5infqoqqes5dro3etjqvv28l04@ds135689.mlab.com:35689/heroku_mglrv19b';
 

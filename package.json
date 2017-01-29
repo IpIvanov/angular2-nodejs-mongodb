@@ -51,6 +51,8 @@
     "express": "^4.13.4",
     "express-jwt": "^3.3.0",
     "jsonwebtoken": "^5.7.0",
+    "mongodb": "^2.2.22",
+    "mongoose": "^4.8.0",
     "ngrx-store-freeze": "^0.1.6",
     "node-uuid": "^1.4.7",
     "normalize.css": "^5.0.0",
@@ -60,8 +62,7 @@
     "ts-node": "1.2.1",
     "tslint": "^4.0.0",
     "typescript": "~2.0.3",
-    "zone.js": "^0.7.2",
-    "mongodb": "^2.2.22"
+    "zone.js": "^0.7.2"
   },
   "devDependencies": {
     "codelyzer": "^2.0.0-beta.4",
