@@ -24,7 +24,7 @@ Angular 2 app with nodejs as backend server. Integrated easy deploy to heroku an
 ## Install / Development
 
 ```bash
-git clone https://github.com/vladotesanovic/angular2-express-starter
+git clone https://github.com/IpIvanov/angular2-nodejs-mongodb
 cd angular2-express-starter
 
 # Install dependencies
