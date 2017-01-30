@@ -1,9 +1,10 @@
-<app-ui-top-navigation></app-ui-top-navigation>
+<md-navigation></md-navigation>
 
-<app-ui-sub-navigation [title]="(observable$ | async)?.title" [description]="(observable$ | async)?.text"></app-ui-sub-navigation>
+<app-ui-sub-navigation [title]="(observable$ | async)?.title"
+                       [description]="(observable$ | async)?.text"></app-ui-sub-navigation>
 
 <div class="main">
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </div>
 
 <router-outlet name='modal'></router-outlet>
