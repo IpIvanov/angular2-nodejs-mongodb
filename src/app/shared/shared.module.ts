@@ -35,7 +35,7 @@ import {MaterialModule} from '@angular/material';
         RouterModule,
         FormsModule,
         ReactiveFormsModule,
-        MaterialModule
+        MaterialModule.forRoot()
     ],
     exports: [
         ModalComponent,
