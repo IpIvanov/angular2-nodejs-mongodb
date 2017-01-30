@@ -1,6 +1,11 @@
 {
-  "name": "Angular2 Express Starter",
-  "description": "Starter application of Angular2 with Express",
-  "repository": "https://github.com/vladotesanovic/angular2-express-starter",
-  "keywords": ["angular2", "express", "node"]
+  "name": "angular2 nodejs mongodb",
+  "description": "Angular 2 app with nodejs as backend server",
+  "repository": "https://github.com/IpIvanov/angular2-nodejs-mongodb",
+  "keywords": [
+    "angular2",
+    "express",
+    "node",
+    "mongodb"
+  ]
 }
