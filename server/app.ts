@@ -8,8 +8,13 @@ import {protectedRouter} from './routes/protected';
 import {publicRouter} from './routes/public';
 import {feedRouter} from './routes/feed';
 import {userRouter} from "./routes/user";
+import {DatabaseConInit} from "./config/database"
+
 
 const app: express.Application = express();
+// init db connection
+DatabaseConInit();
+
 
 app.disable('x-powered-by');
 
