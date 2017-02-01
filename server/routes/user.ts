@@ -11,7 +11,7 @@ userRouter.get('/users', async (request: Request, response: Response) => {
 });
 
 
-/** @description set user in db 
+/** @description set user in db
 */
 userRouter.post('/user', async (request: Request, response: Response) => {
     console.log(request.body);
