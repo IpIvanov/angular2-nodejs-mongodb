@@ -1,10 +1,30 @@
-<h2>Signup component</h2>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum iste laboriosam laudantium nam nemo! Beatae
-    consectetur dolorum ducimus error excepturi impedit minima, nam nisi placeat porro quae quo rem sit!</p>
-<!--<form class="form" [formGroup]="form">-->
-<!--<app-ui-input label="Name" placeholder="Enter name...." [control]="form.get('name')"></app-ui-input>-->
-<!--<app-ui-input label="Text" placeholder="Enter text...." [control]="form.get('text')"></app-ui-input>-->
-
-<!--<app-ui-button [disabled]="!form.valid"  text="Add Feed Changed" (click)="submitFeed()"></app-ui-button>-->
-<!--</form>-->
+<h2>Signup</h2>
+<form [formGroup]="user" (ngSubmit)="submitForm()" class="form">
+    <md-input-container>
+        <input md-input placeholder="Name" formControlName='username'>
+    </md-input-container>
+    <div class="error" *ngIf="user.get('username').hasError('required') && user.get('username').touched">
+        Username is required
+    </div>
+    <md-input-container>
+        <input md-input placeholder="Password" formControlName='password'>
+    </md-input-container>
+    <md-input-container>
+        <input md-input placeholder="Confirm password" formControlName='confirmPassword'>
+    </md-input-container>
+    <md-select placeholder="Location" formControlName='location'>
+        <md-option *ngFor="let country of countries" [value]="country.code">
+            {{country.name}}
+        </md-option>
+    </md-select>
+    <div formGroupName="info">
+        <md-input-container>
+            <input md-input placeholder="Age" type="number" formControlName='age'>
+        </md-input-container>
+        <md-radio-group formControlName='sex'>
+            <md-radio-button value="male" name="sex">Male</md-radio-button>
+            <md-radio-button value="female" name="sex">Female</md-radio-button>
+        </md-radio-group>
+    </div>
+    <button color="primary" type="submit" md-raised-button [disabled]="user.invalid">Sign up</button>
+</form>

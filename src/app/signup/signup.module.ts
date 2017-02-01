@@ -1,10 +1,12 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {SignupComponent} from './signup.component';
-import {routing} from './signup.router';
-import {SharedModule} from '../shared/shared.module';
+import { SignupComponent } from './signup.component';
+import { routing } from './signup.router';
+import { SharedModule } from '../shared/shared.module';
+
+import { MaterialModule } from '@angular/material';
 
 @NgModule({
     imports: [
@@ -12,7 +14,8 @@ import {SharedModule} from '../shared/shared.module';
         FormsModule,
         ReactiveFormsModule,
         SharedModule,
-        routing
+        routing,
+        MaterialModule
     ],
     declarations: [
         SignupComponent
