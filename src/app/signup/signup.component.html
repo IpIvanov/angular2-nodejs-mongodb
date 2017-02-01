@@ -1,52 +1,56 @@
-<md-card-content>
-    <md-card class="card-container">
-        <md-card-header>
-            <md-card-title>Sign up</md-card-title>
-        </md-card-header>
-        <md-grid-list cols="2">
-            <md-grid-tile>
-                <form [formGroup]="user" (ngSubmit)="submitForm()" class="form">
-                    <md-input-container class="input-container">
-                        <input md-input placeholder="Name" formControlName='username'>
-                    </md-input-container>
-                    <!--<div class="error" *ngIf="user.get('username').hasError('required') && user.get('username').touched">
+<div class="container">
+    <div class="row">
+        <md-card-content class="card-container">
+            <md-card>
+                <md-card-header>
+                    <md-card-title>Sign up</md-card-title>
+                </md-card-header>
+                <md-grid-list cols="2">
+                    <md-grid-tile>
+                        <form [formGroup]="user" (ngSubmit)="submitForm()" class="form">
+                            <md-input-container class="input-container">
+                                <input md-input placeholder="Name" formControlName='username'>
+                            </md-input-container>
+                            <!--<div class="error" *ngIf="user.get('username').hasError('required') && user.get('username').touched">
                         Username is required
                     </div>-->
-                    <md-input-container class="input-container">
-                        <input md-input placeholder="Password" formControlName='password'>
-                    </md-input-container>
-                    <md-select formControlName='location' class="input-container">
-                        <md-option *ngFor="let country of countries" [value]="country.code">
-                            {{country.name}}
-                        </md-option>
-                    </md-select>
-                </form>
-            </md-grid-tile>
-            <md-grid-tile>
-                <form [formGroup]="user" (ngSubmit)="submitForm()" class="form">
-                    <md-input-container class="input-container">
-                        <input md-input placeholder="Email" formControlName='email'>
-                    </md-input-container>
+                            <md-input-container class="input-container">
+                                <input md-input placeholder="Password" formControlName='password'>
+                            </md-input-container>
+                            <md-select formControlName='location' class="input-container">
+                                <md-option *ngFor="let country of countries" [value]="country.code">
+                                    {{country.name}}
+                                </md-option>
+                            </md-select>
+                        </form>
+                    </md-grid-tile>
+                    <md-grid-tile>
+                        <form [formGroup]="user" (ngSubmit)="submitForm()" class="form">
+                            <md-input-container class="input-container">
+                                <input md-input placeholder="Email" formControlName='email'>
+                            </md-input-container>
 
-                    <md-input-container class="input-container">
-                        <input md-input placeholder="Confirm password" formControlName='confirmPassword'>
-                    </md-input-container>
-                    <div formGroupName="info" class="input-container">
-                        <md-input-container>
-                            <input md-input placeholder="Age" type="number" formControlName='age'>
-                        </md-input-container>
-                        <md-radio-group formControlName='sex'>
-                            <md-radio-button value="male" name="sex">Male</md-radio-button>
-                            <md-radio-button value="female" name="sex">Female</md-radio-button>
-                        </md-radio-group>
-                    </div>
-                </form>
-            </md-grid-tile>
-        </md-grid-list>
-        <md-card-actions>
-            <form [formGroup]="user" (ngSubmit)="submitForm()" class="form">
-                <button color="primary" type="submit" md-raised-button [disabled]="user.invalid">Sign up</button>
-            </form>
-        </md-card-actions>
-    </md-card>
-</md-card-content>
+                            <md-input-container class="input-container">
+                                <input md-input placeholder="Confirm password" formControlName='confirmPassword'>
+                            </md-input-container>
+                            <div formGroupName="info" class="input-container">
+                                <md-input-container>
+                                    <input md-input placeholder="Age" type="number" formControlName='age'>
+                                </md-input-container>
+                                <md-radio-group formControlName='sex'>
+                                    <md-radio-button value="male" name="sex">Male</md-radio-button>
+                                    <md-radio-button value="female" name="sex">Female</md-radio-button>
+                                </md-radio-group>
+                            </div>
+                        </form>
+                    </md-grid-tile>
+                </md-grid-list>
+                <md-card-actions>
+                    <form [formGroup]="user" (ngSubmit)="submitForm()" class="form">
+                        <button color="primary" type="submit" md-raised-button [disabled]="user.invalid">Sign up</button>
+                    </form>
+                </md-card-actions>
+            </md-card>
+        </md-card-content>
+    </div>
+</div>
