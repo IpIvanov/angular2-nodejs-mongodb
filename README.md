@@ -30,8 +30,11 @@ cd angular2-nodejs-mongodb
 # Install dependencies
 npm install
 
-# start server
+# start server and client
 npm run start
+
+# start client and serve app at url: http://localhost:4200
+ng serve
 
 # Client url: http://localhost:4200
 # Application ( epxress ) API: http://localhost:4300
