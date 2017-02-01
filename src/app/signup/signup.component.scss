@@ -1,8 +1,39 @@
-.card-container {
+@import '../../theme.scss';
+:host {
     display: block;
-    width: 100%;
+    margin-top: 40px;
 }
 
-:host {
-    width: 100%;
+.card-container {
+    display: block;
+    max-width: 500px;
+}
+
+.input-container,
+.input-radio {
+    margin: 5px;
+}
+
+.filled {
+    color: $accent-color;
+}
+
+.invalid {
+    color: $warn;
+}
+
+.error {
+    color: $warn;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.error-text {
+    color: $warn;
+    opacity: 0.38;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    font-size: 11px;
 }

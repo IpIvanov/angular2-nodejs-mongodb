@@ -17,13 +17,18 @@ const schema = new Schema({
     },
     location: String,
     info: {
-        age: Number,
         sex: String
     },
-    created_at: { type: Date, default: Date.now },
-    updated_at: { type: Date, default: Date.now }
+    created_at: {
+        type: Date,
+        default: Date.now
+    },
+    updated_at: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 let User = mongoose.model('User', schema);
 
-export { User }
+export {User}

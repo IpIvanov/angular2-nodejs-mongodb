@@ -1,56 +1,44 @@
-<div class="container">
-    <div class="row">
-        <md-card-content class="card-container">
-            <md-card>
-                <md-card-header>
-                    <md-card-title>Sign up</md-card-title>
-                </md-card-header>
-                <md-grid-list cols="2">
-                    <md-grid-tile>
-                        <form [formGroup]="user" (ngSubmit)="submitForm()" class="form">
-                            <md-input-container class="input-container">
-                                <input md-input placeholder="Name" formControlName='username'>
-                            </md-input-container>
-                            <!--<div class="error" *ngIf="user.get('username').hasError('required') && user.get('username').touched">
-                        Username is required
-                    </div>-->
-                            <md-input-container class="input-container">
-                                <input md-input placeholder="Password" formControlName='password'>
-                            </md-input-container>
-                            <md-select formControlName='location' class="input-container">
-                                <md-option *ngFor="let country of countries" [value]="country.code">
-                                    {{country.name}}
-                                </md-option>
-                            </md-select>
-                        </form>
-                    </md-grid-tile>
-                    <md-grid-tile>
-                        <form [formGroup]="user" (ngSubmit)="submitForm()" class="form">
-                            <md-input-container class="input-container">
-                                <input md-input placeholder="Email" formControlName='email'>
-                            </md-input-container>
-
-                            <md-input-container class="input-container">
-                                <input md-input placeholder="Confirm password" formControlName='confirmPassword'>
-                            </md-input-container>
-                            <div formGroupName="info" class="input-container">
-                                <md-input-container>
-                                    <input md-input placeholder="Age" type="number" formControlName='age'>
-                                </md-input-container>
-                                <md-radio-group formControlName='sex'>
-                                    <md-radio-button value="male" name="sex">Male</md-radio-button>
-                                    <md-radio-button value="female" name="sex">Female</md-radio-button>
-                                </md-radio-group>
-                            </div>
-                        </form>
-                    </md-grid-tile>
-                </md-grid-list>
-                <md-card-actions>
-                    <form [formGroup]="user" (ngSubmit)="submitForm()" class="form">
-                        <button color="primary" type="submit" md-raised-button [disabled]="user.invalid">Sign up</button>
-                    </form>
-                </md-card-actions>
-            </md-card>
-        </md-card-content>
-    </div>
-</div>
+<md-card class="card-container mr-auto ml-auto">
+    <md-grid-list cols="2" rows="4" rowHeight="90px">
+        <md-grid-tile [colspan]="2" [rowspan]="1">
+            <form [formGroup]="signUpForm" class="form">
+                <md-input-container class="input-container" [ngClass]="{'filled': !signUpForm.get('username').hasError() && signUpForm.get('username').touched, 'invalid': signUpForm.get('username').hasError()}">
+                    <input md-input placeholder="Name" name="username" formControlName='username'>
+                    <span class="error" *ngIf="signUpForm.get('username').hasError('required') && signUpForm.get('username').touched">*</span>
+                </md-input-container>
+                <md-input-container class="input-container" [ngClass]="{'filled': !signUpForm.get('email').hasError() && !signUpForm.get('email').hasError('pattern') && signUpForm.get('email').touched, 'invalid': signUpForm.get('email').hasError() || signUpForm.get('email').hasError('pattern')}">
+                    <input md-input placeholder="Email" formControlName='email'>
+                    <span class="error" *ngIf="signUpForm.get('email').hasError('required') && signUpForm.get('email').touched">*</span>
+                </md-input-container>
+            </form>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="2" [rowspan]="1">
+            <form [formGroup]="signUpForm" class="form">
+                <md-input-container class="input-container">
+                    <input type="password" md-input placeholder="Password" formControlName='password' [ngClass]="{'filled': !signUpForm.errors?.mismatch && signUpForm.get('password').touched, 'invalid':signUpForm.errors?.mismatch}">
+                    <span class="error" *ngIf="signUpForm.get('password').hasError('required') && signUpForm.get('password').touched">*</span>
+                </md-input-container>
+                <md-input-container class="input-container">
+                    <input type="password" md-input placeholder="Confirm password" formControlName='confirmPassword' [ngClass]="{'filled': !signUpForm.errors?.mismatch && signUpForm.get('confirmPassword').touched, 'invalid':signUpForm.errors?.mismatch}">
+                    <span class="error" *ngIf="signUpForm.get('confirmPassword').hasError('required') && signUpForm.get('confirmPassword').touched">*</span>
+                    <span class="error-text" *ngIf="signUpForm.errors?.mismatch && signUpForm.get('password').touched">Passwords does not match!</span>
+                </md-input-container>
+            </form>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="1" [rowspan]="1">
+            <form [formGroup]="signUpForm" class="form">
+                <button color="primary" class="submit" type="submit" md-raised-button [disabled]="signUpForm.invalid" (click)="submitForm(signUpForm.value)">Sign up</button>
+            </form>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="1" [rowspan]="1">
+            <form [formGroup]="signUpForm" class="form">
+                <span formGroupName="info" class="radio-group">
+                    <md-radio-group formControlName='sex'>
+                        <md-radio-button value="male" class="input-radio">Male</md-radio-button>
+                        <md-radio-button value="female" class="input-radio">Female</md-radio-button>
+                    </md-radio-group>
+                </span>
+            </form>
+        </md-grid-tile>
+    </md-grid-list>
+</md-card>

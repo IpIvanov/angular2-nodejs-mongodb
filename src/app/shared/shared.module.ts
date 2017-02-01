@@ -11,11 +11,12 @@ import {InputComponent} from './input/input.component';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {CardComponent} from './card/card.component';
 import {LoaderComponent} from './loader/loader.component';
+import {CountryService} from './countries/country.service';
+import {UserService} from './user/user.service';
 
 import {ButtonOverviewExample} from './md-button/md-button.component';
 
 import {MaterialModule} from '@angular/material';
-
 
 @NgModule({
     declarations: [
@@ -31,11 +32,7 @@ import {MaterialModule} from '@angular/material';
         ButtonOverviewExample
     ],
     imports: [
-        CommonModule,
-        RouterModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MaterialModule.forRoot()
+        CommonModule, RouterModule, FormsModule, ReactiveFormsModule, MaterialModule.forRoot()
     ],
     exports: [
         ModalComponent,
@@ -48,7 +45,7 @@ import {MaterialModule} from '@angular/material';
         SubNavigationComponent,
         NotesComponent,
         ButtonOverviewExample
-    ]
+    ],
+    providers: [CountryService, UserService]
 })
-export class SharedModule {
-}
+export class SharedModule {}
