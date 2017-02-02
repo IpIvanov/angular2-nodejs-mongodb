@@ -1,11 +1,11 @@
-import {Router, Response, Request} from 'express';
-import {User} from '../models/user/model';
+import { Router, Response, Request, NextFunction } from 'express';
+import { User } from '../models/user/model';
 
-const userRouter : Router = Router();
+const userRouter: Router = Router();
 
 /** @description get users from db
  */
-userRouter.get('/users', async(request : Request, response : Response) => {
+userRouter.get('/users', async (request: Request, response: Response) => {
     const users = await User
         .find({})
         .lean()
@@ -15,7 +15,7 @@ userRouter.get('/users', async(request : Request, response : Response) => {
 
 /** @description set user in db
 */
-userRouter.post('/add-user', async(request : Request, response : Response) => {
+userRouter.post('/add-user', async (request: Request, response: Response) => {
     console.log(request.body);
     const user = await User.create(request.body);
     response
@@ -23,4 +23,4 @@ userRouter.post('/add-user', async(request : Request, response : Response) => {
         .json(user);
 });
 
-export {userRouter};
+export { userRouter };
