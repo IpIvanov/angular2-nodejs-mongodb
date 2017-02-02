@@ -1,10 +1,25 @@
-<h2>Login component</h2>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum iste laboriosam laudantium nam nemo! Beatae
-    consectetur dolorum ducimus error excepturi impedit minima, nam nisi placeat porro quae quo rem sit!</p>
-<!--<form class="form" [formGroup]="form">-->
-<!--<app-ui-input label="Name" placeholder="Enter name...." [control]="form.get('name')"></app-ui-input>-->
-<!--<app-ui-input label="Text" placeholder="Enter text...." [control]="form.get('text')"></app-ui-input>-->
-
-<!--<app-ui-button [disabled]="!form.valid"  text="Add Feed Changed" (click)="submitFeed()"></app-ui-button>-->
-<!--</form>-->
+<md-card class="card-container mr-auto ml-auto">
+    <md-grid-list cols="2" rows="3" rowHeight="90px">
+        <md-grid-tile [colspan]="2" [rowspan]="1">
+            <form [formGroup]="loginForm" class="form">
+                <md-input-container class="input-container">
+                    <input md-input placeholder="Name" name="username" formControlName='username'>
+                    <span class="error" *ngIf="loginForm.get('username').hasError('required') && loginForm.get('username').touched">*</span>
+                </md-input-container>
+            </form>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="2" [rowspan]="1">
+            <form [formGroup]="loginForm" class="form">
+                <md-input-container class="input-container">
+                    <input type="password" md-input placeholder="Password" name="password" formControlName='password'>
+                    <span class="error" *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">*</span>
+                </md-input-container>
+            </form>
+        </md-grid-tile>
+        <md-grid-tile [colspan]="1" [rowspan]="1">
+            <form [formGroup]="loginForm" class="form">
+                <button color="primary" class="submit" type="submit" md-raised-button [disabled]="loginForm.invalid" (click)="submitForm(loginForm.value)">Log in</button>
+            </form>
+        </md-grid-tile>
+    </md-grid-list>
+</md-card>

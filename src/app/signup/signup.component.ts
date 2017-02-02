@@ -4,6 +4,7 @@ import { countries } from '../shared/countries/countries.data';
 import { CountryService } from '../shared/countries/country.service';
 import { UserService } from '../shared/user/user.service';
 import { User } from '../shared/user/user';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({ selector: 'app-signup', templateUrl: './signup.component.html', styleUrls: ['./signup.component.scss'] })
 export class SignupComponent implements OnInit {
@@ -14,7 +15,7 @@ export class SignupComponent implements OnInit {
     userLocationData: any;
     user: User;
 
-    constructor(public fb: FormBuilder, public countryService: CountryService, public userService: UserService) { }
+    constructor(public fb: FormBuilder, public countryService: CountryService, public userService: UserService, public toastr: ToastsManager) { }
 
     ngOnInit(): void {
         this.countries = countries;
@@ -44,11 +45,20 @@ export class SignupComponent implements OnInit {
 
     submitForm(signUpForm): void {
         this.user = new User(signUpForm.username, signUpForm.password, signUpForm.email, this.userLocationData.country, signUpForm.info.sex);
+
         this
             .userService
             .addUser(this.user)
             .subscribe(res => {
-                console.log(res);
+                if (res.error) {
+                    this.toastr.warning('Username already exists please choose different one.', 'Warning');
+                    return;
+                }
+                if (res.message === 'User saved successfully.') {
+                    this.toastr.success('Registration was successful.', 'Success');
+                    this.user = undefined;
+                    this.signUpForm.reset();
+                }
             });
     }
 

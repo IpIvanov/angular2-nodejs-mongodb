@@ -1,13 +1,15 @@
-import {Component} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import { Component, ViewContainerRef } from '@angular/core';
+import { Http, Response } from '@angular/http';
 
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import {Store} from '@ngrx/store';
-import {IAppState} from './store/index';
-import {USER_GET} from './store/profile/profile.actions';
+import { Store } from '@ngrx/store';
+import { IAppState } from './store/index';
+import { USER_GET } from './store/profile/profile.actions';
+
+import { ToastsManager } from "ng2-toastr/ng2-toastr";
 
 @Component({
     selector: 'app-root',
@@ -18,7 +20,7 @@ export class AppComponent {
 
     observable$: Observable<{}>;
 
-    constructor(http: Http, store: Store<IAppState>) {
-    
+    constructor(http: Http, store: Store<IAppState>, public toastr: ToastsManager, public vRef: ViewContainerRef) {
+        this.toastr.setRootViewContainerRef(vRef);
     }
 }
