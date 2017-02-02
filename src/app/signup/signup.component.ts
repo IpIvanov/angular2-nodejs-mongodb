@@ -43,23 +43,24 @@ export class SignupComponent implements OnInit {
             });
     }
 
-    submitForm(signUpForm): void {
-        this.user = new User(signUpForm.username, signUpForm.password, signUpForm.email, this.userLocationData.country, signUpForm.info.sex);
-
-        this
-            .userService
-            .addUser(this.user)
-            .subscribe(res => {
-                if (res.error) {
-                    this.toastr.warning('Username already exists please choose different one.', 'Warning');
-                    return;
-                }
-                if (res.message === 'User saved successfully.') {
-                    this.toastr.success('Registration was successful.', 'Success');
-                    this.user = undefined;
-                    this.signUpForm.reset();
-                }
-            });
+    submitForm(signUpForm, event): void {
+        if ((event.keyCode === 13 || event.type === "click") && this.signUpForm.valid) {
+            this.user = new User(signUpForm.username, signUpForm.password, signUpForm.email, this.userLocationData.country, signUpForm.info.sex);
+            this
+                .userService
+                .addUser(this.user)
+                .subscribe(res => {
+                    if (res.error) {
+                        this.toastr.warning('Username already exists please choose different one.', 'Warning');
+                        return;
+                    }
+                    if (res.message === 'User saved successfully.') {
+                        this.toastr.success('Registration was successful.', 'Success');
+                        this.user = undefined;
+                        this.signUpForm.reset();
+                    }
+                });
+        }
     }
 
     passwordMatchValidator(g: FormGroup) {
