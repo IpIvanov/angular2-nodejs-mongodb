@@ -3,6 +3,7 @@ body {
   background-color: #f8f8f8;
 }
 
+//Loader stylings
 .loader {
   position: absolute;
   left: 50%;
@@ -25,4 +26,8 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+button:focus {
+  outline:0 !important;
 }
