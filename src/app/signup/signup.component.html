@@ -17,14 +17,12 @@
         <md-grid-tile [colspan]="2" [rowspan]="1">
             <form [formGroup]="signUpForm" class="form">
                 <md-input-container class="input-container">
-                    <input type="password" md-input placeholder="Password" formControlName='password' (keydown)="submitForm(signUpForm.value, $event)"
-                        [ngClass]="{'filled': !signUpForm.get('password').hasError('minlength') || !signUpForm.errors?.mismatch && signUpForm.get('password').touched, 'invalid': signUpForm.get('password').hasError('minlength') || signUpForm.errors?.mismatch}">
+                    <input type="password" md-input placeholder="Password" formControlName='password' (keydown)="submitForm(signUpForm.value, $event)" [ngClass]="{'filled': !signUpForm.get('password').hasError('minlength') || !signUpForm.errors?.mismatch && signUpForm.get('password').touched, 'invalid': signUpForm.get('password').hasError('minlength') || signUpForm.errors?.mismatch}">
                     <span class="error" *ngIf="signUpForm.get('password').hasError('required') && signUpForm.get('password').touched">*</span>
                     <span class="error-text" *ngIf="signUpForm.get('password').hasError('minlength') && signUpForm.get('password').touched">Minimum three characters required.</span>
                 </md-input-container>
                 <md-input-container class="input-container">
-                    <input type="password" md-input placeholder="Confirm password" formControlName='confirmPassword' (keydown)="submitForm(signUpForm.value, $event)"
-                        [ngClass]="{'filled': !signUpForm.get('confirmPassword').hasError('minlength') || !signUpForm.errors?.mismatch && signUpForm.get('confirmPassword').touched, 'invalid': signUpForm.get('password').hasError('minlength') || signUpForm.errors?.mismatch}">
+                    <input type="password" md-input placeholder="Confirm password" formControlName='confirmPassword' (keydown)="submitForm(signUpForm.value, $event)" [ngClass]="{'filled': !signUpForm.get('confirmPassword').hasError('minlength') || !signUpForm.errors?.mismatch && signUpForm.get('confirmPassword').touched, 'invalid': signUpForm.get('password').hasError('minlength') || signUpForm.errors?.mismatch}">
                     <span class="error" *ngIf="signUpForm.get('confirmPassword').hasError('required') && signUpForm.get('confirmPassword').touched">*</span>
                     <span class="error-text" *ngIf="signUpForm.errors?.mismatch && signUpForm.get('password').touched">Passwords does not match!</span>
                 </md-input-container>
@@ -47,3 +45,4 @@
         </md-grid-tile>
     </md-grid-list>
 </md-card>
+<app-ui-loader [visible]="isFetching"></app-ui-loader>

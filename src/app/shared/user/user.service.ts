@@ -1,16 +1,16 @@
-import {Injectable} from '@angular/core';
-import {Http, Headers, Response, RequestOptions} from '@angular/http';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class UserService {
 
-    headers : Headers;
-    options : RequestOptions;
+    headers: Headers;
+    options: RequestOptions;
 
-    constructor(public http : Http) {
-        this.headers = new Headers({'Content-Type': 'application/json'}); // ... Set content type to JSON
-        this.options = new RequestOptions({headers: this.headers}); // Create a request option
+    constructor(public http: Http) {
+        this.headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        this.options = new RequestOptions({ headers: this.headers }); // Create a request option
     }
 
     /**
@@ -18,11 +18,9 @@ export class UserService {
      * @param userCredentials
      * @returns {Observable<R>}
      */
-    addUser(userCredentials : Object) : Observable < any > {
-        return this
-            .http
-            .post(`/api/user/add-user`, JSON.stringify(userCredentials), this.options)
-            .map((res : Response) => res.json())
+    addUser(userCredentials: Object): Observable<any> {
+        return this.http.post(`/api/user/add-user`, JSON.stringify(userCredentials), this.options)
+            .map((res: Response) => res.json())
             .catch(this.handleError);
     }
 
@@ -31,11 +29,9 @@ export class UserService {
      * @param userCredentials
      * @returns {Observable<R>}
      */
-    getUser(userCredentials : Object) : Observable < any > {
-        return this
-            .http
-            .post(`/api/user/get-user`, JSON.stringify(userCredentials), this.options)
-            .map((res : Response) => res.json())
+    getUser(userCredentials: Object): Observable<any> {
+        return this.http.post(`/api/user/get-user`, JSON.stringify(userCredentials), this.options)
+            .map((res: Response) => res.json())
             .catch(this.handleError);
     }
 
@@ -44,11 +40,9 @@ export class UserService {
      * @param userCredentials
      * @returns {Observable<R>}
      */
-    signUp(userCredentials : Object) : Observable < any > {
-        return this
-            .http
-            .post(`/api/login/signup`, JSON.stringify(userCredentials), this.options)
-            .map((res : Response) => res.json())
+    signUp(userCredentials: Object): Observable<any> {
+        return this.http.post(`/api/login/signup`, JSON.stringify(userCredentials), this.options)
+            .map((res: Response) => res.json())
             .catch(this.handleError);
     }
 
@@ -57,20 +51,14 @@ export class UserService {
      * @param userCredentials
      * @returns {Observable<R>}
      */
-    login(userCredentials : Object) : Observable < any > {
-        return this
-            .http
-            .post(`/api/login/login`, JSON.stringify(userCredentials), this.options)
-            .map((res : Response) => res.json())
+    login(userCredentials: Object): Observable<any> {
+        return this.http.post(`/api/login/login`, JSON.stringify(userCredentials), this.options)
+            .map((res: Response) => res.json())
             .catch(this.handleError);
     }
 
-    private handleError(error : any) {
-        let errMsg = (error.message)
-            ? error.message
-            : error.status
-                ? `${error.status} - ${error.statusText}`
-                : 'Server error';
+    private handleError(error: any) {
+        let errMsg = (error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         console.error(errMsg); // log to console instead
         return Observable.throw(errMsg);
     }

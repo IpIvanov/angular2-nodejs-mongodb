@@ -1,24 +1,32 @@
 .app-toolbar-filler {
-  flex: 1 1 auto;
+    flex: 1 1 auto;
 }
 
-.example-button-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-left: 15px;
+.button-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: 55px;
+    a {
+        color: #fff;
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: none;
+        }
+    }
 }
 
 .topnav div a.active {
-  border: 1px solid #fff;
+    border: 1px solid #fff;
 }
 
 .topnav div a {
-  border: 1px solid transparent;
+    border: 1px solid transparent;
 }
 
 .title {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 //.app-icon-button {
@@ -39,38 +47,90 @@
 //}
 
 /*ul.topnav li.icon {*/
+
+
 /*display: none;*/
+
+
 /*}*/
 
+
 /*@media screen and (max-width: 680px) {*/
+
+
 /*ul.topnav li:not(:first-child) {*/
+
+
 /*display: none;*/
+
+
 /*}*/
+
 
 /*ul.topnav li.icon {*/
+
+
 /*float: right;*/
+
+
 /*display: inline-block;*/
+
+
 /*}*/
+
+
 /*}*/
+
 
 /*@media screen and (max-width: 680px) {*/
+
+
 /*ul.topnav.responsive {*/
+
+
 /*position: relative;*/
+
+
 /*}*/
+
 
 /*ul.topnav.responsive li.icon {*/
+
+
 /*position: absolute;*/
+
+
 /*right: 0;*/
+
+
 /*top: 0;*/
+
+
 /*}*/
+
 
 /*ul.topnav.responsive li {*/
+
+
 /*float: none;*/
+
+
 /*display: inline;*/
+
+
 /*}*/
 
+
 /*ul.topnav.responsive li a {*/
+
+
 /*display: block;*/
+
+
 /*text-align: left;*/
+
+
 /*}*/
+
+
 /*}*/
