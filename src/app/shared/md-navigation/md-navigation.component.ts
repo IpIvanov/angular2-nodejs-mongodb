@@ -25,28 +25,28 @@ export class TopNavigationComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.router.events.forEach((event) => {
-            if (event instanceof NavigationStart) {
-                this.authenticationService.authenticate(this.localStorage.retrieve('app-jwt')).subscribe(res => {
-                    console.log(res.message)
-                    if (res.message === 'Invalid token.') {
-                        if (this.router.url !== '/login' && this.router.url !== '/signup') {
-                            this.router.navigateByUrl('login');
-                            if (!this.toastShown) {
-                                this.toastr.warning('Please log in first.', 'Warning');
-                                this.toastShown = true;
-                            }
-                        }
-                    } else if (res.message === 'Valid token.') {
-                        this.logged = true;
-                    }
-                });
-            }
-            // NavigationEnd
-            // NavigationCancel
-            // NavigationError
-            // RoutesRecognized
-        });
+        // this.router.events.forEach((event) => {
+        //     if (event instanceof NavigationStart) {
+        //         this.authenticationService.authenticate(this.localStorage.retrieve('app-jwt')).subscribe(res => {
+        //             console.log(res.message)
+        //             if (res.message === 'Invalid token.') {
+        //                 if (this.router.url !== '/login' && this.router.url !== '/signup') {
+        //                     this.router.navigateByUrl('login');
+        //                     if (!this.toastShown) {
+        //                         this.toastr.warning('Please log in first.', 'Warning');
+        //                         this.toastShown = true;
+        //                     }
+        //                 }
+        //             } else if (res.message === 'Valid token.') {
+        //                 this.logged = true;
+        //             }
+        //         });
+        //     }
+        //     // NavigationEnd
+        //     // NavigationCancel
+        //     // NavigationError
+        //     // RoutesRecognized
+        // });
     }
 
     toggle() {

@@ -8,7 +8,7 @@ protectedRouter.use((request: Request & { headers: { authorization: string } }, 
     const token = request.headers.authorization;
     verify(token, secret, function (tokenError) {
         if (tokenError) {
-            return response.json({
+            return response.status(403).json({
                 message: 'Invalid token.'
             });
         }
@@ -18,7 +18,7 @@ protectedRouter.use((request: Request & { headers: { authorization: string } }, 
 });
 
 protectedRouter.get('/checktoken', (request: Request, response: Response) => {
-    response.json({
+    response.status(200).json({
         message: 'Valid token.',
         title: 'Protected call'
     });

@@ -11,6 +11,8 @@ import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from '@angular/material';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { Ng2Webstorage } from 'ng2-webstorage';
+import { PreventLoggedInAccess } from './shared/user/control.access';
+
 
 @NgModule({
     declarations: [AppComponent],
@@ -28,7 +30,7 @@ import { Ng2Webstorage } from 'ng2-webstorage';
         ToastModule.forRoot({ animate: 'flyRight', positionClass: 'toast-bottom-right' }),
         Ng2Webstorage
     ],
-    providers: [],
+    providers: [PreventLoggedInAccess],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
