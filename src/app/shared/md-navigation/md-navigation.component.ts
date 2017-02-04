@@ -4,9 +4,12 @@ import { AuthenticationService } from '../user/authentication.service';
 import { LocalStorageService } from 'ng2-webstorage';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
+import { PreventLoggedInAccess } from '../user/control.access';
+import { UserService } from '../user/user.service';
+
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'md-navigation',
+    selector: 'app-md-navigation',
     templateUrl: './md-navigation.component.html',
     styleUrls: ['./md-navigation.component.scss']
 })
@@ -14,39 +17,29 @@ export class TopNavigationComponent implements OnInit {
 
     @ViewChild('topnav') topnav: ElementRef;
 
-    logged = false;
+    logged: boolean;
     toastShown = false;
 
     constructor(
         public router: Router,
         private authenticationService: AuthenticationService,
         private localStorage: LocalStorageService,
-        public toastr: ToastsManager
+        public toastr: ToastsManager,
+        public preventLoggedInAccess: PreventLoggedInAccess,
+        public userService: UserService
     ) { }
 
     ngOnInit() {
-        // this.router.events.forEach((event) => {
-        //     if (event instanceof NavigationStart) {
-        //         this.authenticationService.authenticate(this.localStorage.retrieve('app-jwt')).subscribe(res => {
-        //             console.log(res.message)
-        //             if (res.message === 'Invalid token.') {
-        //                 if (this.router.url !== '/login' && this.router.url !== '/signup') {
-        //                     this.router.navigateByUrl('login');
-        //                     if (!this.toastShown) {
-        //                         this.toastr.warning('Please log in first.', 'Warning');
-        //                         this.toastShown = true;
-        //                     }
-        //                 }
-        //             } else if (res.message === 'Valid token.') {
-        //                 this.logged = true;
-        //             }
-        //         });
-        //     }
-        //     // NavigationEnd
-        //     // NavigationCancel
-        //     // NavigationError
-        //     // RoutesRecognized
-        // });
+        this.logged = this.userService.getUserLogStatus();
+        this.router.events.forEach((event) => {
+            if (event instanceof NavigationStart) {
+                this.logged = this.userService.getUserLogStatus();
+            }
+            // NavigationEnd
+            // NavigationCancel
+            // NavigationError
+            // RoutesRecognized
+        });
     }
 
     toggle() {
@@ -55,8 +48,8 @@ export class TopNavigationComponent implements OnInit {
 
     signOut() {
         this.localStorage.clear('app-jwt');
-        this.router.navigateByUrl('login');
-        this.logged = false;
+        this.router.navigate(['/login']);
+        this.userService.setUserLogStatus(false);
+        this.logged = this.userService.getUserLogStatus();
     }
-
 }

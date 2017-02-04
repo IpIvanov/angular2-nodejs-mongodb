@@ -12,13 +12,14 @@ import { LocalStorageService } from 'ng2-webstorage';
 @Component({ selector: 'app-signup', templateUrl: './signup.component.html', styleUrls: ['./signup.component.scss'] })
 export class SignupComponent implements OnInit {
     // Regex for email validator
-    emailRegex: string = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
+    emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
     countries: Array<Object>;
     signUpForm: FormGroup;
     userLocationData: any;
     user: User;
-    saltRounds: number = 10;
-    isFetching: boolean = false;
+    saltRounds = 10;
+    isFetching = false;
+    correctInfo = false;
 
     constructor(
         public fb: FormBuilder,
@@ -54,7 +55,7 @@ export class SignupComponent implements OnInit {
     }
 
     submitForm(signUpForm, event): void {
-        if ((event.keyCode === 13 || event.type === "click") && this.signUpForm.valid) {
+        if ((event.keyCode === 13 || event.type === 'click') && this.signUpForm.valid) {
             this.isFetching = true;
             this.user = new User(
                 signUpForm.username,
@@ -72,7 +73,12 @@ export class SignupComponent implements OnInit {
                         this.localStorage.store('app-jwt', res.jwt);
                         this.toastr.success('Registration was successful.', 'Success');
                         this.user = undefined;
-                        this.router.navigateByUrl('dashboard');
+                        this.correctInfo = true;
+                    }
+                }).add(() => {
+                    if (this.correctInfo) {
+                        this.userService.setUserLogStatus(true);
+                        this.router.navigate(['/dashboard']);
                     }
                 });
         }

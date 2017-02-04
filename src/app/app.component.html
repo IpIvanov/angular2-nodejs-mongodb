@@ -1,7 +1,6 @@
-<md-navigation></md-navigation>
+<app-md-navigation></app-md-navigation>
 
-<app-ui-sub-navigation [title]="(observable$ | async)?.title"
-                       [description]="(observable$ | async)?.text"></app-ui-sub-navigation>
+<app-ui-sub-navigation [title]="(observable$ | async)?.title" [description]="(observable$ | async)?.text"></app-ui-sub-navigation>
 
 <div class="main">
     <router-outlet></router-outlet>

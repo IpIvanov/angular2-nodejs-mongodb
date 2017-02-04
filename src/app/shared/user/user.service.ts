@@ -7,6 +7,7 @@ export class UserService {
 
     headers: Headers;
     options: RequestOptions;
+    logged = false;
 
     constructor(public http: Http) {
         this.headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
@@ -55,6 +56,14 @@ export class UserService {
         return this.http.post(`/api/login/login`, JSON.stringify(userCredentials), this.options)
             .map((res: Response) => res.json())
             .catch(this.handleError);
+    }
+
+    setUserLogStatus(logged) {
+        this.logged = logged;
+    }
+
+    getUserLogStatus() {
+        return this.logged;
     }
 
     private handleError(error: any) {

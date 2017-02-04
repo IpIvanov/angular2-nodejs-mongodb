@@ -16,16 +16,13 @@ export class AuthenticationService {
      * @param token
      * @returns {Observable<R>}
      */
-    authenticate(token): any {
+    authenticate(token): Observable<any> {
         this.headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         this.headers.append('Authorization', token);
         this.options = new RequestOptions({ headers: this.headers }); // Create a request option
 
         return this.http.get(`/api/secure/checktoken`, this.options)
-            .map((res: Response) => {
-                res.json()
-                return true;
-            })
+            .map((error: any) => error)
             .catch(this.handleError);
     }
 

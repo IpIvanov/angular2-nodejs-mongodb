@@ -9,7 +9,8 @@ import { LocalStorageService } from 'ng2-webstorage';
 @Component({ selector: 'app-login', templateUrl: './login.component.html', styleUrls: ['./login.component.scss'] })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
-    isFetching: boolean = false;
+    isFetching = false;
+    correctInfo = false;
 
     constructor(
         public fb: FormBuilder,
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
     }
 
     submitForm(loginForm, event): void {
-        if ((event.keyCode === 13 || event.type === "click") && this.loginForm.valid) {
+        if ((event.keyCode === 13 || event.type === 'click') && this.loginForm.valid) {
             this.isFetching = true;
             this.userService.login(loginForm)
                 .subscribe(res => {
@@ -39,7 +40,12 @@ export class LoginComponent implements OnInit {
                     } else {
                         this.localStorage.store('app-jwt', res.jwt);
                         this.toastr.success('Successful login.', 'Success');
-                        this.router.navigateByUrl('dashboard');
+                        this.correctInfo = true;
+                    }
+                }).add(() => {
+                    if (this.correctInfo) {
+                        this.userService.setUserLogStatus(true);
+                        this.router.navigate(['/dashboard']);
                     }
                 });
         }
