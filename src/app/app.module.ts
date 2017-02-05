@@ -13,6 +13,7 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { PreventLoggedInAccess } from './shared/user/control.access';
 
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import { AuthenticationService } from './shared/user/authentication.service';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     return new AuthHttp(new AuthConfig(), http, options);
@@ -37,7 +38,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
         provide: AuthHttp,
         useFactory: authHttpServiceFactory,
         deps: [Http, RequestOptions]
-    }],
+    }, AuthenticationService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,10 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
-import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { UserService } from './user.service';
-import { Response } from 'express';
-import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class PreventLoggedInAccess implements CanActivate {
@@ -13,8 +9,7 @@ export class PreventLoggedInAccess implements CanActivate {
 
     constructor(
         private authService: AuthenticationService,
-        private router: Router,
-        public userService: UserService
+        private router: Router
     ) { }
 
     canActivate() {

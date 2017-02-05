@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef } from '@angular/core';
+import { Component, ViewContainerRef, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs';
@@ -10,17 +10,49 @@ import { IAppState } from './store/index';
 import { USER_GET } from './store/profile/profile.actions';
 
 import { ToastsManager } from "ng2-toastr/ng2-toastr";
+import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
+import { AuthenticationService } from './shared/user/authentication.service';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
     observable$: Observable<{}>;
+    userLogged: boolean;
 
-    constructor(http: Http, store: Store<IAppState>, public toastr: ToastsManager, public vRef: ViewContainerRef) {
+    constructor(
+        http: Http,
+        store: Store<IAppState>,
+        public toastr: ToastsManager,
+        public vRef: ViewContainerRef,
+        private router: Router,
+        private authService: AuthenticationService
+    ) {
         this.toastr.setRootViewContainerRef(vRef);
+        this.userLogged = false;
+    }
+
+    ngOnInit() {
+        this.router.events.forEach((event) => {
+            if (event instanceof NavigationStart) {
+                this.authService.isLoggedIn(localStorage.getItem('app-jwt')).then(
+                    (res) => {
+                        if (res.error === '403 - Forbidden') {
+                            this.userLogged = false;
+                        }
+                        if (res.message === 'Valid token.') {
+                            this.userLogged = true;
+                        }
+                    }
+                );
+            }
+            // NavigationEnd
+            // NavigationCancel
+            // NavigationError
+            // RoutesRecognized
+        });
     }
 }

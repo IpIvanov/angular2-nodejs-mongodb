@@ -12,7 +12,6 @@ import { CardComponent } from './card/card.component';
 import { LoaderComponent } from './loader/loader.component';
 import { CountryService } from './countries/country.service';
 import { UserService } from './user/user.service';
-import { AuthenticationService } from './user/authentication.service';
 
 import { ButtonOverviewExample } from './md-button/md-button.component';
 import { MaterialModule } from '@angular/material';
@@ -44,6 +43,6 @@ import { MaterialModule } from '@angular/material';
         SubNavigationComponent,
         ButtonOverviewExample
     ],
-    providers: [CountryService, UserService, AuthenticationService]
+    providers: [CountryService, UserService]
 })
 export class SharedModule { }
