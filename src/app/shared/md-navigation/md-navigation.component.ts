@@ -25,6 +25,7 @@ export class TopNavigationComponent implements OnInit {
 
     signOut() {
         localStorage.removeItem('app-jwt');
+        localStorage.removeItem('app-username');
         this.logged = false;
         this.router.navigate(['/login']);
     }

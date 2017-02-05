@@ -25,7 +25,7 @@ loginRouter.post('/signup', function (request: Request, response: Response, next
                 const token = sign({
                     'user': user.username,
                     permissions: []
-                }, secret, { expiresIn: '7d' });
+                }, secret); //, { expiresIn: '7d' }
                 response.json({ 'jwt': token });
             }
         });
@@ -47,7 +47,7 @@ loginRouter.post('/login', function (request: Request, response: Response, next:
                     const token = sign({
                         'user': doc[0].username,
                         permissions: []
-                    }, secret, { expiresIn: '7d' });
+                    }, secret); //, { expiresIn: '7d' }
                     response.json({ 'jwt': token });
                 } else {
                     response.json({ message: 'Wrong password' });

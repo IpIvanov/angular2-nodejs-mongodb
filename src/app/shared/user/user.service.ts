@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
+import { User } from './user';
 
 @Injectable()
 export class UserService {
@@ -8,6 +9,7 @@ export class UserService {
     headers: Headers;
     options: RequestOptions;
     logged = false;
+    username: string;
 
     constructor(public http: Http) {
         this.headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
@@ -15,25 +17,19 @@ export class UserService {
     }
 
     /**
-     * Add user to backend /api/user/add-user
-     * @param userCredentials
-     * @returns {Observable<R>}
+     * Set Username in the app
+     * @param string
      */
-    addUser(userCredentials: Object): Observable<any> {
-        return this.http.post(`/api/user/add-user`, JSON.stringify(userCredentials), this.options)
-            .map((res: Response) => res.json())
-            .catch(this.handleError);
+    setUsername(username: string) {
+        this.username = username;
     }
 
     /**
-     * Checks if user exists and returns auth token /api/user/get-user
-     * @param userCredentials
-     * @returns {Observable<R>}
+     * Get Username
+     * @returns {string}
      */
-    getUser(userCredentials: Object): Observable<any> {
-        return this.http.post(`/api/user/get-user`, JSON.stringify(userCredentials), this.options)
-            .map((res: Response) => res.json())
-            .catch(this.handleError);
+    getUsername(): string {
+        return this.username;
     }
 
     /**
@@ -48,7 +44,7 @@ export class UserService {
     }
 
     /**
-     * Sign up user /api/login
+     * Login user /api/login
      * @param userCredentials
      * @returns {Observable<R>}
      */

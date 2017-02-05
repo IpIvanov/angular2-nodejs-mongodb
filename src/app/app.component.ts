@@ -12,6 +12,7 @@ import { USER_GET } from './store/profile/profile.actions';
 import { ToastsManager } from "ng2-toastr/ng2-toastr";
 import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
 import { AuthenticationService } from './shared/user/authentication.service';
+import { UserService } from './shared/user/user.service';
 
 @Component({
     selector: 'app-root',
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
 
     observable$: Observable<{}>;
     userLogged: boolean;
+    username: string;
 
     constructor(
         http: Http,
@@ -29,21 +31,25 @@ export class AppComponent implements OnInit {
         public toastr: ToastsManager,
         public vRef: ViewContainerRef,
         private router: Router,
-        private authService: AuthenticationService
+        private authService: AuthenticationService,
+        private userService: UserService
     ) {
         this.toastr.setRootViewContainerRef(vRef);
         this.userLogged = false;
     }
 
     ngOnInit() {
+        this.username = localStorage.getItem('app-username');
         this.router.events.forEach((event) => {
             if (event instanceof NavigationStart) {
                 this.authService.isLoggedIn(localStorage.getItem('app-jwt')).then(
                     (res) => {
                         if (res.error === '403 - Forbidden') {
+                            this.username = localStorage.getItem('app-username');
                             this.userLogged = false;
                         }
                         if (res.message === 'Valid token.') {
+                            this.username = localStorage.getItem('app-username');
                             this.userLogged = true;
                         }
                     }
