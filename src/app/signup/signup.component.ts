@@ -7,7 +7,6 @@ import { CountryService } from '../shared/countries/country.service';
 import { UserService } from '../shared/user/user.service';
 import { User } from '../shared/user/user';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { LocalStorageService } from 'ng2-webstorage';
 
 @Component({ selector: 'app-signup', templateUrl: './signup.component.html', styleUrls: ['./signup.component.scss'] })
 export class SignupComponent implements OnInit {
@@ -26,8 +25,7 @@ export class SignupComponent implements OnInit {
         public countryService: CountryService,
         public userService: UserService,
         public toastr: ToastsManager,
-        private router: Router,
-        private localStorage: LocalStorageService
+        private router: Router
     ) { }
 
     ngOnInit(): void {
@@ -70,14 +68,13 @@ export class SignupComponent implements OnInit {
                     if (res.message === 'Username already exists.') {
                         this.toastr.warning('Username already exists please choose different one.', 'Warning');
                     } else {
-                        this.localStorage.store('app-jwt', res.jwt);
+                        localStorage.setItem('app-jwt', res.jwt);
                         this.toastr.success('Registration was successful.', 'Success');
                         this.user = undefined;
                         this.correctInfo = true;
                     }
                 }).add(() => {
                     if (this.correctInfo) {
-                        this.userService.setUserLogStatus(true);
                         this.router.navigate(['/dashboard']);
                     }
                 });

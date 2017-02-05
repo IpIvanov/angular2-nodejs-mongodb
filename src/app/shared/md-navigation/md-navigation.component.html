@@ -6,7 +6,7 @@
     </div>
 
     <span class="app-toolbar-filler"></span>
-    <button md-button routerLink="/signup" *ngIf="!logged">Sign up</button>
-    <button md-raised-button color="accent" routerLink="/login" *ngIf="!logged">Log in</button>
-    <button md-button (click)="signOut()" *ngIf="logged">Sign out</button>
+    <button md-button routerLink="/signup">Sign up</button>
+    <button md-raised-button color="accent" routerLink="/login">Log in</button>
+    <button md-button (click)="signOut()">Sign out</button>
 </md-toolbar>

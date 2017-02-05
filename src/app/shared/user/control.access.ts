@@ -1,40 +1,34 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
-import { LocalStorageService } from 'ng2-webstorage';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { UserService } from './user.service';
+import { Response } from 'express';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class PreventLoggedInAccess implements CanActivate {
-    toastShown = false;
     isUserAuthenticated = false;
+    token = '';
 
     constructor(
         private authService: AuthenticationService,
-        private localStorage: LocalStorageService,
-        public toastr: ToastsManager,
         private router: Router,
         public userService: UserService
     ) { }
 
     canActivate() {
-        this.authService.authenticate(this.localStorage.retrieve('app-jwt')).subscribe(
-            res => {
-                if (res.status === 200) {
-                    this.userService.setUserLogStatus(true);
-                    this.isUserAuthenticated = true;
-                }
-            },
-            err => {
-                if (err === '403 - Forbidden') {
-                    this.isUserAuthenticated = false;
-                    this.userService.setUserLogStatus(false);
+        return this.authService.isLoggedIn(localStorage.getItem('app-jwt')).then(
+            (res) => {
+                if (res.error === '403 - Forbidden') {
                     this.router.navigate(['/login']);
+                    return false;
+                }
+                if (res.message === 'Valid token.') {
+                    return true;
                 }
             }
         );
-        return this.isUserAuthenticated;
     }
-
 }
+

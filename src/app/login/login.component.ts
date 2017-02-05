@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 import { UserService } from '../shared/user/user.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { LocalStorageService } from 'ng2-webstorage';
 
 @Component({ selector: 'app-login', templateUrl: './login.component.html', styleUrls: ['./login.component.scss'] })
 export class LoginComponent implements OnInit {
@@ -16,8 +15,7 @@ export class LoginComponent implements OnInit {
         public fb: FormBuilder,
         public userService: UserService,
         public toastr: ToastsManager,
-        public router: Router,
-        private localStorage: LocalStorageService
+        public router: Router
     ) { }
 
     ngOnInit(): void {
@@ -38,13 +36,12 @@ export class LoginComponent implements OnInit {
                     } else if (res.message === 'User does not exists.') {
                         this.toastr.warning('Username does not exists, please sign up first.', 'Warning');
                     } else {
-                        this.localStorage.store('app-jwt', res.jwt);
+                        localStorage.setItem('app-jwt', res.jwt);
                         this.toastr.success('Successful login.', 'Success');
                         this.correctInfo = true;
                     }
                 }).add(() => {
                     if (this.correctInfo) {
-                        this.userService.setUserLogStatus(true);
                         this.router.navigate(['/dashboard']);
                     }
                 });

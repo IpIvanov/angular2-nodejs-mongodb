@@ -58,14 +58,6 @@ export class UserService {
             .catch(this.handleError);
     }
 
-    setUserLogStatus(logged) {
-        this.logged = logged;
-    }
-
-    getUserLogStatus() {
-        return this.logged;
-    }
-
     private handleError(error: any) {
         let errMsg = (error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         console.error(errMsg); // log to console instead
