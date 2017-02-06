@@ -23,7 +23,7 @@ const schema = new Schema({
     token: {
         type: String,
         default: ''
-    }
+    },
     info: {
         sex: String
     },
