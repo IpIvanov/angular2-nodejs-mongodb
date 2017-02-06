@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
                         this.toastr.warning('Username does not exists, please sign up first.', 'Warning');
                     } else {
                         localStorage.setItem('app-jwt', res.jwt);
-                        localStorage.setItem('app-username', loginForm.username);
+                        localStorage.setItem('app-username', res.username);
                         this.toastr.success('Successful login.', 'Success');
                         this.correctInfo = true;
                     }

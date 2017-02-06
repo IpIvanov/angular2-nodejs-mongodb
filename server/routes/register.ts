@@ -4,9 +4,9 @@ import { sign } from 'jsonwebtoken';
 import { secret, length, digest } from '../config';
 import { User } from '../models/user/model';
 
-const loginRouter: Router = Router();
+const registerRouter: Router = Router();
 
-loginRouter.post('/signup', function (request: Request, response: Response, next: NextFunction) {
+registerRouter.post('/signup', function (request: Request, response: Response, next: NextFunction) {
     if (!request.body.hasOwnProperty('password')) {
         let err = new Error('No password');
         return next(err);
@@ -26,19 +26,21 @@ loginRouter.post('/signup', function (request: Request, response: Response, next
                     'user': user.username,
                     permissions: []
                 }, secret); //, { expiresIn: '7d' }
-                response.json({ 'jwt': token });
+                response.json({ 'jwt': token, 'username': user.username });
             }
         });
     });
 });
 
 // login method
-loginRouter.post('/login', function (request: Request, response: Response, next: NextFunction) {
-
-    const doc = User.find({
-        'username': request.body.username
-    }, 'username password salt', function (err, doc) {
-        if (doc.length > 0 && doc[0].username === request.body.username) {
+registerRouter.post('/login', function (request: Request, response: Response, next: NextFunction) {
+    let fieldsToSearch = [
+        { 'username': request.body.username, },
+        { 'email': request.body.username }
+    ];
+    console.log(fieldsToSearch)
+    const doc = User.find({ '$or': fieldsToSearch }, 'username password email salt', function (err, doc) {
+        if (doc.length > 0 && ((doc[0].username === request.body.username) || (doc[0].email === request.body.username))) {
             pbkdf2(request.body.password, doc[0].salt, 10000, length, digest, (err: Error, hash: Buffer) => {
                 if (err) {
                     response.json({ error: err, message: 'Error.' })
@@ -48,7 +50,7 @@ loginRouter.post('/login', function (request: Request, response: Response, next:
                         'user': doc[0].username,
                         permissions: []
                     }, secret); //, { expiresIn: '7d' }
-                    response.json({ 'jwt': token });
+                    response.json({ 'jwt': token, 'username': doc[0].username });
                 } else {
                     response.json({ message: 'Wrong password' });
                 }
@@ -60,4 +62,4 @@ loginRouter.post('/login', function (request: Request, response: Response, next:
     });
 });
 
-export { loginRouter }
+export { registerRouter }

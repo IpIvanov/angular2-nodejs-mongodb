@@ -33,23 +33,23 @@ export class UserService {
     }
 
     /**
-     * Sign up user /api/login/signup
+     * Sign up user /api/register/signup
      * @param userCredentials
      * @returns {Observable<R>}
      */
     signUp(userCredentials: Object): Observable<any> {
-        return this.http.post(`/api/login/signup`, JSON.stringify(userCredentials), this.options)
+        return this.http.post(`/api/register/signup`, JSON.stringify(userCredentials), this.options)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
 
     /**
-     * Login user /api/login
+     * Login user /api/register/login
      * @param userCredentials
      * @returns {Observable<R>}
      */
     login(userCredentials: Object): Observable<any> {
-        return this.http.post(`/api/login/login`, JSON.stringify(userCredentials), this.options)
+        return this.http.post(`/api/register/login`, JSON.stringify(userCredentials), this.options)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }

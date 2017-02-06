@@ -3,7 +3,7 @@
         <md-grid-tile [colspan]="2" [rowspan]="1">
             <form [formGroup]="loginForm" class="form">
                 <md-input-container class="input-container">
-                    <input md-input placeholder="Name" name="username" formControlName='username' (keydown)="submitForm(loginForm.value, $event)">
+                    <input md-input placeholder="Name or Email" name="username" formControlName='username' (keydown)="submitForm(loginForm.value, $event)">
                     <span class="error" *ngIf="loginForm.get('username').hasError('required') && loginForm.get('username').touched">*</span>
                 </md-input-container>
             </form>

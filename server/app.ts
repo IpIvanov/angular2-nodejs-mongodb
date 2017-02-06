@@ -3,7 +3,7 @@ import { json, urlencoded } from 'body-parser';
 import * as path from 'path';
 import * as compression from 'compression';
 
-import { loginRouter } from './routes/login';
+import { registerRouter } from './routes/register';
 import { protectedRouter } from './routes/protected';
 import { publicRouter } from './routes/public';
 import { feedRouter } from './routes/feed';
@@ -24,7 +24,7 @@ app.use(urlencoded({ extended: true }));
 
 // api routes
 app.use('/api/secure', protectedRouter);
-app.use('/api/login', loginRouter);
+app.use('/api/register', registerRouter);
 app.use('/api/public', publicRouter);
 app.use('/api/feed', feedRouter);
 app.use('/api/user', userRouter);
