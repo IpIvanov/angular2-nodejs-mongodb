@@ -20,6 +20,10 @@ const schema = new Schema({
         required: true
     },
     location: String,
+    token: {
+        type: String,
+        default: ''
+    }
     info: {
         sex: String
     },
@@ -35,4 +39,4 @@ const schema = new Schema({
 
 let User = mongoose.model('User', schema);
 
-export {User}
+export { User }

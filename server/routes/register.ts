@@ -18,14 +18,15 @@ registerRouter.post('/signup', function (request: Request, response: Response, n
         const user = request.body;
         user.password = hash.toString('hex');
         user.salt = salt;
+        const token = sign({
+            'user': user.username,
+            permissions: []
+        }, secret); //, { expiresIn: '7d' }
+        user.token = token;
         User.create(user, function (err) {
             if (err) {
                 response.json({ error: err.errmsg, message: 'Username already exists.' })
             } else {
-                const token = sign({
-                    'user': user.username,
-                    permissions: []
-                }, secret); //, { expiresIn: '7d' }
                 response.json({ 'jwt': token, 'username': user.username });
             }
         });
@@ -38,19 +39,14 @@ registerRouter.post('/login', function (request: Request, response: Response, ne
         { 'username': request.body.username, },
         { 'email': request.body.username }
     ];
-    console.log(fieldsToSearch)
-    const doc = User.find({ '$or': fieldsToSearch }, 'username password email salt', function (err, doc) {
+    const doc = User.find({ '$or': fieldsToSearch }, 'username password email salt token', function (err, doc) {
         if (doc.length > 0 && ((doc[0].username === request.body.username) || (doc[0].email === request.body.username))) {
             pbkdf2(request.body.password, doc[0].salt, 10000, length, digest, (err: Error, hash: Buffer) => {
                 if (err) {
                     response.json({ error: err, message: 'Error.' })
                 }
                 if (hash.toString('hex') === doc[0].password) {
-                    const token = sign({
-                        'user': doc[0].username,
-                        permissions: []
-                    }, secret); //, { expiresIn: '7d' }
-                    response.json({ 'jwt': token, 'username': doc[0].username });
+                    response.json({ 'jwt': doc[0].token, 'username': doc[0].username });
                 } else {
                     response.json({ message: 'Wrong password' });
                 }

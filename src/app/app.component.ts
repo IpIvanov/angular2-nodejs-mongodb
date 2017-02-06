@@ -39,17 +39,16 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.username = localStorage.getItem('app-username');
         this.router.events.forEach((event) => {
             if (event instanceof NavigationStart) {
                 this.authService.isLoggedIn(localStorage.getItem('app-jwt')).then(
                     (res) => {
                         if (res.error === '403 - Forbidden') {
-                            this.username = localStorage.getItem('app-username');
+                            this.username = res.username;
                             this.userLogged = false;
                         }
                         if (res.message === 'Valid token.') {
-                            this.username = localStorage.getItem('app-username');
+                            this.username = res.username;
                             this.userLogged = true;
                         }
                     }
