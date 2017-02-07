@@ -21,19 +21,14 @@ import { FootballDataService } from './shared/football-data/football-data.servic
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
-    observable$: Observable<{}>;
     username: string;
+    logged: boolean;
 
     constructor(
-        http: Http,
-        store: Store<IAppState>,
         public toastr: ToastsManager,
         public vRef: ViewContainerRef,
         private router: Router,
-        private authService: AuthenticationService,
-        private userService: UserService,
-        private footballDataService: FootballDataService
+        private authService: AuthenticationService
     ) {
         this.toastr.setRootViewContainerRef(vRef);
     }
@@ -44,9 +39,11 @@ export class AppComponent implements OnInit {
                 this.authService.isLoggedIn(localStorage.getItem('app-jwt')).then(
                     (res) => {
                         if (res.error === '403 - Forbidden') {
+                            this.logged = false;
                             this.username = res.username;
                         }
                         if (res.message === 'Valid token.') {
+                            this.logged = true;
                             this.username = res.username;
                         }
                     }

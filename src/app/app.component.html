@@ -1,6 +1,4 @@
-<app-md-navigation [logged]='username === undefined'></app-md-navigation>
-
-<app-ui-sub-navigation [username]='username' *ngIf="username !== undefined"></app-ui-sub-navigation>
+<app-md-navigation [logged]='username !== undefined' [username]='username'></app-md-navigation>
 
 <div class="main ">
     <router-outlet></router-outlet>

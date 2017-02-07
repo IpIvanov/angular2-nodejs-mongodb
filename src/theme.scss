@@ -1,19 +1,19 @@
 @import '~@angular/material/core/theming/all-theme';
 @include md-core();
-$primary-theme: md-palette($md-indigo, 500);
-$accent-theme: md-palette($md-teal, 600, A100, A400);
+$primary-theme: md-palette($md-deep-orange, 500);
+$accent-theme: md-palette($md-light-blue, 600, A100, A400);
 $warn-theme: md-palette($md-red, 600);
 $theme: md-light-theme($primary-theme, $accent-theme, $warn-theme);
 @include angular-material-theme($theme);
 // Main colors
-$primary-color-dark: #303F9F;
-$primary-color: #3F51B5;
-$primary-color-light: #C5CAE9;
+$primary-color-dark: #FF5722;
+$primary-color: #FF9800;
+$primary-color-light: #FFC107;
 $primary-color-text: #FFFFFF;
-$accent-color: #009688;
+$accent-color: #03a9f4;
 $warn: red;
 // Text colors
-$primary-text-color: #212121;
-$secondary-text-color: #757575;
+$primary-text-color: #323337;
+$secondary-text-color: #979a87;
 // Dividers
 $divider-color: #BDBDBD;

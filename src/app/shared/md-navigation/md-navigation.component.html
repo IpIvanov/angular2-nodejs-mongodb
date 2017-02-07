@@ -1,4 +1,4 @@
-<md-toolbar color="primary" class="topnav">
+<md-toolbar color="white" class="topnav">
     <span class="title" routerLink="/">WinBet</span>
     <div class="button-row">
         <a md-button routerLink="/dashboard" routerLinkActive="active" class="mr-1">Dashboard</a>
@@ -6,7 +6,13 @@
     </div>
 
     <span class="app-toolbar-filler"></span>
-    <button md-button routerLink="/signup" *ngIf="logged" class="mr-2">Sign up</button>
-    <button md-raised-button color="accent" routerLink="/login" *ngIf="logged">Log in</button>
-    <button md-button routerLink="/login" (click)="signOut()" *ngIf="!logged">Sign out</button>
+    <div class="username-container" *ngIf="logged">
+        <img [src]="avatarLink" class="rounded-circle mr-2" />
+        <span class="username mr-3">{{username}}</span>
+    </div>
+    <div class="button-row right">
+        <a md-button routerLink="/signup" routerLinkActive="active" *ngIf="!logged" class="mr-2">Sign up</a>
+        <a md-raised-button color="primary" class="login" routerLink="/login" routerLinkActive="active" *ngIf="!logged">Log in</a>
+        <a md-button routerLink="/login" routerLinkActive="active" (click)="signOut()" *ngIf="logged">Sign out</a>
+    </div>
 </md-toolbar>

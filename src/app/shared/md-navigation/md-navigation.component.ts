@@ -11,14 +11,16 @@ export class TopNavigationComponent implements OnInit {
 
     @ViewChild('topnav') topnav: ElementRef;
     @Input() logged: boolean;
+    @Input() username: string;
     @Output() onLogout = new EventEmitter<string>();
-    username: string;
+    avatarLink: string;
 
     constructor(
         public router: Router
     ) { }
 
     ngOnInit() {
+        this.avatarLink = '../../assets/avatars/avatars-material-man-2.png';
     }
 
     toggle() {
@@ -28,6 +30,7 @@ export class TopNavigationComponent implements OnInit {
     signOut() {
         localStorage.removeItem('app-jwt');
         this.username = undefined;
+        this.logged = false;
         this.onLogout.emit(this.username);
         this.router.navigate(['/login']);
     }
