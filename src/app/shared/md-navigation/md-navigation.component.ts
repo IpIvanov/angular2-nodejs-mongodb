@@ -25,10 +25,10 @@ export class TopNavigationComponent implements OnInit {
         this.topnav.nativeElement.classList.toggle(['responsive']);
     }
 
-    signOut(username: string) {
+    signOut() {
         localStorage.removeItem('app-jwt');
-        this.onLogout.emit(username);
         this.username = undefined;
+        this.onLogout.emit(this.username);
         this.router.navigate(['/login']);
     }
 }

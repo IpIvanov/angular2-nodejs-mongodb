@@ -13,6 +13,7 @@ import { ToastsManager } from "ng2-toastr/ng2-toastr";
 import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
 import { AuthenticationService } from './shared/user/authentication.service';
 import { UserService } from './shared/user/user.service';
+import { FootballDataService } from './shared/football-data/football-data.service';
 
 @Component({
     selector: 'app-root',
@@ -22,7 +23,6 @@ import { UserService } from './shared/user/user.service';
 export class AppComponent implements OnInit {
 
     observable$: Observable<{}>;
-    userLogged: boolean;
     username: string;
 
     constructor(
@@ -32,10 +32,10 @@ export class AppComponent implements OnInit {
         public vRef: ViewContainerRef,
         private router: Router,
         private authService: AuthenticationService,
-        private userService: UserService
+        private userService: UserService,
+        private footballDataService: FootballDataService
     ) {
         this.toastr.setRootViewContainerRef(vRef);
-        this.userLogged = false;
     }
 
     ngOnInit() {
@@ -45,11 +45,9 @@ export class AppComponent implements OnInit {
                     (res) => {
                         if (res.error === '403 - Forbidden') {
                             this.username = res.username;
-                            this.userLogged = false;
                         }
                         if (res.message === 'Valid token.') {
                             this.username = res.username;
-                            this.userLogged = true;
                         }
                     }
                 );

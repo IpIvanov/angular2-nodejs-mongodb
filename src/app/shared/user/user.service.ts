@@ -8,28 +8,10 @@ export class UserService {
 
     headers: Headers;
     options: RequestOptions;
-    logged = false;
-    username: string;
 
     constructor(public http: Http) {
         this.headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         this.options = new RequestOptions({ headers: this.headers }); // Create a request option
-    }
-
-    /**
-     * Set Username in the app
-     * @param string
-     */
-    setUsername(username: string) {
-        this.username = username;
-    }
-
-    /**
-     * Get Username
-     * @returns {string}
-     */
-    getUsername(): string {
-        return this.username;
     }
 
     /**

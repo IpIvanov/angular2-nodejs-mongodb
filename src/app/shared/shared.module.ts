@@ -1,3 +1,4 @@
+import { FootballDataService } from './football-data/football-data.service';
 import { NgModule } from '@angular/core';
 
 import { ModalComponent, ModalDirectivesDirective } from './modal/modal.component';
@@ -43,6 +44,6 @@ import { MaterialModule } from '@angular/material';
         SubNavigationComponent,
         ButtonOverviewExample
     ],
-    providers: [CountryService, UserService]
+    providers: [CountryService, UserService, FootballDataService]
 })
 export class SharedModule { }
