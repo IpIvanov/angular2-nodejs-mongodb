@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 
 import { UserService } from '../shared/user/user.service';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { MdSnackBar } from '@angular/material';
 
 @Component({ selector: 'app-login', templateUrl: './login.component.html', styleUrls: ['./login.component.scss'] })
 export class LoginComponent implements OnInit {
@@ -14,8 +14,8 @@ export class LoginComponent implements OnInit {
     constructor(
         public fb: FormBuilder,
         public userService: UserService,
-        public toastr: ToastsManager,
-        public router: Router
+        public router: Router,
+        public snackBar: MdSnackBar
     ) { }
 
     ngOnInit(): void {
@@ -32,12 +32,12 @@ export class LoginComponent implements OnInit {
                 .subscribe(res => {
                     this.isFetching = false;
                     if (res.message === 'Wrong password') {
-                        this.toastr.warning('Wrong username or password.', 'Warning');
+                        this.snackBar.open('Wrong username or password.', null, { duration: 2000 });
                     } else if (res.message === 'User does not exists.') {
-                        this.toastr.warning('Username does not exists, please sign up first.', 'Warning');
+                        this.snackBar.open('Username does not exists, please sign up first.', null, { duration: 2000 });
                     } else {
                         localStorage.setItem('app-jwt', res.jwt);
-                        this.toastr.success('Successful login.', 'Success');
+                        this.snackBar.open('Successful login.', null, { duration: 2000 });
                         this.correctInfo = true;
                     }
                 }).add(() => {

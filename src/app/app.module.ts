@@ -9,7 +9,6 @@ import { effects, store, instrumentation } from './store';
 import { SharedModule } from './shared/shared.module';
 
 import { MaterialModule } from '@angular/material';
-import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { PreventLoggedInAccess } from './shared/user/control.access';
 
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
@@ -31,8 +30,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
         routing,
         instrumentation,
         MaterialModule.forRoot(),
-        ReactiveFormsModule,
-        ToastModule.forRoot({ animate: 'flyRight', positionClass: 'toast-bottom-right' })
+        ReactiveFormsModule
     ],
     providers: [PreventLoggedInAccess, {
         provide: AuthHttp,

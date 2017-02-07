@@ -6,7 +6,8 @@ import { countries } from '../shared/countries/countries.data';
 import { CountryService } from '../shared/countries/country.service';
 import { UserService } from '../shared/user/user.service';
 import { User } from '../shared/user/user';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { MdSnackBar } from '@angular/material';
+
 
 @Component({ selector: 'app-signup', templateUrl: './signup.component.html', styleUrls: ['./signup.component.scss'] })
 export class SignupComponent implements OnInit {
@@ -24,8 +25,8 @@ export class SignupComponent implements OnInit {
         public fb: FormBuilder,
         public countryService: CountryService,
         public userService: UserService,
-        public toastr: ToastsManager,
-        private router: Router
+        private router: Router,
+        public snackBar: MdSnackBar
     ) { }
 
     ngOnInit(): void {
@@ -66,10 +67,10 @@ export class SignupComponent implements OnInit {
                 .subscribe(res => {
                     this.isFetching = false;
                     if (res.message === 'Username already exists.') {
-                        this.toastr.warning('Username already exists please choose different one.', 'Warning');
+                        this.snackBar.open('Username already exists please choose different one.', null, { duration: 2000 });
                     } else {
                         localStorage.setItem('app-jwt', res.jwt);
-                        this.toastr.success('Registration was successful.', 'Success');
+                        this.snackBar.open('Registration was successful.', null, { duration: 2000 });
                         this.user = undefined;
                         this.correctInfo = true;
                     }
