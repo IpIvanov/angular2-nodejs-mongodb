@@ -10,10 +10,9 @@ export class SubNavigationComponent implements OnInit {
   @Input()
   username: string;
 
-  avatarLink = '../../assets/avatars/avatars-material-man-2.png'
+  avatarLink = '../../assets/avatars/avatars-material-man-2.png';
 
   constructor(private userService: UserService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 }

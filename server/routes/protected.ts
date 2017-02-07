@@ -19,7 +19,7 @@ protectedRouter.use((request: Request & { headers: { authorization: string } }, 
 });
 
 protectedRouter.get('/checktoken', (request: Request & { headers: { authorization: string } }, response: Response) => {
-    User.find(request.headers.authorization.toString(), 'username', function (err, doc) {
+    User.find({ 'token': request.headers.authorization.toString() }, 'username', function (err, doc) {
         response.status(200).json({
             message: 'Valid token.',
             username: doc[0].username

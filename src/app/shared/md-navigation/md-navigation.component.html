@@ -8,5 +8,5 @@
     <span class="app-toolbar-filler"></span>
     <button md-button routerLink="/signup" *ngIf="!logged">Sign up</button>
     <button md-raised-button color="accent" routerLink="/login" *ngIf="!logged">Log in</button>
-    <button md-button routerLink="/login" (click)="signOut()" *ngIf="logged">Sign out</button>
+    <button md-button routerLink="/login" (click)="signOut(username)" *ngIf="logged">Sign out</button>
 </md-toolbar>

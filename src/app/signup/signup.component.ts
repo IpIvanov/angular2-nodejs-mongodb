@@ -69,7 +69,6 @@ export class SignupComponent implements OnInit {
                         this.toastr.warning('Username already exists please choose different one.', 'Warning');
                     } else {
                         localStorage.setItem('app-jwt', res.jwt);
-                        localStorage.setItem('app-username', res.username);
                         this.toastr.success('Registration was successful.', 'Success');
                         this.user = undefined;
                         this.correctInfo = true;

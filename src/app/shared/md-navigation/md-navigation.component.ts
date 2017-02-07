@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
 
 @Component({
@@ -11,6 +11,8 @@ export class TopNavigationComponent implements OnInit {
 
     @ViewChild('topnav') topnav: ElementRef;
     @Input() logged: boolean;
+    @Output() onLogout = new EventEmitter<string>();
+    username: string;
 
     constructor(
         public router: Router
@@ -23,10 +25,10 @@ export class TopNavigationComponent implements OnInit {
         this.topnav.nativeElement.classList.toggle(['responsive']);
     }
 
-    signOut() {
+    signOut(username: string) {
         localStorage.removeItem('app-jwt');
-        localStorage.removeItem('app-username');
-        this.logged = false;
+        this.onLogout.emit(username);
+        this.username = undefined;
         this.router.navigate(['/login']);
     }
 }
