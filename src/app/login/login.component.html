@@ -20,6 +20,7 @@
             <form [formGroup]="loginForm" class="form">
                 <button color="primary" class="submit" type="submit" md-raised-button [disabled]="loginForm.invalid" (click)="submitForm(loginForm.value, $event)">Log in</button>
             </form>
+            <button class="facebook-login-btn" md-raised-button (click)="faceBookLogin()">Facebook</button>
         </md-grid-tile>
     </md-grid-list>
 </md-card>
