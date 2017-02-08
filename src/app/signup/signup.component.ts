@@ -6,7 +6,7 @@ import { countries } from '../shared/countries/countries.data';
 import { CountryService } from '../shared/countries/country.service';
 import { UserService } from '../shared/user/user.service';
 import { User } from '../shared/user/user';
-import { MdSnackBar } from '@angular/material';
+import { MdSnackBarService } from '../shared/snackbar/snakbar.service';
 
 
 @Component({
@@ -31,7 +31,7 @@ export class SignupComponent implements OnInit {
         public countryService: CountryService,
         public userService: UserService,
         private router: Router,
-        public snackBar: MdSnackBar,
+        public snackBar: MdSnackBarService
     ) { }
 
     ngOnInit(): void {
@@ -72,10 +72,10 @@ export class SignupComponent implements OnInit {
                 .subscribe(res => {
                     this.isFetching = false;
                     if (res.message === 'Username already exists.') {
-                        this.snackBar.open('Username already exists please choose different one.', null, { duration: 2000 });
+                        this.snackBar.open('Username already exists please choose different one.');
                     } else {
                         localStorage.setItem('app-jwt', res.jwt);
-                        this.snackBar.open('Registration was successful.', null, { duration: 2000 });
+                        this.snackBar.open('Registration was successful.');
                         this.user = undefined;
                         this.correctInfo = true;
                     }
