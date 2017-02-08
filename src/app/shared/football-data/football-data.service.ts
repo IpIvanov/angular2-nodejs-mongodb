@@ -154,8 +154,8 @@ export class FootballDataService {
      * 
      * @memberOf UserService
      */
-    getTeam(id: string): Observable<any> {
-        return this.http.get(`https://api.football-data.org/v1/teams/` + id, this.options)
+    getTeam(url: string): Observable<any> {
+        return this.http.get(url, this.options)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }

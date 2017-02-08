@@ -7,7 +7,8 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent {
-  @Input() img: string;
+  @Input() homeTeamImgs: string;
+  @Input() awayTeamImgs: string;
   @Input() title: string;
   @Input() timeStart: string;
 }
