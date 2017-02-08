@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import {FacebookService, FacebookLoginResponse} from 'ng2-facebook-sdk';
 
 import { countries } from '../shared/countries/countries.data';
 import { CountryService } from '../shared/countries/country.service';
@@ -11,9 +10,9 @@ import { MdSnackBar } from '@angular/material';
 
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+    selector: 'app-signup',
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.scss']
 })
 
 export class SignupComponent implements OnInit {
