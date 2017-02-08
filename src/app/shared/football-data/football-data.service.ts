@@ -172,6 +172,23 @@ export class FootballDataService {
             .catch(this.handleError);
     }
 
+    /**
+     * Get fixtures by day
+     * 
+     * @param {string} [timeFrameStart] default today
+     * @param {string} [timeFrameEnd] +7 days from today
+     * @returns {Observable<any>}
+     * 
+     * @memberOf FootballDataService
+     */
+    getLeagueFixturesByDay(timeFrameStart?: string, timeFrameEnd?: string): Observable<any> {
+        return this.http.get(`http://api.football-data.org/v1/fixtures/?timeFrameStart=`
+            + timeFrameStart + `&timeFrameEnd=` + timeFrameEnd,
+            this.options)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+
     private handleError(error: any) {
         let errMsg = (error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         console.error(errMsg); // log to console instead

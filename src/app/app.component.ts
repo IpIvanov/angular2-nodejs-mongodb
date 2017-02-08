@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.router.events.forEach((event) => {
-            if (event instanceof NavigationStart) {
+            if (event instanceof NavigationEnd) {
                 this.authService.isLoggedIn(localStorage.getItem('app-jwt')).then(
                     (res) => {
                         if (res.error === '403 - Forbidden') {

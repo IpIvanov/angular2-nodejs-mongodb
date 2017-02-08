@@ -12,7 +12,7 @@ export class TopNavigationComponent implements OnInit {
     @ViewChild('topnav') topnav: ElementRef;
     @Input() logged: boolean;
     @Input() username: string;
-    @Output() onLogout = new EventEmitter<string>();
+    @Output() onLogout = new EventEmitter<any>();
     avatarLink: string;
 
     constructor(
@@ -31,6 +31,7 @@ export class TopNavigationComponent implements OnInit {
         localStorage.removeItem('app-jwt');
         this.username = undefined;
         this.logged = false;
+        this.onLogout.emit(this.logged);
         this.onLogout.emit(this.username);
         this.router.navigate(['/login']);
     }
