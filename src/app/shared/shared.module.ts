@@ -16,7 +16,7 @@ import { UserService } from './user/user.service';
 
 import { ButtonOverviewExample } from './md-button/md-button.component';
 import { MaterialModule } from '@angular/material';
-
+;
 
 @NgModule({
     declarations: [

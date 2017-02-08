@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+/*import { FacebookService } from 'ng2-facebook-sdk';*/
 
 import { LoginComponent } from './login.component';
 import { routing } from './login.router';
@@ -19,6 +20,9 @@ import { MaterialModule } from '@angular/material';
     declarations: [
         LoginComponent
     ],
+/*    providers: [
+      FacebookService
+    ],*/
     bootstrap: [
         LoginComponent
     ]

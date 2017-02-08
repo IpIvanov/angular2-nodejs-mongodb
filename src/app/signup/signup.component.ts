@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import {FacebookService, FacebookLoginResponse} from 'ng2-facebook-sdk';
 
 import { countries } from '../shared/countries/countries.data';
 import { CountryService } from '../shared/countries/country.service';
@@ -9,7 +10,12 @@ import { User } from '../shared/user/user';
 import { MdSnackBar } from '@angular/material';
 
 
-@Component({ selector: 'app-signup', templateUrl: './signup.component.html', styleUrls: ['./signup.component.scss'] })
+@Component({
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
+})
+
 export class SignupComponent implements OnInit {
     // Regex for email validator
     emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
@@ -26,7 +32,7 @@ export class SignupComponent implements OnInit {
         public countryService: CountryService,
         public userService: UserService,
         private router: Router,
-        public snackBar: MdSnackBar
+        public snackBar: MdSnackBar,
     ) { }
 
     ngOnInit(): void {
