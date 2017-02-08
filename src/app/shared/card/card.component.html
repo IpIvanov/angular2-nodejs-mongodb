@@ -1,7 +1,14 @@
-<div class="card">
-  <img *ngIf="img" src="{{img}}" alt="Avatar" style="width:100%">
-  <div class="container">
-    <h4><b>{{title}}</b></h4>
-    <p>{{description}}</p>
-  </div>
+<div class="info-card">
+    <img style="width: 100%" src="http://lorempixel.com/400/200" />
+    <div class="info-card-details animate">
+        <div class="info-card-header">
+            <h1> {{title}} </h1>
+            <h3> {{timeStart}} </h3>
+        </div>
+        <div class="info-card-detail">
+            <!-- Description -->
+            <p>People often say that beauty is in the eye of the beholder, and I say that the most liberating thing about beauty is realizing that you are the beholder. This empowers us to find beauty in places where others have not dared to look including
+                inside ourselves.</p>
+        </div>
+    </div>
 </div>

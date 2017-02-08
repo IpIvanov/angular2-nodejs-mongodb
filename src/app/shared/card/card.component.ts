@@ -4,10 +4,10 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-ui-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  styleUrls: ['./card.component.scss']
 })
 export class CardComponent {
   @Input() img: string;
   @Input() title: string;
-  @Input() description: string;
+  @Input() timeStart: string;
 }

@@ -30,18 +30,11 @@ export class DashboardComponent implements OnInit {
     this.footballData.getLeagueFixturesByDay(startDate, endDate)
       .subscribe(
       res => {
+        console.log(res)
         this.todaysMatches = res.fixtures;
       },
       err => console.log(err),
       () => console.log('Stop loader fetching is complete!')
       )
-  }
-
-  setMatchTitle(match): string {
-    return match.homeTeamName + ' vs ' + match.awayTeamName;
-  }
-
-  setMatchStart(date: string): string {
-    return new Date(date).toLocaleDateString() + '   ' + new Date(date).toLocaleTimeString();
   }
 }
