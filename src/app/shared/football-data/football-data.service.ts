@@ -24,7 +24,7 @@ export class FootballDataService {
      */
     getLeagues(year?: string): Observable<any> {
         console.log(this.options)
-        return this.http.get(`http://api.football-data.org/v1/competitions/?season=` + year, this.options)
+        return this.http.get(`https://api.football-data.org/v1/competitions/?season=` + year, this.options)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
@@ -39,7 +39,7 @@ export class FootballDataService {
      * @memberOf UserService
      */
     LeagueTable(id: string, matchday?: string): Observable<any> {
-        return this.http.get(`http://api.football-data.org/v1/competitions/` + id + `/leagueTable/?matchday=` + matchday, this.options)
+        return this.http.get(`https://api.football-data.org/v1/competitions/` + id + `/leagueTable/?matchday=` + matchday, this.options)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
@@ -53,7 +53,7 @@ export class FootballDataService {
      * @memberOf UserService
      */
     getLeagueTeams(id: string): Observable<any> {
-        return this.http.get(`http://api.football-data.org/v1/competitions/` + id + `/teams`, this.options)
+        return this.http.get(`https://api.football-data.org/v1/competitions/` + id + `/teams`, this.options)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
@@ -68,7 +68,7 @@ export class FootballDataService {
      * @memberOf UserService
      */
     getLeagueFixturesByMatchDay(id: string, matchday?: string): Observable<any> {
-        return this.http.get(`http://api.football-data.org/v1/competitions/` + id + `/fixtures/?matchday=` + matchday, this.options)
+        return this.http.get(`https://api.football-data.org/v1/competitions/` + id + `/fixtures/?matchday=` + matchday, this.options)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
@@ -85,7 +85,7 @@ export class FootballDataService {
      * @memberOf UserService
      */
     getLeagueFixturesByTimeframe(id: string, timeFrameStart?: string, timeFrameEnd?: string): Observable<any> {
-        return this.http.get(`http://api.football-data.org/v1/competitions/`
+        return this.http.get(`https://api.football-data.org/v1/competitions/`
             + id + `/fixtures/?timeFrameStart=`
             + timeFrameStart + `&timeFrameEnd=` + timeFrameEnd,
             this.options)
@@ -103,7 +103,7 @@ export class FootballDataService {
      * @memberOf UserService
      */
     getFixture(id: string, numberOfFixtures?: string): Observable<any> {
-        return this.http.get(`http://api.football-data.org/v1/fixtures/`
+        return this.http.get(`https://api.football-data.org/v1/fixtures/`
             + id + `?head2head=`
             + numberOfFixtures, this.options)
             .map((res: Response) => res.json())
@@ -121,7 +121,7 @@ export class FootballDataService {
      * @memberOf UserService
      */
     getFixturesByLeagueAndTime(id: string, timeFrameStart?: string, timeFrameEnd?: string): Observable<any> {
-        return this.http.get(`http://api.football-data.org/v1/fixtures/?leagueCode=`
+        return this.http.get(`https://api.football-data.org/v1/fixtures/?leagueCode=`
             + id + `/fixtures/?timeFrameStart=`
             + timeFrameStart + `&timeFrameEnd=` + timeFrameEnd,
             this.options)
@@ -140,7 +140,7 @@ export class FootballDataService {
      * @memberOf UserService
      */
     getTeamFixtures(id: string, season: string, venue: string, timeFrameStart?: string, timeFrameEnd?: string): Observable<any> {
-        return this.http.get(`http://api.football-data.org/v1/teams/`
+        return this.http.get(`https://api.football-data.org/v1/teams/`
             + id + `/fixtures/?season=` + season + `&timeFrameStart=`
             + timeFrameStart + `&timeFrameEnd=` + timeFrameEnd + `&venue=` + venue,
             this.options)
@@ -155,7 +155,7 @@ export class FootballDataService {
      * @memberOf UserService
      */
     getTeam(id: string): Observable<any> {
-        return this.http.get(`http://api.football-data.org/v1/teams/` + id, this.options)
+        return this.http.get(`https://api.football-data.org/v1/teams/` + id, this.options)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
@@ -167,7 +167,7 @@ export class FootballDataService {
      * @memberOf UserService
      */
     getTeamPlayers(id: string): Observable<any> {
-        return this.http.get(`http://api.football-data.org/v1/teams/` + id + '/players', this.options)
+        return this.http.get(`https://api.football-data.org/v1/teams/` + id + '/players', this.options)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
@@ -182,7 +182,7 @@ export class FootballDataService {
      * @memberOf FootballDataService
      */
     getLeagueFixturesByDay(timeFrameStart?: string, timeFrameEnd?: string): Observable<any> {
-        return this.http.get(`http://api.football-data.org/v1/fixtures/?timeFrameStart=`
+        return this.http.get(`https://api.football-data.org/v1/fixtures/?timeFrameStart=`
             + timeFrameStart + `&timeFrameEnd=` + timeFrameEnd,
             this.options)
             .map((res: Response) => res.json())
