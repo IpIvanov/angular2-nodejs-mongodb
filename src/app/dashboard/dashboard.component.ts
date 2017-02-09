@@ -18,13 +18,14 @@ export class DashboardComponent implements OnInit {
   startDate = new Date().toISOString().slice(0, 10);
   endDate = new Date().toISOString().slice(0, 10);
   todaysDate = new Date().toLocaleDateString();
+  tommorow = new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().slice(0, 10);
   todaysMatches: Array<Object>;
 
   constructor(public footballData: FootballDataService) {
   }
 
   ngOnInit() {
-    this.getTodaysMatches(this.startDate, this.endDate);
+    this.getTodaysMatches(this.startDate, this.tommorow);
   }
 
   getTodaysMatches(startDate, endDate): void {

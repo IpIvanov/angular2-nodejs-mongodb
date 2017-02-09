@@ -1,3 +1,4 @@
+import { ListOverviewComponent } from './md-list/md-list.component';
 import { FootballDataService } from './football-data/football-data.service';
 import { NgModule } from '@angular/core';
 
@@ -28,7 +29,8 @@ import { MdSnackBarService } from './snackbar/snakbar.service';
         ButtonComponent,
         LoaderComponent,
         InputComponent,
-        ButtonOverviewExample
+        ButtonOverviewExample,
+        ListOverviewComponent
     ],
     imports: [
         CommonModule, RouterModule, FormsModule, ReactiveFormsModule, MaterialModule.forRoot()
@@ -42,7 +44,8 @@ import { MdSnackBarService } from './snackbar/snakbar.service';
         ButtonComponent,
         InputComponent,
         SubNavigationComponent,
-        ButtonOverviewExample
+        ButtonOverviewExample,
+        ListOverviewComponent
     ],
     providers: [CountryService, UserService, FootballDataService, MdSnackBarService]
 })
