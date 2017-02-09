@@ -19,7 +19,7 @@ import { ButtonOverviewExample } from './md-button/md-button.component';
 import { MaterialModule } from '@angular/material';
 import { MdSnackBarService } from './snackbar/snakbar.service';
 import { FacebookService } from 'ng2-facebook-sdk/dist/index';
-
+import { FacebookLoginComponent } from './facebook/login/facebook-login.component'
 
 @NgModule({
     declarations: [
@@ -32,7 +32,8 @@ import { FacebookService } from 'ng2-facebook-sdk/dist/index';
         LoaderComponent,
         InputComponent,
         ButtonOverviewExample,
-        ListOverviewComponent
+        ListOverviewComponent,
+        FacebookLoginComponent
     ],
     imports: [
         CommonModule, RouterModule, FormsModule, ReactiveFormsModule, MaterialModule.forRoot()
@@ -47,7 +48,8 @@ import { FacebookService } from 'ng2-facebook-sdk/dist/index';
         InputComponent,
         SubNavigationComponent,
         ButtonOverviewExample,
-        ListOverviewComponent
+        ListOverviewComponent,
+        FacebookLoginComponent
     ],
 
     providers: [CountryService, UserService, FootballDataService, FacebookService, MdSnackBarService]

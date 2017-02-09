@@ -7,8 +7,7 @@ const routes: Route[] = [
     { loadChildren: 'app/dashboard/dashboard.module#DashboardModule', path: 'dashboard', canActivate: [PreventLoggedInAccess] },
     { loadChildren: 'app/profile/profile.module#ProfileModule', path: 'profile' },
     { loadChildren: 'app/login/login.module#LoginModule', path: 'login' },
-    { loadChildren: 'app/signup/signup.module#SignupModule', path: 'signup' },
-    { loadChildren: 'app/facebook-login/facebook-login.module#FacebookLoginModule', path: 'facebook-login' },
+    { loadChildren: 'app/signup/signup.module#SignupModule', path: 'signup' }
 
 ];
 

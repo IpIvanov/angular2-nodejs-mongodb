@@ -1,4 +1,3 @@
-import { FacebookService, FacebookApiMethod, FacebookInitParams, FacebookLoginResponse } from 'ng2-facebook-sdk/dist/index';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,37 +6,26 @@ import { UserService } from '../shared/user/user.service';
 import { MdSnackBarService } from '../shared/snackbar/snakbar.service';
 
 
-
-@Component({ selector: 'app-login', templateUrl: './login.component.html', styleUrls: ['./login.component.scss'] })
-export class LoginComponent  {
-    loginForm: FormGroup;
+@Component({selector: 'app-login', templateUrl: './login.component.html', styleUrls: ['./login.component.scss']})
+export class LoginComponent {
+    loginForm:FormGroup;
     isFetching = false;
     correctInfo = false;
-    fbApiMethod: FacebookApiMethod;
-
-    constructor(
-        public fb: FormBuilder,
-        public userService: UserService,
-        public router: Router,
-        public snackBar: MdSnackBarService,
-        public facebookService: FacebookService
-    ) {
-      let fbParams: FacebookInitParams = {
-        appId: '1800762523509083',
-        xfbml: true,
-        version: 'v2.6'
-      };
-      this.facebookService.init(fbParams);
+    constructor(public fb:FormBuilder,
+                public userService:UserService,
+                public router:Router,
+                public snackBar:MdSnackBarService) {
 
     }
-    ngOnInit(): void {
+
+    ngOnInit():void {
         this.loginForm = new FormGroup({
             username: new FormControl('', Validators.required),
             password: new FormControl('', Validators.required)
         });
     }
 
-    submitForm(loginForm, event): void {
+    submitForm(loginForm, event):void {
         if ((event.keyCode === 13 || event.type === 'click') && this.loginForm.valid) {
             this.isFetching = true;
             this.userService.login(loginForm)
@@ -59,29 +47,5 @@ export class LoginComponent  {
                 });
         }
     }
-
-
-    faceBookLogin(): void {
-        this.facebookService.login().then(
-            (response: FacebookLoginResponse) => {
-                console.log(response);
-                this.facebookService.api('/me', this.fbApiMethod, { fields: ['id', 'name', 'picture'] }).then(
-                    (response: FacebookLoginResponse) => {
-                        console.log(response);
-                    }
-                );
-            },
-            (error: any) => console.error(error)
-        );
-    }
-
-    // faceBookLogout(): void {
-    //     this.facebookService.logout().then(
-    //         (response: FacebookLoginResponse) => {
-    //             console.log(response)
-    //         },
-    //         (error: any) => console.error(error)
-    //     );
-    // }
 
 }
