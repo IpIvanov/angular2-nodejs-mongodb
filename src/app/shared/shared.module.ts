@@ -1,3 +1,4 @@
+import { ListOverviewComponent } from './md-list/md-list.component';
 import { FootballDataService } from './football-data/football-data.service';
 import { NgModule } from '@angular/core';
 
@@ -30,7 +31,8 @@ import { FacebookService } from 'ng2-facebook-sdk/dist/index';
         ButtonComponent,
         LoaderComponent,
         InputComponent,
-        ButtonOverviewExample
+        ButtonOverviewExample,
+        ListOverviewComponent
     ],
     imports: [
         CommonModule, RouterModule, FormsModule, ReactiveFormsModule, MaterialModule.forRoot()
@@ -44,7 +46,8 @@ import { FacebookService } from 'ng2-facebook-sdk/dist/index';
         ButtonComponent,
         InputComponent,
         SubNavigationComponent,
-        ButtonOverviewExample
+        ButtonOverviewExample,
+        ListOverviewComponent
     ],
 
     providers: [CountryService, UserService, FootballDataService, FacebookService, MdSnackBarService]
