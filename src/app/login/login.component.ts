@@ -9,7 +9,7 @@ import { MdSnackBarService } from '../shared/snackbar/snakbar.service';
 
 
 @Component({ selector: 'app-login', templateUrl: './login.component.html', styleUrls: ['./login.component.scss'] })
-export class LoginComponent implements OnInit {
+export class LoginComponent  {
     loginForm: FormGroup;
     isFetching = false;
     correctInfo = false;
@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
         public userService: UserService,
         public router: Router,
         public snackBar: MdSnackBarService,
-        public snackBar: MdSnackBar,
         public facebookService: FacebookService
     ) {
       let fbParams: FacebookInitParams = {
