@@ -1,3 +1,4 @@
+import { FacebookService, FacebookApiMethod, FacebookInitParams, FacebookLoginResponse } from 'ng2-facebook-sdk/dist/index';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,19 +7,30 @@ import { UserService } from '../shared/user/user.service';
 import { MdSnackBarService } from '../shared/snackbar/snakbar.service';
 
 
+
 @Component({ selector: 'app-login', templateUrl: './login.component.html', styleUrls: ['./login.component.scss'] })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     isFetching = false;
     correctInfo = false;
+    fbApiMethod: FacebookApiMethod;
 
     constructor(
         public fb: FormBuilder,
         public userService: UserService,
         public router: Router,
-        public snackBar: MdSnackBarService
-    ) { }
+        public snackBar: MdSnackBarService,
+        public snackBar: MdSnackBar,
+        public facebookService: FacebookService
+    ) {
+      let fbParams: FacebookInitParams = {
+        appId: '1800762523509083',
+        xfbml: true,
+        version: 'v2.6'
+      };
+      this.facebookService.init(fbParams);
 
+    }
     ngOnInit(): void {
         this.loginForm = new FormGroup({
             username: new FormControl('', Validators.required),
@@ -48,4 +60,29 @@ export class LoginComponent implements OnInit {
                 });
         }
     }
+
+
+    faceBookLogin(): void {
+        this.facebookService.login().then(
+            (response: FacebookLoginResponse) => {
+                console.log(response);
+                this.facebookService.api('/me', this.fbApiMethod, { fields: ['id', 'name', 'picture'] }).then(
+                    (response: FacebookLoginResponse) => {
+                        console.log(response);
+                    }
+                );
+            },
+            (error: any) => console.error(error)
+        );
+    }
+
+    // faceBookLogout(): void {
+    //     this.facebookService.logout().then(
+    //         (response: FacebookLoginResponse) => {
+    //             console.log(response)
+    //         },
+    //         (error: any) => console.error(error)
+    //     );
+    // }
+
 }

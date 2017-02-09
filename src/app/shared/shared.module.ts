@@ -17,6 +17,8 @@ import { UserService } from './user/user.service';
 import { ButtonOverviewExample } from './md-button/md-button.component';
 import { MaterialModule } from '@angular/material';
 import { MdSnackBarService } from './snackbar/snakbar.service';
+import { FacebookService } from 'ng2-facebook-sdk/dist/index';
+
 
 @NgModule({
     declarations: [
@@ -44,6 +46,8 @@ import { MdSnackBarService } from './snackbar/snakbar.service';
         SubNavigationComponent,
         ButtonOverviewExample
     ],
-    providers: [CountryService, UserService, FootballDataService, MdSnackBarService]
+
+    providers: [CountryService, UserService, FootballDataService, FacebookService, MdSnackBarService]
+
 })
 export class SharedModule { }
