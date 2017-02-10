@@ -6,22 +6,17 @@ import { FacebookService, FacebookApiMethod, FacebookInitParams, FacebookLoginRe
     templateUrl: './facebook-login.component.html',
     styleUrls: ['./facebook-login.component.scss']
 })
-export class FacebookLoginComponent  {
+export class FacebookLoginComponent {
 
-    fbApiMethod:FacebookApiMethod;
+    fbApiMethod: FacebookApiMethod;
 
     @Input() username: string;
-    @Output() onFacebookLogin = new EventEmitter<any>();
+    @Output() userUpdated = new EventEmitter<Array<any>>();
 
-    constructor(public facebookService:FacebookService) {
-
-
-    }
-
-
+    constructor(public facebookService: FacebookService) { }
 
     ngOnInit() {
-        let fbParams:FacebookInitParams = {
+        let fbParams: FacebookInitParams = {
             appId: '1800762523509083',
             xfbml: true,
             version: 'v2.6'
@@ -29,31 +24,20 @@ export class FacebookLoginComponent  {
         this.facebookService.init(fbParams);
     }
 
-
-    faceBookLogin():void {
+    faceBookLogin(): void {
         this.facebookService.login().then(
-            (response:FacebookLoginResponse) => {
+            (response: FacebookLoginResponse) => {
                 console.log(response);
-                this.facebookService.api('/me', this.fbApiMethod, {fields: ['id', 'name', 'picture']}).then(
-                    (response:any) => {
+                this.facebookService.api('/me', this.fbApiMethod, { fields: ['id', 'name', 'picture'] }).then(
+                    (response: any) => {
                         console.log(response);
                         this.username = response.name;
                         console.log(response.name)
-                        this.onFacebookLogin.emit(this.username)
+                        this.userUpdated.emit([this.username, response.picture.data.url])
                     }
                 );
             },
-            (error:any) => console.error(error)
+            (error: any) => console.error(error)
         );
     }
-
-    faceBookLogout():void {
-        this.facebookService.logout().then(
-            (response:FacebookLoginResponse) => {
-                console.log(response)
-            },
-            (error:any) => console.error(error)
-        );
-    }
-
 }

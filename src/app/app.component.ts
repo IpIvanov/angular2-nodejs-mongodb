@@ -22,6 +22,7 @@ import { FootballDataService } from './shared/football-data/football-data.servic
 export class AppComponent implements OnInit {
     username: string;
     logged: boolean;
+    avatarLink: string;
 
     constructor(
         public vRef: ViewContainerRef,
@@ -50,5 +51,10 @@ export class AppComponent implements OnInit {
             // NavigationError
             // RoutesRecognized
         });
+    }
+
+    handleUserUpdated(userInfo: Array<any>) {
+        this.username = userInfo[0];
+        this.avatarLink = userInfo[1];
     }
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
+import { FacebookService, FacebookLoginResponse } from 'ng2-facebook-sdk/dist/index';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,15 +13,19 @@ export class TopNavigationComponent implements OnInit {
     @ViewChild('topnav') topnav: ElementRef;
     @Input() logged: boolean;
     @Input() username: string;
-    @Output() onLogout = new EventEmitter<any>();
-    avatarLink: string;
+    @Input() facebookImg: string;
+
+    @Output() userUpdated = new EventEmitter<Array<any>>();
 
     constructor(
-        public router: Router
+        public router: Router,
+        public facebookService: FacebookService
     ) { }
 
     ngOnInit() {
-        this.avatarLink = '../../assets/avatars/avatars-material-man-2.png';
+        if (this.facebookImg === undefined) {
+            this.facebookImg = '../../assets/avatars/avatars-material-man-2.png';
+        }
     }
 
     toggle() {
@@ -31,8 +36,18 @@ export class TopNavigationComponent implements OnInit {
         localStorage.removeItem('app-jwt');
         this.username = undefined;
         this.logged = false;
-        this.onLogout.emit(this.logged);
-        this.onLogout.emit(this.username);
+        this.facebookImg = undefined;
         this.router.navigate(['/login']);
+        this.faceBookLogout();
+    }
+
+    faceBookLogout() {
+        this.facebookService.logout().then(
+            (response: FacebookLoginResponse) => {
+                console.log(response)
+                this.userUpdated.emit([this.username, this.facebookImg]);
+            },
+            (error: any) => console.error(error)
+        );
     }
 }

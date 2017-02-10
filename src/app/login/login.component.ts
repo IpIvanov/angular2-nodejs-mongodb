@@ -6,26 +6,28 @@ import { UserService } from '../shared/user/user.service';
 import { MdSnackBarService } from '../shared/snackbar/snakbar.service';
 
 
-@Component({selector: 'app-login', templateUrl: './login.component.html', styleUrls: ['./login.component.scss']})
+@Component({ selector: 'app-login', templateUrl: './login.component.html', styleUrls: ['./login.component.scss'] })
 export class LoginComponent {
-    loginForm:FormGroup;
+
+    loginForm: FormGroup;
     isFetching = false;
     correctInfo = false;
-    constructor(public fb:FormBuilder,
-                public userService:UserService,
-                public router:Router,
-                public snackBar:MdSnackBarService) {
+
+    constructor(public fb: FormBuilder,
+        public userService: UserService,
+        public router: Router,
+        public snackBar: MdSnackBarService) {
 
     }
 
-    ngOnInit():void {
+    ngOnInit(): void {
         this.loginForm = new FormGroup({
             username: new FormControl('', Validators.required),
             password: new FormControl('', Validators.required)
         });
     }
 
-    submitForm(loginForm, event):void {
+    submitForm(loginForm, event): void {
         if ((event.keyCode === 13 || event.type === 'click') && this.loginForm.valid) {
             this.isFetching = true;
             this.userService.login(loginForm)

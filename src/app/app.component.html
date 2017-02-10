@@ -1,8 +1,7 @@
-<app-md-navigation [logged]='username !== undefined' [username]='username'></app-md-navigation>
-<app-facebook-login [username]='username' ></app-facebook-login>
+<app-md-navigation [logged]='username !== undefined' [username]='username' [facebookImg]='avatarLink' (userUpdated)="handleUserUpdated($event)"></app-md-navigation>
+<app-facebook-login [username]='username' (userUpdated)="handleUserUpdated($event)"></app-facebook-login>
 <div class="main ">
     <router-outlet></router-outlet>
 </div>
 
 <router-outlet name='modal'></router-outlet>
-
