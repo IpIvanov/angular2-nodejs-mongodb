@@ -1,5 +1,6 @@
-<app-md-navigation [logged]='username !== undefined' [username]='username' [facebookImg]='avatarLink' (userUpdated)="handleUserUpdated($event)"></app-md-navigation>
-<app-facebook-login [username]='username' (userUpdated)="handleUserUpdated($event)"></app-facebook-login>
+<app-md-navigation [avatarLink]="avatarImg" [name]='username' [userLogged]="userLogged" (onLogout)="setUsername($event)"></app-md-navigation>
+<app-facebook-login (userUpdated)="handleFaceBookLogin($event)"></app-facebook-login>
+
 <div class="main ">
     <router-outlet></router-outlet>
 </div>

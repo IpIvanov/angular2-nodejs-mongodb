@@ -21,8 +21,8 @@ import { FootballDataService } from './shared/football-data/football-data.servic
 })
 export class AppComponent implements OnInit {
     username: string;
-    logged: boolean;
-    avatarLink: string;
+    userLogged: boolean;
+    avatarImg: string;
 
     constructor(
         public vRef: ViewContainerRef,
@@ -36,11 +36,11 @@ export class AppComponent implements OnInit {
                 this.authService.isLoggedIn(localStorage.getItem('app-jwt')).then(
                     (res) => {
                         if (res.error === '403 - Forbidden') {
-                            this.logged = false;
+                            this.userLogged = false;
                             this.username = res.username;
                         }
                         if (res.message === 'Valid token.') {
-                            this.logged = true;
+                            this.userLogged = true;
                             this.username = res.username;
                         }
                     }
@@ -53,8 +53,14 @@ export class AppComponent implements OnInit {
         });
     }
 
-    handleUserUpdated(userInfo: Array<any>) {
+    handleFaceBookLogin(userInfo: Array<any>) {
         this.username = userInfo[0];
-        this.avatarLink = userInfo[1];
+        this.avatarImg = userInfo[1];
+        this.userLogged = true;
+    }
+
+    setUsername(username) {
+        this.username = username;
+        this.userLogged = false;
     }
 }

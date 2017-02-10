@@ -11,11 +11,10 @@ import { FacebookService, FacebookLoginResponse } from 'ng2-facebook-sdk/dist/in
 export class TopNavigationComponent implements OnInit {
 
     @ViewChild('topnav') topnav: ElementRef;
-    @Input() logged: boolean;
-    @Input() username: string;
-    @Input() facebookImg: string;
-
-    @Output() userUpdated = new EventEmitter<Array<any>>();
+    @Input() name: string;
+    @Input() userLogged: boolean;
+    @Output() onLogout = new EventEmitter<string>();
+    @Input() avatarLink: string;
 
     constructor(
         public router: Router,
@@ -23,8 +22,8 @@ export class TopNavigationComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        if (this.facebookImg === undefined) {
-            this.facebookImg = '../../assets/avatars/avatars-material-man-2.png';
+        if (this.avatarLink === undefined) {
+            this.avatarLink = '../../assets/avatars/avatars-material-man-2.png';
         }
     }
 
@@ -34,9 +33,9 @@ export class TopNavigationComponent implements OnInit {
 
     signOut() {
         localStorage.removeItem('app-jwt');
-        this.username = undefined;
-        this.logged = false;
-        this.facebookImg = undefined;
+        this.name = undefined;
+        this.userLogged = false;
+        this.onLogout.emit(this.name);
         this.router.navigate(['/login']);
         this.faceBookLogout();
     }
@@ -45,7 +44,7 @@ export class TopNavigationComponent implements OnInit {
         this.facebookService.logout().then(
             (response: FacebookLoginResponse) => {
                 console.log(response)
-                this.userUpdated.emit([this.username, this.facebookImg]);
+                this.onLogout.emit(this.name);
             },
             (error: any) => console.error(error)
         );

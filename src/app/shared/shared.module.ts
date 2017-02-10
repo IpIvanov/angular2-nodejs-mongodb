@@ -10,7 +10,7 @@ import { SubNavigationComponent } from './sub-navigation/sub-navigation.componen
 import { ButtonComponent } from './button/button.component';
 import { InputComponent } from './input/input.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { CardComponent } from './card/card.component';
+import { CardComponent } from './md-card/md-card.component';
 import { LoaderComponent } from './loader/loader.component';
 import { CountryService } from './countries/country.service';
 import { UserService } from './user/user.service';
