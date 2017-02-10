@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, Output, EventEmitter, ViewContainerRef } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
-import { FacebookService, FacebookLoginResponse } from 'ng2-facebook-sdk/dist/index';
+import { FacebookService, FacebookLoginResponse } from 'ng2-facebook-sdk';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { DialogWindowComponent } from '../md-dialog/md-dialog.component';
 import { DomSanitizer } from '@angular/platform-browser';

@@ -18,7 +18,7 @@ import { UserService } from './user/user.service';
 import { ButtonOverviewExample } from './md-button/md-button.component';
 import { MaterialModule } from '@angular/material';
 import { MdSnackBarService } from './snackbar/snakbar.service';
-import { FacebookService } from 'ng2-facebook-sdk/dist/index';
+import { FacebookService } from 'ng2-facebook-sdk';
 import { FacebookLoginComponent } from './facebook/login/facebook-login.component';
 import { DialogWindowComponent } from './md-dialog/md-dialog.component';
 import { DialogsService } from './md-dialog/md-dialog.service';
