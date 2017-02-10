@@ -10,7 +10,6 @@ export class FacebookLoginComponent {
 
     fbApiMethod: FacebookApiMethod;
 
-    @Input() username: string;
     @Output() userUpdated = new EventEmitter<Array<any>>();
 
     constructor(public facebookService: FacebookService) { }
@@ -31,9 +30,7 @@ export class FacebookLoginComponent {
                 this.facebookService.api('/me', this.fbApiMethod, { fields: ['id', 'name', 'picture'] }).then(
                     (response: any) => {
                         console.log(response);
-                        this.username = response.name;
-                        console.log(response.name)
-                        this.userUpdated.emit([this.username, response.picture.data.url])
+                        this.userUpdated.emit([response.name, response.picture.data.url])
                     }
                 );
             },
