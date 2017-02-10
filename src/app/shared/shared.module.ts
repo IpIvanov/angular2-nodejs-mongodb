@@ -21,6 +21,7 @@ import { MdSnackBarService } from './snackbar/snakbar.service';
 import { FacebookService } from 'ng2-facebook-sdk/dist/index';
 import { FacebookLoginComponent } from './facebook/login/facebook-login.component';
 import { DialogWindowComponent } from './md-dialog/md-dialog.component';
+import { DialogsService } from './md-dialog/md-dialog.service';
 
 @NgModule({
     declarations: [
@@ -38,7 +39,11 @@ import { DialogWindowComponent } from './md-dialog/md-dialog.component';
         DialogWindowComponent
     ],
     imports: [
-        CommonModule, RouterModule, FormsModule, ReactiveFormsModule, MaterialModule.forRoot()
+        CommonModule,
+        RouterModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MaterialModule.forRoot()
     ],
     exports: [
         ModalComponent,
@@ -54,7 +59,14 @@ import { DialogWindowComponent } from './md-dialog/md-dialog.component';
         FacebookLoginComponent,
         DialogWindowComponent
     ],
-    providers: [CountryService, UserService, FootballDataService, FacebookService, MdSnackBarService],
+    providers: [
+        CountryService,
+        UserService,
+        FootballDataService,
+        FacebookService,
+        MdSnackBarService,
+        DialogsService
+    ],
     entryComponents: [
         DialogWindowComponent
     ]

@@ -1,10 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, Output, EventEmitter, ViewContainerRef } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
 import { FacebookService, FacebookLoginResponse } from 'ng2-facebook-sdk/dist/index';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { DialogWindowComponent } from '../md-dialog/md-dialog.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MdIconRegistry } from '@angular/material';
+import { DialogsService } from '../md-dialog/md-dialog.service';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,7 +26,9 @@ export class TopNavigationComponent implements OnInit {
         public facebookService: FacebookService,
         public dialog: MdDialog,
         iconRegistry: MdIconRegistry,
-        sanitizer: DomSanitizer
+        sanitizer: DomSanitizer,
+        private dialogsService: DialogsService,
+        private viewContainerRef: ViewContainerRef
     ) {
         iconRegistry.addSvgIcon(
             'facebook-icon',
@@ -68,7 +71,9 @@ export class TopNavigationComponent implements OnInit {
     }
 
     openDialog() {
-        let dialogRef = this.dialog.open(DialogWindowComponent);
+        this.dialogsService
+            .confirm('Confirm Dialog', 'Are you sure you want to do this?', this.viewContainerRef)
+            .subscribe(res => console.log(res));
     }
 }
 
