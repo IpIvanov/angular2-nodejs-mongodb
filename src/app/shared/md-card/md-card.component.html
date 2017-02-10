@@ -1,13 +1,14 @@
 <md-card class="card mb-5">
     <md-card-header>
         <md-card-title>{{title}}</md-card-title>
-        <md-card-subtitle>{{timeStart}}</md-card-subtitle>
+        <md-card-subtitle>
+            {{status}} / {{timeStart}}
+        </md-card-subtitle>
     </md-card-header>
     <img md-card-image src="http://lorempixel.com/400/200">
     <md-card-content>
         <p *ngIf="odds">Odds: {{odds?.homeWin}} / {{odds?.draw}} / {{odds?.awayWin}}</p>
-        <p>Status: {{status}}</p>
-        <p *ngIf="result.goalsHomeTeam">Final result: {{result.goalsHomeTeam}}:goalsAwayTeam</p>
+        <p *ngIf="result.goalsHomeTeam !== null">Final result: {{result.goalsHomeTeam}}:{{result.goalsAwayTeam}}</p>
     </md-card-content>
     <md-card-actions>
         <button md-raised-button>Share</button>
