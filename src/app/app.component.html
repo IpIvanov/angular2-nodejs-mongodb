@@ -1,4 +1,4 @@
-<app-md-navigation [logged]='username !== undefined' [username]='username'></app-md-navigation>
+<app-md-navigation [name]='username' [userLogged]="userLogged" (onLogout)="setUsername($event)"></app-md-navigation>
 
 <div class="main ">
     <router-outlet></router-outlet>

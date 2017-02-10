@@ -10,9 +10,9 @@ import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCanc
 export class TopNavigationComponent implements OnInit {
 
     @ViewChild('topnav') topnav: ElementRef;
-    @Input() logged: boolean;
-    @Input() username: string;
-    @Output() onLogout = new EventEmitter<any>();
+    @Input() name: string;
+    @Input() userLogged: boolean;
+    @Output() onLogout = new EventEmitter<string>();
     avatarLink: string;
 
     constructor(
@@ -29,10 +29,9 @@ export class TopNavigationComponent implements OnInit {
 
     signOut() {
         localStorage.removeItem('app-jwt');
-        this.username = undefined;
-        this.logged = false;
-        this.onLogout.emit(this.logged);
-        this.onLogout.emit(this.username);
+        this.name = undefined;
+        this.userLogged = false;
+        this.onLogout.emit(this.name);
         this.router.navigate(['/login']);
     }
 }
