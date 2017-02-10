@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
+import { FacebookService, FacebookApiMethod, FacebookInitParams, FacebookLoginResponse } from 'ng2-facebook-sdk';
 
 @Component({
     selector: 'app-md-dialog',
@@ -10,8 +11,6 @@ export class DialogWindowComponent {
     public title: string;
     public message: string;
 
-
     constructor(public dialogRef: MdDialogRef<DialogWindowComponent>) {
-
     }
 }

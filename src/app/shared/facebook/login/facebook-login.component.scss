@@ -1,4 +1,8 @@
 @import '../../../../theme.scss';
+:host {
+    display: block;
+}
+
 a {
     &:hover,
     &:focus,

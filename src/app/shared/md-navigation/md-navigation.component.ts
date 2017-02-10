@@ -25,8 +25,8 @@ export class TopNavigationComponent implements OnInit {
         public router: Router,
         public facebookService: FacebookService,
         public dialog: MdDialog,
-        iconRegistry: MdIconRegistry,
-        sanitizer: DomSanitizer,
+        public iconRegistry: MdIconRegistry,
+        public sanitizer: DomSanitizer,
         private dialogsService: DialogsService,
         private viewContainerRef: ViewContainerRef
     ) {
@@ -73,7 +73,9 @@ export class TopNavigationComponent implements OnInit {
     openDialog() {
         this.dialogsService
             .confirm('Confirm Dialog', 'Are you sure you want to do this?', this.viewContainerRef)
-            .subscribe(res => console.log(res));
+            .subscribe((res: any) => {
+                this.handleFaceBookLogin(res);
+            });
     }
 }
 
