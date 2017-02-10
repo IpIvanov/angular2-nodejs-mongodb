@@ -1,6 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
 import { FacebookService, FacebookLoginResponse } from 'ng2-facebook-sdk/dist/index';
+import { MdDialog, MdDialogRef } from '@angular/material';
+import { DialogWindowComponent } from '../md-dialog/md-dialog.component';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MdIconRegistry } from '@angular/material';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,12 +22,19 @@ export class TopNavigationComponent implements OnInit {
 
     constructor(
         public router: Router,
-        public facebookService: FacebookService
-    ) { }
+        public facebookService: FacebookService,
+        public dialog: MdDialog,
+        iconRegistry: MdIconRegistry,
+        sanitizer: DomSanitizer
+    ) {
+        iconRegistry.addSvgIcon(
+            'facebook-icon',
+            sanitizer.bypassSecurityTrustResourceUrl('../../../assets/imgs/facebook.svg'));
+    }
 
     ngOnInit() {
         if (this.avatarLink === undefined) {
-            this.avatarLink = '../../assets/avatars/avatars-material-man-2.png';
+            this.avatarLink = '../../assets/imgs/avatars/avatars-material-man-2.png';
         }
     }
 
@@ -49,4 +60,15 @@ export class TopNavigationComponent implements OnInit {
             (error: any) => console.error(error)
         );
     }
+
+    handleFaceBookLogin(userInfo: Array<any>) {
+        this.name = userInfo[0];
+        this.avatarLink = userInfo[1];
+        this.userLogged = true;
+    }
+
+    openDialog() {
+        let dialogRef = this.dialog.open(DialogWindowComponent);
+    }
 }
+

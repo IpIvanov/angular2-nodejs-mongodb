@@ -1,0 +1,24 @@
+@import '../../../../theme.scss';
+a {
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+        color: #fff;
+        border-color: transparent;
+    }
+    .facebook-icon {
+        fill: #fff
+    }
+    &.facebook-login {
+        color: #fff;
+        background-color: #0075bb;
+    }
+    background: 0 0;
+    color: #888;
+    border: 2px solid #0075bb;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-shadow: none;
+}

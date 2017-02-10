@@ -26,10 +26,8 @@ export class FacebookLoginComponent {
     faceBookLogin(): void {
         this.facebookService.login().then(
             (response: FacebookLoginResponse) => {
-                console.log(response);
                 this.facebookService.api('/me', this.fbApiMethod, { fields: ['id', 'name', 'picture'] }).then(
                     (response: any) => {
-                        console.log(response);
                         this.userUpdated.emit([response.name, response.picture.data.url])
                     }
                 );

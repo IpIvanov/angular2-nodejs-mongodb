@@ -19,7 +19,8 @@ import { ButtonOverviewExample } from './md-button/md-button.component';
 import { MaterialModule } from '@angular/material';
 import { MdSnackBarService } from './snackbar/snakbar.service';
 import { FacebookService } from 'ng2-facebook-sdk/dist/index';
-import { FacebookLoginComponent } from './facebook/login/facebook-login.component'
+import { FacebookLoginComponent } from './facebook/login/facebook-login.component';
+import { DialogWindowComponent } from './md-dialog/md-dialog.component';
 
 @NgModule({
     declarations: [
@@ -33,7 +34,8 @@ import { FacebookLoginComponent } from './facebook/login/facebook-login.componen
         InputComponent,
         ButtonOverviewExample,
         ListOverviewComponent,
-        FacebookLoginComponent
+        FacebookLoginComponent,
+        DialogWindowComponent
     ],
     imports: [
         CommonModule, RouterModule, FormsModule, ReactiveFormsModule, MaterialModule.forRoot()
@@ -49,10 +51,13 @@ import { FacebookLoginComponent } from './facebook/login/facebook-login.componen
         SubNavigationComponent,
         ButtonOverviewExample,
         ListOverviewComponent,
-        FacebookLoginComponent
+        FacebookLoginComponent,
+        DialogWindowComponent
     ],
-
-    providers: [CountryService, UserService, FootballDataService, FacebookService, MdSnackBarService]
+    providers: [CountryService, UserService, FootballDataService, FacebookService, MdSnackBarService],
+    entryComponents: [
+        DialogWindowComponent
+    ]
 
 })
 export class SharedModule { }
