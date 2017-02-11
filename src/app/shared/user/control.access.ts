@@ -19,7 +19,6 @@ export class PreventLoggedInAccess implements CanActivate {
             (res) => {
                 if (res.error === '403 - Forbidden') {
                     this.snackBar.open('You don\'t have access to this section. Please login or signup first.');
-                    this.router.navigate(['/login']);
                     return false;
                 }
                 if (res.message === 'Valid token.') {

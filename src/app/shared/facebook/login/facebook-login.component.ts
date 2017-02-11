@@ -35,7 +35,6 @@ export class FacebookLoginComponent {
                             this.dialogRef.close([response.name, response.picture.data.url])
                         } else {
                             this.userUpdated.emit([response.name, response.picture.data.url])
-
                         }
                     }
                 );

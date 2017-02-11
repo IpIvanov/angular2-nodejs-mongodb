@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
         });
     }
 
-    handleFaceBookLogin(userInfo: Array<any>) {
+    handleNormalLogin(userInfo: Array<any>) {
         this.username = userInfo[0];
         this.avatarImg = userInfo[1];
         this.userLogged = true;

@@ -50,14 +50,12 @@ export class TopNavigationComponent implements OnInit {
         this.name = undefined;
         this.userLogged = false;
         this.onLogout.emit(this.name);
-        this.router.navigate(['/login']);
         this.faceBookLogout();
     }
 
     faceBookLogout() {
         this.facebookService.logout().then(
             (response: FacebookLoginResponse) => {
-                console.log(response)
                 this.onLogout.emit(this.name);
             },
             (error: any) => console.error(error)
@@ -68,13 +66,16 @@ export class TopNavigationComponent implements OnInit {
         this.name = userInfo[0];
         this.avatarLink = userInfo[1];
         this.userLogged = true;
+
     }
 
     openDialog() {
         this.dialogsService
-            .confirm('Confirm Dialog', 'Are you sure you want to do this?', this.viewContainerRef)
+            .confirm(null, null, this.viewContainerRef)
             .subscribe((res: any) => {
-                this.handleFaceBookLogin(res);
+                if (res) {
+                    this.handleFaceBookLogin(res);
+                }
             });
     }
 }

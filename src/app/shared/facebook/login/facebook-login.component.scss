@@ -12,11 +12,12 @@ a {
         border-color: transparent;
     }
     .facebook-icon {
-        fill: #fff
+        fill: #fff;
     }
     &.facebook-login {
         color: #fff;
         background-color: #0075bb;
+        display: block;
     }
     background: 0 0;
     color: #888;

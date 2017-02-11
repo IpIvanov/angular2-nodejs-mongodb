@@ -23,7 +23,6 @@ export class FootballDataService {
      * @memberOf UserService
      */
     getLeagues(year?: string): Observable<any> {
-        console.log(this.options)
         return this.http.get(`https://api.football-data.org/v1/competitions/?season=` + year, this.options)
             .map((res: Response) => res.json())
             .catch(this.handleError);

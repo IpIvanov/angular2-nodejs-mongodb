@@ -22,6 +22,8 @@ import { FacebookService } from 'ng2-facebook-sdk';
 import { FacebookLoginComponent } from './facebook/login/facebook-login.component';
 import { DialogWindowComponent } from './md-dialog/md-dialog.component';
 import { DialogsService } from './md-dialog/md-dialog.service';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +38,9 @@ import { DialogsService } from './md-dialog/md-dialog.service';
         ButtonOverviewExample,
         ListOverviewComponent,
         FacebookLoginComponent,
-        DialogWindowComponent
+        DialogWindowComponent,
+        LoginComponent,
+        SignupComponent
     ],
     imports: [
         CommonModule,
@@ -57,7 +61,9 @@ import { DialogsService } from './md-dialog/md-dialog.service';
         ButtonOverviewExample,
         ListOverviewComponent,
         FacebookLoginComponent,
-        DialogWindowComponent
+        DialogWindowComponent,
+        LoginComponent,
+        SignupComponent
     ],
     providers: [
         CountryService,

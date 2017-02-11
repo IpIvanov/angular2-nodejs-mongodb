@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { countries } from '../shared/countries/countries.data';
-import { CountryService } from '../shared/countries/country.service';
-import { UserService } from '../shared/user/user.service';
-import { User } from '../shared/user/user';
-import { MdSnackBarService } from '../shared/snackbar/snakbar.service';
+import { countries } from '../countries/countries.data';
+import { CountryService } from '../countries/country.service';
+import { UserService } from '../user/user.service';
+import { User } from '../user/user';
+import { MdSnackBarService } from '../snackbar/snakbar.service';
+import { MdDialogRef } from '@angular/material';
+import { DialogWindowComponent } from '../md-dialog/md-dialog.component';
 
 
 @Component({
@@ -25,6 +27,7 @@ export class SignupComponent implements OnInit {
     saltRounds = 10;
     isFetching = false;
     correctInfo = false;
+    @Input() dialogRef: MdDialogRef<DialogWindowComponent>;
 
     constructor(
         public fb: FormBuilder,
@@ -76,12 +79,7 @@ export class SignupComponent implements OnInit {
                     } else {
                         localStorage.setItem('app-jwt', res.jwt);
                         this.snackBar.open('Registration was successful.');
-                        this.user = undefined;
-                        this.correctInfo = true;
-                    }
-                }).add(() => {
-                    if (this.correctInfo) {
-                        this.router.navigate(['/dashboard']);
+                        this.dialogRef.close([res.username, '../../../assets/imgs/avatars/avatars-material-man-2.png']);
                     }
                 });
         }

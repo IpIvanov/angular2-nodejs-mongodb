@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserService } from '../shared/user/user.service';
-import { MdSnackBarService } from '../shared/snackbar/snakbar.service';
+import { UserService } from '../user/user.service';
+import { MdSnackBarService } from '../snackbar/snakbar.service';
+import { MdDialogRef } from '@angular/material';
+import { DialogWindowComponent } from '../md-dialog/md-dialog.component';
 
 
 @Component({ selector: 'app-login', templateUrl: './login.component.html', styleUrls: ['./login.component.scss'] })
@@ -12,6 +14,7 @@ export class LoginComponent {
     loginForm: FormGroup;
     isFetching = false;
     correctInfo = false;
+    @Input() dialogRef: MdDialogRef<DialogWindowComponent>;
 
     constructor(public fb: FormBuilder,
         public userService: UserService,
@@ -40,11 +43,7 @@ export class LoginComponent {
                     } else {
                         localStorage.setItem('app-jwt', res.jwt);
                         this.snackBar.open('Successful login.');
-                        this.correctInfo = true;
-                    }
-                }).add(() => {
-                    if (this.correctInfo) {
-                        this.router.navigate(['/dashboard']);
+                        this.dialogRef.close([res.username, '../../../assets/imgs/avatars/avatars-material-man-2.png']);
                     }
                 });
         }
