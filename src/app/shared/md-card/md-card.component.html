@@ -1,11 +1,8 @@
 <md-card class="card mb-5">
     <md-card-header>
-        <md-card-title>{{title}}</md-card-title>
-        <md-card-subtitle>
-            {{status}} / {{timeStart}}
-        </md-card-subtitle>
+        <md-card-title>{{title}}  {{status}} / {{timeStart}}</md-card-title>
     </md-card-header>
-    <img md-card-image src="http://lorempixel.com/400/200">
+    <img md-card-image src="assets/imgs/soccer_img.jpg" >
     <md-card-content>
         <p *ngIf="odds">Odds: {{odds?.homeWin}} / {{odds?.draw}} / {{odds?.awayWin}}</p>
         <p *ngIf="result.goalsHomeTeam !== null">Final result: {{result.goalsHomeTeam}}:{{result.goalsAwayTeam}}</p>
