@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { countries } from '../countries/countries.data';
 import { CountryService } from '../countries/country.service';
 import { UserService } from '../user/user.service';
-import { User } from '../user/user';
 import { MdSnackBarService } from '../snackbar/snakbar.service';
 import { MdDialogRef } from '@angular/material';
 import { DialogWindowComponent } from '../md-dialog/md-dialog.component';
@@ -23,7 +22,6 @@ export class SignupComponent implements OnInit {
     countries: Array<Object>;
     signUpForm: FormGroup;
     userLocationData: any;
-    user: User;
     saltRounds = 10;
     isFetching = false;
     correctInfo = false;
@@ -40,19 +38,15 @@ export class SignupComponent implements OnInit {
     ngOnInit(): void {
         this.countries = countries;
         this.signUpForm = new FormGroup({
-            username: new FormControl('', [
-                Validators.required, Validators.minLength(3)
+            email: new FormControl('', [
+                Validators.minLength(3), Validators.pattern(this.emailRegex)
             ]),
             password: new FormControl('', [
                 Validators.required, Validators.minLength(3)
             ]),
             confirmPassword: new FormControl('', [
                 Validators.required, Validators.minLength(3)
-            ]),
-            email: new FormControl('', [
-                Validators.required, Validators.pattern(this.emailRegex)
-            ]),
-            info: new FormGroup({ sex: new FormControl('male') })
+            ])
         }, this.passwordMatchValidator);
 
         this.countryService.getUserLocation()
@@ -64,14 +58,8 @@ export class SignupComponent implements OnInit {
     submitForm(signUpForm, event): void {
         if ((event.keyCode === 13 || event.type === 'click') && this.signUpForm.valid) {
             this.isFetching = true;
-            this.user = new User(
-                signUpForm.username,
-                signUpForm.password,
-                signUpForm.email,
-                this.userLocationData.country,
-                signUpForm.info.sex);
 
-            this.userService.signUp(this.user)
+            this.userService.signUp({ email: signUpForm.email, password: signUpForm.password })
                 .subscribe(res => {
                     this.isFetching = false;
                     if (res.message === 'Username already exists.') {

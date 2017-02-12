@@ -13,11 +13,11 @@ export class DialogsService {
         let dialogRef: MdDialogRef<DialogWindowComponent>;
         let config = new MdDialogConfig();
         config.viewContainerRef = viewContainerRef;
+        config.width = '420px';
 
         dialogRef = this.dialog.open(DialogWindowComponent, config);
-
-        dialogRef.componentInstance.title = title;
-        dialogRef.componentInstance.message = message;
+        // dialogRef.componentInstance.title = title;
+        // dialogRef.componentInstance.message = message;
 
         return dialogRef.afterClosed();
     }

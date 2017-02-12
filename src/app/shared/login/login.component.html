@@ -1,7 +1,7 @@
 <form [formGroup]="loginForm" class="form">
     <md-input-container class="input-container">
-        <input md-input placeholder="Name or Email" name="username" formControlName='username' (keydown)="submitForm(loginForm.value, $event)">
-        <span class="error" *ngIf="loginForm.get('username').hasError('required') && loginForm.get('username').touched">*</span>
+        <input md-input placeholder="Email" name="email" formControlName='email' (keydown)="submitForm(loginForm.value, $event)">
+        <span class="error" *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched">*</span>
     </md-input-container>
     <md-input-container class="input-container">
         <input type="password" md-input placeholder="Password" name="password" formControlName='password' (keydown)="submitForm(loginForm.value, $event)">

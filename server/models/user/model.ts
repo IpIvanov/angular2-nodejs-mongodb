@@ -2,7 +2,7 @@ let mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 const schema = new Schema({
-    username: {
+    email: {
         type: String,
         required: true,
         unique: true
@@ -15,17 +15,9 @@ const schema = new Schema({
         type: String,
         required: true
     },
-    email: {
-        type: String,
-        required: true
-    },
-    location: String,
     token: {
         type: String,
         default: ''
-    },
-    info: {
-        sex: String
     },
     created_at: {
         type: Date,

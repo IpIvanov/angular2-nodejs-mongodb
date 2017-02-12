@@ -1,9 +1,4 @@
 <form [formGroup]="signUpForm" class="form">
-    <md-input-container class="input-container" [ngClass]="{'filled': !signUpForm.get('username').hasError('minlength') && signUpForm.get('username').touched, 'invalid': signUpForm.get('username').hasError('minlength')}">
-        <input md-input placeholder="Name" name="username" formControlName='username' (keydown)="submitForm(signUpForm.value, $event)">
-        <span class="error" *ngIf="signUpForm.get('username').hasError('required') && signUpForm.get('username').touched">*</span>
-        <span class="error-text" *ngIf="signUpForm.get('username').hasError('minlength') && signUpForm.get('username').touched">Minimum three characters required.</span>
-    </md-input-container>
     <md-input-container class="input-container" [ngClass]="{'filled': !signUpForm.get('email').hasError('minlength') && !signUpForm.get('email').hasError('pattern') && signUpForm.get('email').touched, 'invalid': signUpForm.get('email').hasError('minlength') || signUpForm.get('email').hasError('pattern')}">
         <input md-input placeholder="Email" formControlName='email' (keydown)="submitForm(signUpForm.value, $event)">
         <span class="error" *ngIf="signUpForm.get('email').hasError('required') && signUpForm.get('email').touched">*</span>
@@ -19,12 +14,6 @@
         <span class="error" *ngIf="signUpForm.get('confirmPassword').hasError('required') && signUpForm.get('confirmPassword').touched">*</span>
         <span class="error-text" *ngIf="signUpForm.errors?.mismatch && signUpForm.get('password').touched">Passwords does not match!</span>
     </md-input-container>
-    <span formGroupName="info" class="radio-group">
-                    <md-radio-group formControlName='sex'>
-                        <md-radio-button value="male" class="input-radio">Male</md-radio-button>
-                        <md-radio-button value="female" class="input-radio">Female</md-radio-button>
-                    </md-radio-group>
-                </span>
     <button color="primary" class="submit" type="submit" md-raised-button [disabled]="signUpForm.invalid" (click)="submitForm(signUpForm.value, $event)">Sign up</button>
 </form>
 <app-ui-loader [visible]="isFetching"></app-ui-loader>

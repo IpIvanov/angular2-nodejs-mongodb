@@ -16,18 +16,18 @@ registerRouter.post('/signup', function (request: Request, response: Response, n
 
     pbkdf2(request.body.password, salt, 10000, length, digest, (err: Error, hash: Buffer) => {
         const user = request.body;
+        console.log(user)
         user.password = hash.toString('hex');
         user.salt = salt;
-        const token = sign({
-            'user': user.username,
+        user.token = sign({
+            'user': user.email,
             permissions: []
         }, secret); //, { expiresIn: '7d' }
-        user.token = token;
         User.create(user, function (err) {
             if (err) {
                 response.json({ error: err.errmsg, message: 'Username already exists.' })
             } else {
-                response.json({ 'jwt': token, 'username': user.username });
+                response.json({ 'jwt': user.token, 'username': user.email });
             }
         });
     });
@@ -35,18 +35,15 @@ registerRouter.post('/signup', function (request: Request, response: Response, n
 
 // login method
 registerRouter.post('/login', function (request: Request, response: Response, next: NextFunction) {
-    let fieldsToSearch = [
-        { 'username': request.body.username, },
-        { 'email': request.body.username }
-    ];
-    const doc = User.find({ '$or': fieldsToSearch }, 'username password email salt token', function (err, doc) {
-        if (doc.length > 0 && ((doc[0].username === request.body.username) || (doc[0].email === request.body.username))) {
+    let userEmail = request.body.email;
+    const doc = User.find(userEmail, 'email password salt token', function (err, doc) {
+        if (doc.length > 0 && (doc[0].email === userEmail)) {
             pbkdf2(request.body.password, doc[0].salt, 10000, length, digest, (err: Error, hash: Buffer) => {
                 if (err) {
                     response.json({ error: err, message: 'Error.' })
                 }
                 if (hash.toString('hex') === doc[0].password) {
-                    response.json({ 'jwt': doc[0].token, 'username': doc[0].username });
+                    response.json({ 'jwt': doc[0].token, 'username': doc[0].email });
                 } else {
                     response.json({ message: 'Wrong password' });
                 }

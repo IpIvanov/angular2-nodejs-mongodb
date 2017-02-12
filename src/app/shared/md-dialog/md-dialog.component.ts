@@ -5,7 +5,7 @@ import { FacebookService, FacebookApiMethod, FacebookInitParams, FacebookLoginRe
 @Component({
     selector: 'app-md-dialog',
     templateUrl: './md-dialog.component.html',
-    styleUrls: ['./md-dialog.component.scss']
+    styleUrls: ['./md-dialog.component.scss'],
 })
 export class DialogWindowComponent {
     public title: string;
