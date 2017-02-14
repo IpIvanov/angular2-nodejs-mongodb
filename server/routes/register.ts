@@ -36,7 +36,7 @@ registerRouter.post('/signup', function (request: Request, response: Response, n
 // login method
 registerRouter.post('/login', function (request: Request, response: Response, next: NextFunction) {
     let userEmail = request.body.email;
-    User.find({ email: userEmail }, 'email password salt token', function (err, doc) {
+    User.find({ email: userEmail }, function (err, doc) {
         if (doc.length > 0 && (doc[0].email === userEmail)) {
             pbkdf2(request.body.password, doc[0].salt, 10000, length, digest, (err: Error, hash: Buffer) => {
                 if (err) {
