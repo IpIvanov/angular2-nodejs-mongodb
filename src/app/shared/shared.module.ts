@@ -10,11 +10,10 @@ import { SubNavigationComponent } from './sub-navigation/sub-navigation.componen
 import { ButtonComponent } from './button/button.component';
 import { InputComponent } from './input/input.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { CardComponent } from './md-card/md-card.component';
 import { LoaderComponent } from './loader/loader.component';
 import { CountryService } from './countries/country.service';
 import { UserService } from './user/user.service';
-
+import { CardComponent } from './md-card/md-card.component';
 import { ButtonOverviewExample } from './md-button/md-button.component';
 import { MaterialModule } from '@angular/material';
 import { MdSnackBarService } from './snackbar/snakbar.service';
@@ -31,7 +30,6 @@ import { SignupComponent } from './signup/signup.component';
         TopNavigationComponent,
         SubNavigationComponent,
         ModalDirectivesDirective,
-        CardComponent,
         ButtonComponent,
         LoaderComponent,
         InputComponent,
@@ -40,7 +38,8 @@ import { SignupComponent } from './signup/signup.component';
         FacebookLoginComponent,
         DialogWindowComponent,
         LoginComponent,
-        SignupComponent
+        SignupComponent,
+        CardComponent
     ],
     imports: [
         CommonModule,
@@ -54,7 +53,6 @@ import { SignupComponent } from './signup/signup.component';
         ModalDirectivesDirective,
         TopNavigationComponent,
         LoaderComponent,
-        CardComponent,
         ButtonComponent,
         InputComponent,
         SubNavigationComponent,
@@ -63,7 +61,8 @@ import { SignupComponent } from './signup/signup.component';
         FacebookLoginComponent,
         DialogWindowComponent,
         LoginComponent,
-        SignupComponent
+        SignupComponent,
+        CardComponent
     ],
     providers: [
         CountryService,

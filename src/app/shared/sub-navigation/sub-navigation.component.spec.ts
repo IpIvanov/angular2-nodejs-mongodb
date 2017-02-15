@@ -1,26 +1,23 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { EditComponent } from './edit.component';
-import { SharedModule } from '../../shared/shared.module';
+import { SubNavigationComponent } from './sub-navigation.component';
 
-describe('EditComponent', () => {
-  let component: EditComponent;
-  let fixture: ComponentFixture<EditComponent>;
+describe('SubNavigationComponent', () => {
+  let component: SubNavigationComponent;
+  let fixture: ComponentFixture<SubNavigationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditComponent ],
-      imports: [ SharedModule, RouterTestingModule ]
+      declarations: [ SubNavigationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditComponent);
+    fixture = TestBed.createComponent(SubNavigationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

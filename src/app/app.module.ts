@@ -5,7 +5,6 @@ import { HttpModule, Http, RequestOptions } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.router';
-import { effects, store, instrumentation } from './store';
 import { SharedModule } from './shared/shared.module';
 
 import { MaterialModule } from '@angular/material';
@@ -25,10 +24,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
         SharedModule,
         FormsModule,
         HttpModule,
-        store,
-        effects,
         routing,
-        instrumentation,
         MaterialModule.forRoot(),
         ReactiveFormsModule
     ],

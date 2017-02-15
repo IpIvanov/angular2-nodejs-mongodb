@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IAppState } from '../store/index';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,10 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class ProfileComponent {
 
-  profile$: Observable<{}>;
-
-  constructor(store: Store<IAppState>) {
-
-    this.profile$ = store.select('profile');
+  constructor() {
   }
 }
