@@ -1,9 +1,0 @@
-:host {
-    padding: 10px;
-    border-bottom: 1px solid #aaa;
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row-reverse;
-    justify-content: flex-start;
-    align-items: center;
-}

@@ -6,8 +6,6 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { Store } from '@ngrx/store';
-import { IAppState } from './store/index';
-import { USER_GET } from './store/profile/profile.actions';
 
 import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
 import { AuthenticationService } from './shared/user/authentication.service';
