@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
   templateUrl: './profile.component.html'
 })
 export class ProfileComponent {
-
   constructor() {
   }
 }
