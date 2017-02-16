@@ -59,7 +59,7 @@ export class SignupComponent implements OnInit {
         if ((event.keyCode === 13 || event.type === 'click') && this.signUpForm.valid) {
             this.isFetching = true;
 
-            this.userService.signUp({ email: signUpForm.email, password: signUpForm.password })
+            this.userService.signUp({ email: signUpForm.email, password: signUpForm.password, avatarImg: 'avatars-material-man-2.png' })
                 .subscribe(res => {
                     this.isFetching = false;
                     if (res.message === 'Username already exists.') {
@@ -67,7 +67,7 @@ export class SignupComponent implements OnInit {
                     } else {
                         localStorage.setItem('app-jwt', res.jwt);
                         this.snackBar.open('Registration was successful.');
-                        this.dialogRef.close([res.username, '../../../assets/imgs/avatars/avatars-material-man-2.png']);
+                        this.dialogRef.close([res.username, res.avatarImg]);
                     }
                 });
         }

@@ -11,6 +11,9 @@ const schema = new Schema({
         type: String,
         required: true
     },
+    avatarImg: {
+        type: String
+    },
     salt: {
         type: String,
         required: true

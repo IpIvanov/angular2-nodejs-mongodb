@@ -51,12 +51,6 @@ export class AppComponent implements OnInit {
         });
     }
 
-    handleNormalLogin(userInfo: Array<any>) {
-        this.username = userInfo[0];
-        this.avatarImg = userInfo[1];
-        this.userLogged = true;
-    }
-
     setUsername(username) {
         this.username = username;
         this.userLogged = false;

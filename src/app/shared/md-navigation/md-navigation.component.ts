@@ -19,7 +19,7 @@ export class TopNavigationComponent implements OnInit {
     @Input() name: string;
     @Input() userLogged: boolean;
     @Output() onLogout = new EventEmitter<string>();
-    @Input() avatarLink: string;
+    avatarImg: string;
 
     constructor(
         public router: Router,
@@ -36,9 +36,6 @@ export class TopNavigationComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (this.avatarLink === undefined) {
-            this.avatarLink = '../../assets/imgs/avatars/avatars-material-man-2.png';
-        }
     }
 
     toggle() {
@@ -62,9 +59,13 @@ export class TopNavigationComponent implements OnInit {
         );
     }
 
-    handleFaceBookLogin(userInfo: Array<any>) {
+    setUserInfo(userInfo: Array<any>) {
         this.name = userInfo[0];
-        this.avatarLink = userInfo[1];
+        if (userInfo[1].indexOf('fbcdn.net') !== -1) {
+            this.avatarImg = userInfo[1];
+        } else {
+            this.avatarImg = '/api/static/imgs/avatars/' + userInfo[1];
+        }
         this.userLogged = true;
 
     }
@@ -74,7 +75,7 @@ export class TopNavigationComponent implements OnInit {
             .confirm(null, null, this.viewContainerRef)
             .subscribe((res: any) => {
                 if (res) {
-                    this.handleFaceBookLogin(res);
+                    this.setUserInfo(res);
                 }
             });
     }
