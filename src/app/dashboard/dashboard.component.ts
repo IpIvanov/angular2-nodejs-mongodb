@@ -30,7 +30,6 @@ export class DashboardComponent implements OnInit {
     this.footballData.getLeagueFixturesByDay(startDate, endDate)
       .subscribe(
       res => {
-        console.log(res)
         this.todaysMatches = res.fixtures;
       },
       err => console.log(err),

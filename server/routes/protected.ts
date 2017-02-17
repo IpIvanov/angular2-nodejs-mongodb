@@ -23,7 +23,8 @@ protectedRouter.get('/checktoken', (request: Request & { headers: { authorizatio
     User.find({ 'token': request.headers.authorization.toString() }, function (err, doc) {
         response.status(200).json({
             message: 'Valid token.',
-            username: doc[0].email
+            username: doc[0].email,
+            avatarImg: '/api/static/imgs/avatars/' + doc[0].avatarImg
         });
     });
 });

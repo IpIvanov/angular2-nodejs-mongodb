@@ -16,7 +16,6 @@ registerRouter.post('/signup', function (request: Request, response: Response, n
 
     pbkdf2(request.body.password, salt, 10000, length, digest, (err: Error, hash: Buffer) => {
         const user = request.body;
-        console.log(user)
         user.password = hash.toString('hex');
         user.salt = salt;
         user.token = sign({

@@ -19,7 +19,7 @@ export class TopNavigationComponent implements OnInit {
     @Input() name: string;
     @Input() userLogged: boolean;
     @Output() onLogout = new EventEmitter<string>();
-    avatarImg: string;
+    @Input() avatarImg: string;
 
     constructor(
         public router: Router,

@@ -35,11 +35,11 @@ export class AppComponent implements OnInit {
                     (res) => {
                         if (res.error === '403 - Forbidden') {
                             this.userLogged = false;
-                            this.username = res.username;
                         }
                         if (res.message === 'Valid token.') {
                             this.userLogged = true;
                             this.username = res.username;
+                            this.avatarImg = res.avatarImg;
                         }
                     }
                 );
