@@ -1,17 +1,9 @@
-import { Router, Response, Request } from 'express';
-
+import { Router, Response, Request, NextFunction } from 'express';
 
 const facebookRouter: Router = Router();
 
-feedRouter.post('/login', (request: Request, response: Response) => {
-  oAuthToken;
-  response.json({
-    this.oAuthToken: request.body.accessToken
-    console.log(o)
-  });
-
+facebookRouter.get('/facebook', function(res: Response){
+    console.log(res);
 });
 
-
-
-export { facebookRouter }
+export { facebookRouter };

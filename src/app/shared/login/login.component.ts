@@ -43,7 +43,7 @@ export class LoginComponent {
                     } else {
                         localStorage.setItem('app-jwt', res.jwt);
                         this.snackBar.open('Successful login.');
-                        this.dialogRef.close([res.username, '../../../assets/imgs/avatars/avatars-material-man-2.png']);
+                        this.dialogRef.close([res.username, res.avatarImg]);
                     }
                 });
         }

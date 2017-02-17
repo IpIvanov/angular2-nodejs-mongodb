@@ -25,9 +25,9 @@ registerRouter.post('/signup', function (request: Request, response: Response, n
         }, secret); //, { expiresIn: '7d' }
         User.create(user, function (err) {
             if (err) {
-                response.json({ error: err.errmsg, message: 'Username already exists.' })
+                response.json({ error: err.errmsg, message: 'Username already exists.' });
             } else {
-                response.json({ 'jwt': user.token, 'username': user.email });
+                response.json({ 'jwt': user.token, 'username': user.email, 'avatarImg': user.avatarImg });
             }
         });
     });
@@ -43,7 +43,7 @@ registerRouter.post('/login', function (request: Request, response: Response, ne
                     response.json({ error: err, message: 'Error.' })
                 }
                 if (hash.toString('hex') === doc[0].password) {
-                    response.json({ 'jwt': doc[0].token, 'username': doc[0].email });
+                    response.json({ 'jwt': doc[0].token, 'username': doc[0].email, 'avatarImg': doc[0].avatarImg });
                 } else {
                     response.json({ message: 'Wrong password' });
                 }

@@ -42,4 +42,5 @@ export class FacebookLoginComponent {
             (error: any) => console.error(error)
         );
     }
+//TODO create a facebook method for AUTH TOKEN
 }
