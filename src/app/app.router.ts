@@ -1,16 +1,15 @@
-import { RouterModule, Route } from '@angular/router';
+import { RouterModule, Route, Routes } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { PreventLoggedInAccess } from './shared/user/control.access';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProfileComponent } from './profile/profile.component';
 
-const routes: Route[] = [
-    { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-    { loadChildren: 'app/dashboard/dashboard.module#DashboardModule', path: 'dashboard' }, //, canActivate: [PreventLoggedInAccess]
-    { loadChildren: 'app/profile/profile.module#ProfileModule', path: 'profile' }
+const routes: Routes = [
+    { path: '', pathMatch: 'full', redirectTo: '/dashboard' },
+    { path: 'dashboard', component: DashboardComponent }, //, canActivate: [PreventLoggedInAccess]
+    { path: 'profile', component: ProfileComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(
-    routes,
-    {
-        useHash: true
-    }
+    routes
 );

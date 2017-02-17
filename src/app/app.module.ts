@@ -12,6 +12,8 @@ import { PreventLoggedInAccess } from './shared/user/control.access';
 
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { AuthenticationService } from './shared/user/authentication.service';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { ProfileModule } from './profile/profile.module';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     return new AuthHttp(new AuthConfig(), http, options);
@@ -26,7 +28,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
         HttpModule,
         routing,
         MaterialModule.forRoot(),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        DashboardModule,
+        ProfileModule
     ],
     providers: [PreventLoggedInAccess, {
         provide: AuthHttp,
