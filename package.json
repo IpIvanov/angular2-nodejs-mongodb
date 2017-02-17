@@ -54,6 +54,7 @@
     "core-js": "^2.4.1",
     "express": "^4.14.0",
     "express-jwt": "^3.3.0",
+    "fbgraph": "^1.4.1",
     "hammerjs": "^2.0.8",
     "jquery": "^3.1.1",
     "jsonwebtoken": "^5.7.0",

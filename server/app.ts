@@ -28,6 +28,7 @@ app.use('/api/register', registerRouter);
 app.use('/api/public', publicRouter);
 app.use('/api/feed', feedRouter);
 app.use('/api/user', userRouter);
+app.use('/api/facebook', facebookRouter);
 app.use('/api/static', express.static(path.join(__dirname, 'public')));
 
 
