@@ -1,26 +1,19 @@
-let mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+import * as mongoose from 'mongoose';
 
-const schema = new Schema({
-    email: {
-        type: String,
-        required: true,
-        unique: true
+const schema = new mongoose.Schema({
+    local: {
+        email: String,
+        password: String,
+        avatarImg: String,
+        salt: String,
+        token: String
     },
-    password: {
-        type: String,
-        required: true
-    },
-    avatarImg: {
-        type: String
-    },
-    salt: {
-        type: String,
-        required: true
-    },
-    token: {
-        type: String,
-        default: ''
+    facebook: {
+        id: String,
+        token: String,
+        email: String,
+        name: String,
+        avatarImg: String
     },
     created_at: {
         type: Date,

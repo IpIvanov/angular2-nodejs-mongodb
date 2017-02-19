@@ -20,11 +20,11 @@ protectedRouter.use((request: Request & { headers: { authorization: string } }, 
 });
 
 protectedRouter.get('/checktoken', (request: Request & { headers: { authorization: string } }, response: Response) => {
-    User.find({ 'token': request.headers.authorization.toString() }, function (err, doc) {
+    User.find({ 'local.token': request.headers.authorization.toString() }, function (err, doc) {
         response.status(200).json({
             message: 'Valid token.',
-            username: doc[0].email,
-            avatarImg: '/api/static/imgs/avatars/' + doc[0].avatarImg
+            username: doc[0].local.email,
+            avatarImg: '/api/static/imgs/avatars/' + doc[0].local.avatarImg
         });
     });
 });

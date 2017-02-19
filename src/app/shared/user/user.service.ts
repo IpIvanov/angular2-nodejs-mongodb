@@ -15,22 +15,22 @@ export class UserService {
 
     /**
      * Sign up user /api/register/signup
-     * @param userCredentials
+     * @param user
      * @returns {Observable<R>}
      */
-    signUp(userCredentials: Object): Observable<any> {
-        return this.http.post(`/api/register/signup`, JSON.stringify(userCredentials), this.options)
+    signUp(user: Object): Observable<any> {
+        return this.http.post(`/api/register/signup`, JSON.stringify(user), this.options)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
 
     /**
      * Login user /api/register/login
-     * @param userCredentials
+     * @param user
      * @returns {Observable<R>}
      */
-    login(userCredentials: Object): Observable<any> {
-        return this.http.post(`/api/register/login`, JSON.stringify(userCredentials), this.options)
+    login(user: Object): Observable<any> {
+        return this.http.post(`/api/register/login`, JSON.stringify(user), this.options)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }

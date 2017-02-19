@@ -33,7 +33,7 @@ export class LoginComponent {
     submitForm(loginForm, event): void {
         if ((event.keyCode === 13 || event.type === 'click') && this.loginForm.valid) {
             this.isFetching = true;
-            this.userService.login(loginForm)
+            this.userService.login({ local: loginForm })
                 .subscribe(res => {
                     this.isFetching = false;
                     if (res.message === 'Wrong password') {
@@ -43,7 +43,7 @@ export class LoginComponent {
                     } else {
                         localStorage.setItem('app-jwt', res.jwt);
                         this.snackBar.open('Successful login.');
-                        this.dialogRef.close([res.username, res.avatarImg]);
+                        this.dialogRef.close([res.email, res.avatarImg]);
                     }
                 });
         }
