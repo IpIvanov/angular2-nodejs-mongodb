@@ -34,6 +34,6 @@ export class DashboardComponent implements OnInit {
       },
       err => console.log(err),
       () => console.log('Stop loader fetching is complete!')
-      )
+      );
   }
 }

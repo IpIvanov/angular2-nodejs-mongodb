@@ -32,9 +32,9 @@ export class FacebookLoginComponent {
                 this.facebookService.api('/me', this.fbApiMethod, { fields: ['id', 'name', 'picture'] }).then(
                     (response: any) => {
                         if (this.dialogRef) {
-                            this.dialogRef.close([response.name, response.picture.data.url])
+                            this.dialogRef.close([response.name, response.picture.data.url]);
                         } else {
-                            this.userUpdated.emit([response.name, response.picture.data.url])
+                            this.userUpdated.emit([response.name, response.picture.data.url]);
                         }
                     }
                 );

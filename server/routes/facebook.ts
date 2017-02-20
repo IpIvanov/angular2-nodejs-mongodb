@@ -4,7 +4,7 @@ import * as passport from 'passport';
 const facebookRouter: Router = Router();
 
 facebookRouter.get('/', () => {
-    passport.authenticate('facebook');
+    passport.authenticate('facebook', {scope: ['email']});
 });
 
 facebookRouter.get('/callback', () => {

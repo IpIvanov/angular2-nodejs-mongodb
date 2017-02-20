@@ -5,7 +5,7 @@ const userRouter: Router = Router();
 
 /** @description get users from db
  */
-userRouter.post('/get-user', async (request: Request, response: Response) => {
+userRouter.get('/get-user', async (request: Request, response: Response) => {
     const user = await User.find({
         'username': request.body.username
     }, function (err, user) {
