@@ -45,7 +45,7 @@ export class LoginComponent {
                         this.snackBar.open('Successful login.');
                         this.dialogRef.close([res.email, res.avatarImg]);
                     }
-                });
+            });
         }
     }
 

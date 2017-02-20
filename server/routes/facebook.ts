@@ -3,8 +3,15 @@ import * as passport from 'passport';
 
 const facebookRouter: Router = Router();
 
-facebookRouter.get('/', (request: Request, response: Response, next: NextFunction) => {
-    passport.authenticate('facebook')(request, response, next);
+facebookRouter.get('/', () => {
+    passport.authenticate('facebook');
 });
+
+facebookRouter.get('/callback', () => {
+    passport.authenticate('facebook'), (request: Request, response: Response) => {
+        response.redirect('/');
+    });
+});
+
 
 export { facebookRouter };

@@ -11,5 +11,5 @@
         <div class="col-md-4" *ngFor="let match of todaysMatches; let i = index">
             <app-ui-card [result]="match.result" [status]="match.status" [odds]="match.odds" [title]="match.homeTeamName + ' vs ' + match.awayTeamName" [timeStart]="match.date | date:'short'"></app-ui-card>
         </div>
-    </div>-
+    </div>
 </div>

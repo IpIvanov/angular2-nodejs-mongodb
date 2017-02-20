@@ -26,7 +26,7 @@ userRouter.post('/get-user', async (request: Request, response: Response) => {
 userRouter.post('/add-user', async (request: Request, response: Response, next) => {
     const user = await User.create(request.body, function (err) {
         if (err) {
-            response.json({ error: err.errmsg, message: 'Username already exists.' })
+            response.json({ error: err.errmsg, message: 'Username already exists.' });
         } else {
             response
                 .status(200)
