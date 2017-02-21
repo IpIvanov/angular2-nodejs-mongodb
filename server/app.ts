@@ -8,7 +8,6 @@ import { protectedRouter } from './routes/protected';
 import { publicRouter } from './routes/public';
 import { feedRouter } from './routes/feed';
 import { userRouter } from './routes/user';
-import { facebookUserRouter } from './routes/facebookUser';
 import { facebookRouter } from './routes/facebook';
 import { DatabaseConInit } from './config/database';
 import * as passport from 'passport';
@@ -34,14 +33,12 @@ app.use(urlencoded({ extended: true }));
 
 passport.use(new FacebookStrategy(facebookOptions, (accessToken, refreshToken, profile, callback) => {
     process.nextTick(() => {
-        User.findOne({ facebookId: profile.id }, function (err, user) {
+        User.findOne({ 'facebook.id' : profile.id }, function (err, user) {
           if (err) {
               return callback(err);
-          }
-           if (user) {
+          } else if (user) {
                 return callback(null, user);
-           };
-           else {
+           } else {
             let newUser = new User();
             newUser.facebook.id = profile.id;
             newUser.facebook.accessToken = accessToken;
@@ -51,8 +48,7 @@ passport.use(new FacebookStrategy(facebookOptions, (accessToken, refreshToken, p
             newUser.save(() => {
                 if (err) {
                     throw err;
-                }
-                else {
+                } else {
                     return callback(null, newUser);
                 }
             });
@@ -67,7 +63,6 @@ app.use('/api/register', registerRouter);
 app.use('/api/public', publicRouter);
 app.use('/api/feed', feedRouter);
 app.use('/api/user', userRouter);
-app.use('/api/facebookUser', facebookUserRouter);
 app.use('/api/auth/facebook', facebookRouter);
 app.use('/api/static', express.static(path.join(__dirname, 'public')));
 

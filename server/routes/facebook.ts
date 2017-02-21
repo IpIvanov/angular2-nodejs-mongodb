@@ -8,7 +8,7 @@ facebookRouter.get('/', () => {
 });
 
 facebookRouter.get('/callback', () => {
-    passport.authenticate('facebook'), (request: Request, response: Response) => {
+    passport.authenticate('facebook', (request: Request, response: Response) => {
         response.redirect('/');
     });
 });

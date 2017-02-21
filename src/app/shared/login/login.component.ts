@@ -33,7 +33,7 @@ export class LoginComponent {
     submitForm(loginForm, event): void {
         if ((event.keyCode === 13 || event.type === 'click') && this.loginForm.valid) {
             this.isFetching = true;
-            this.userService.login({ local: loginForm })
+            this.userService.login({ localUser: loginForm })
                 .subscribe(res => {
                     this.isFetching = false;
                     if (res.message === 'Wrong password') {
