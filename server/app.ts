@@ -30,31 +30,10 @@ app.use(json());
 app.use(compression());
 app.use(urlencoded({ extended: true }));
 
-
+app.use(passport.initialize());
 passport.use(new FacebookStrategy(facebookOptions, (accessToken, refreshToken, profile, callback) => {
-    process.nextTick(() => {
-        User.findOne({ 'facebook.id' : profile.id }, function (err, user) {
-          if (err) {
-              return callback(err);
-          } else if (user) {
-                return callback(null, user);
-           } else {
-            let newUser = new User();
-            newUser.facebook.id = profile.id;
-            newUser.facebook.accessToken = accessToken;
-            newUser.facebook.name = `${profile.name.givenName} ${profile.name.familyName}`;
-            newUser.facebook.email = profile.emails[0].value;
-
-            newUser.save(() => {
-                if (err) {
-                    throw err;
-                } else {
-                    return callback(null, newUser);
-                }
-            });
-           }
-        });
-    });
+    console.log(profile)
+    return callback(null, profile);
 }));
 
 // api routes
