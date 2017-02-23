@@ -39,7 +39,7 @@ registerRouter.post('/login', function (request: Request, response: Response, ne
         if (doc.length > 0 && (doc[0].local.email === userEmail)) {
             pbkdf2(request.body.local.password, doc[0].local.salt, 10000, length, digest, (err: Error, hash: Buffer) => {
                 if (err) {
-                    response.json({ error: err, message: 'Error.' })
+                    response.json({ error: err, message: 'Error.' });
                 }
                 if (hash.toString('hex') === doc[0].local.password) {
                     response.json({ 'jwt': doc[0].local.token, 'email': doc[0].local.email, 'avatarImg': doc[0].local.avatarImg });
@@ -50,7 +50,6 @@ registerRouter.post('/login', function (request: Request, response: Response, ne
         } else {
             response.json({ message: 'User does not exists.' });
         }
-
     });
 });
 
