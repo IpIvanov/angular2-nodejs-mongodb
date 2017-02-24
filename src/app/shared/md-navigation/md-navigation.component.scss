@@ -62,10 +62,15 @@ md-toolbar {
     cursor: pointer;
 }
 
-.username-container {
+.user-info {
     height: 100%;
     padding-top: 15px;
     border-right: 1px solid #888;
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+    }
     img {
         width: 40px;
         background-color: #c2c2c2;

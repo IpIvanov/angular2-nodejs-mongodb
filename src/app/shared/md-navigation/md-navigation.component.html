@@ -5,10 +5,10 @@
     </div>
 
     <span class="app-toolbar-filler"></span>
-    <div class="username-container" *ngIf="userLogged">
-        <img md-button routerLink="/profile" routerLinkActive="active" [src]="avatarImg" class="rounded-circle mr-2" />
-        <span md-button routerLink="/profile" routerLinkActive="active" class="username mr-3">{{name}}</span>
-    </div>
+    <a class="user-info" *ngIf="userLogged" routerLink="/profile">
+        <img [src]="avatarImg" class="rounded-circle mr-2" />
+        <span class="username mr-3">{{name}}</span>
+    </a>
     <div class="button-row right">
         <a md-button md-raised-button color="primary" *ngIf="!userLogged" (click)="openDialog()" class="login mr-2">Connect</a>
         <a md-button routerLink="/dashboard" (click)="signOut()" *ngIf="userLogged" class="mr-2">Sign out</a>
