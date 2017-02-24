@@ -35,6 +35,11 @@ export class UserService {
             .catch(this.handleError);
     }
 
+    facebookLogin(): Observable<any> {
+        return this.http.get(`/api/auth/facebook`)
+        .catch(this.handleError);
+    };
+
     private handleError(error: any) {
         let errMsg = (error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         console.error(errMsg); // log to console instead
