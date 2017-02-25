@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   form: FormGroup;
   title: string;
   description: string;
+  fixtures: Array<Object> = [];
   startDate = new Date().toISOString().slice(0, 10);
   endDate = new Date().toISOString().slice(0, 10);
   todaysDate = new Date().toLocaleDateString();
@@ -35,5 +36,10 @@ export class DashboardComponent implements OnInit {
       err => console.log(err),
       () => console.log('Stop loader fetching is complete!')
       );
+  }
+
+  handleAddPrediction(prediction) {
+    let copy = Object.assign({}, prediction);
+    this.fixtures.push(copy);
   }
 }

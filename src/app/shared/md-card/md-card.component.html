@@ -4,11 +4,11 @@
     </md-card-header>
     <img md-card-image src="../assets/imgs/soccer_img.jpg">
     <md-card-content>
-        <p *ngIf="odds">Odds: {{odds?.homeWin}} / {{odds?.draw}} / {{odds?.awayWin}}</p>
         <p *ngIf="result.goalsHomeTeam !== null">Final result: {{result.goalsHomeTeam}}:{{result.goalsAwayTeam}}</p>
     </md-card-content>
     <md-card-actions>
-        <button md-raised-button>Share</button>
-        <button md-raised-button color="primary">Predict</button>
+        <button md-raised-button color="primary" (click)="addPrediction(fixture, 'homeWin')" class="home-win">{{odds?.homeWin | number : '1.2-2'}}</button>
+        <button md-raised-button color="primary" (click)="addPrediction(fixture, 'draw')" class="draw">{{odds?.draw | number : '1.2-2'}}</button>
+        <button md-raised-button color="primary" (click)="addPrediction(fixture, 'awayWin')" class="away-win">{{odds?.awayWin | number : '1.2-2'}}</button>
     </md-card-actions>
 </md-card>

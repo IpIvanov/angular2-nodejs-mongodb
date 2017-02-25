@@ -5,12 +5,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TopNavigationComponent } from './md-navigation/md-navigation.component';
 import { RouterModule } from '@angular/router';
-import { ButtonComponent } from './button/button.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CardComponent } from './md-card/md-card.component';
 import { LoaderComponent } from './loader/loader.component';
 import { CountryService } from './countries/country.service';
 import { UserService } from './user/user.service';
+import { PredictionsComponent } from './predictions/predictions.component';
 
 import { ButtonOverviewExample } from './md-button/md-button.component';
 import { MaterialModule } from '@angular/material';
@@ -26,14 +26,14 @@ import { SignupComponent } from './signup/signup.component';
     declarations: [
         TopNavigationComponent,
         CardComponent,
-        ButtonComponent,
         LoaderComponent,
         ButtonOverviewExample,
         ListOverviewComponent,
         FacebookLoginComponent,
         DialogWindowComponent,
         LoginComponent,
-        SignupComponent
+        SignupComponent,
+        PredictionsComponent
     ],
     imports: [
         CommonModule,
@@ -46,13 +46,13 @@ import { SignupComponent } from './signup/signup.component';
         TopNavigationComponent,
         LoaderComponent,
         CardComponent,
-        ButtonComponent,
         ButtonOverviewExample,
         ListOverviewComponent,
         FacebookLoginComponent,
         DialogWindowComponent,
         LoginComponent,
-        SignupComponent
+        SignupComponent,
+        PredictionsComponent
     ],
     providers: [
         CountryService,

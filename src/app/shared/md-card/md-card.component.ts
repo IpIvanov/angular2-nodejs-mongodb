@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,6 +14,8 @@ export class CardComponent implements OnInit {
   @Input() odds: Object;
   @Input() status: string;
   @Input() result: Object;
+  @Input() fixture: Object;
+  @Output() onPredictionAdded = new EventEmitter<Object>();
 
   constructor() { }
 
@@ -24,5 +26,10 @@ export class CardComponent implements OnInit {
     if (this.status === 'TIMED') {
       this.status = 'Sched';
     }
+  }
+
+  addPrediction(fixture, prediction) {
+    fixture.userPrediction = prediction;
+    this.onPredictionAdded.emit(fixture);
   }
 }
