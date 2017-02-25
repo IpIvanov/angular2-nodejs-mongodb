@@ -16,10 +16,10 @@ export class FootballDataService {
 
     /**
      * Get leagues by year. If no year is provided returns leagues for latest season.
-     * 
+     *
      * @param {string} [year]
      * @returns {Observable<any>}
-     * 
+     *
      * @memberOf UserService
      */
     getLeagues(year?: string): Observable<any> {

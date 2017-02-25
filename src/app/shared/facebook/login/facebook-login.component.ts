@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { FacebookService, FacebookApiMethod, FacebookInitParams, FacebookLoginResponse } from 'ng2-facebook-sdk';
-import { MdDialogRef } from '@angular/material';
 import { DialogWindowComponent } from '../../md-dialog/md-dialog.component';
+import { UserService } from '../../user/user.service';
 
 @Component({
     selector: 'app-facebook-login',
@@ -15,7 +14,7 @@ export class FacebookLoginComponent {
     @Output() userUpdated = new EventEmitter<Array<any>>();
     @Input() dialogRef: MdDialogRef<DialogWindowComponent>;
 
-    constructor(public facebookService: FacebookService) { }
+    constructor(private userService: UserService) { }
 
     ngOnInit() {
         let fbParams: FacebookInitParams = {

@@ -38,7 +38,7 @@ userRouter.post('/add-user', async (request: Request, response: Response, next) 
 */
 userRouter.get('/get-facebookUser', async (request: Request, response: Response) => {
     const user = await User.find({
-        'facebook.id': request.body.id
+        'facebook.id': request.user.id
     }, function (err, user) {
         console.log(user);
         if (user.length) {

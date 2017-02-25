@@ -15,6 +15,10 @@ facebookRouter.get('/callback',
         user.facebook.name = req.user.displayName;
         user.facebook.gender = req.user.gender;
         user.facebook.email = req.user.emails[0].value;
+        let facebookId = User.find({'facebook.id' : req.user.id});
+        if (facebookId) {
+            return res.json({ message: 'User already exists.' });
+        } else {
         User.create(user, function (err){
             if (err) {
                 res.json({ error: err.errmsg, message: 'Username already exists.' });
@@ -22,6 +26,7 @@ facebookRouter.get('/callback',
                 res.json( { 'message' : 'User saved!' } );
             }
         });
+    }
         res.json({
             user_token: req.user
         });

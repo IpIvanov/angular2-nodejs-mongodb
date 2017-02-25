@@ -31,6 +31,7 @@ export class UserService {
      */
     login(user: Object): Observable<any> {
         return this.http.post(`/api/register/login`, JSON.stringify(user), this.options)
+            //convert the response object to a json
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
