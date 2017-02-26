@@ -36,10 +36,10 @@ export class UserService {
             .catch(this.handleError);
     }
 
-    facebookLogin(user: Object): Observable<any> {
-        return this.http.post(`/api/auth/facebook`, JSON.stringify(user), this.options)
-        .map((res: Response) => res.json)
-        .catch(this.handleError);
+    facebookLogin(): Observable<any> {
+        return this.http.get(`/api/auth/facebook`, this.options)
+            .map((res: Response) => res.json)
+            .catch(this.handleError);
     };
 
     private handleError(error: any) {
