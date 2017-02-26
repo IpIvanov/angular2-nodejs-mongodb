@@ -27,9 +27,28 @@ export class FacebookLoginComponent {
         };
         this.facebookService.init(fbParams);
     }
-
+//https://developers.facebook.com/docs/facebook-login/access-tokens/expiration-and-extension - workflow to convert short-live token to long-lived token
     faceBookLogin(): void {
-       let user = '';
+
+// TO-DO INCORPORATE THE CLIENT WORK, CHECK THE LINK ABOVE FOR MORE INFO.
+// faceBookLogin(): void {
+//         this.facebookService.login().then(
+//             (response: FacebookLoginResponse) => {
+//                 this.facebookService.api('/me', this.fbApiMethod, { fields: ['id', 'name', 'picture'] }).then(
+//                     (response: any) => {
+//                         if (this.dialogRef) {
+//                             this.dialogRef.close([response.name, response.picture.data.url]);
+//                         } else {
+//                             this.userUpdated.emit([response.name, response.picture.data.url]);
+//                         }
+//                     }
+//                 );
+//             },
+//             (error: any) => console.error(error)
+//         );
+//     }
+
+
         this.userService.facebookLogin(user).toPromise().then(
                     (response: any) => {
                     console.log(response);

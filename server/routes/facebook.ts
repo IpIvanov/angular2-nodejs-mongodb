@@ -4,7 +4,7 @@ import { User } from '../models/user/model';
 
 const facebookRouter: Router = Router();
 
-facebookRouter.get('/', passport.authenticate('facebook', { session: false, scope: ['email'] }));
+facebookRouter.get('/', passport.authenticate('facebook', { session: false, scope: ['email', 'user_birthday', ] }));
 
 facebookRouter.get('/callback',
     passport.authenticate('facebook', { session: false, failureRedirect: '/' }),

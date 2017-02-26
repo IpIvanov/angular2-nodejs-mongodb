@@ -14,6 +14,7 @@ const schema = new mongoose.Schema({
         token: String,
         email: String,
         name: String,
+        birthday: String,
         avatarImg: String
     },
     created_at: {
