@@ -15,11 +15,16 @@ facebookRouter.get('/callback',
         user.facebook.name = req.user.displayName;
         user.facebook.gender = req.user.gender;
         user.facebook.email = req.user.emails[0].value;
-        let facebookId = User.find({'facebook.id' : req.user.id});
-        if (facebookId) {
-            return res.json({ message: 'User already exists.' });
+        let facebookUser = User.find({'facebook.id' : req.user.id}).exec();
+        console.log(facebookUser.id === req.user.id);
+        if (facebookUser.id === req.user.id) {
+         user.update({'facebookUser.id': req.user.id}, {}, (err, rawUser) => {
+                 if (err) {
+                res.json({ error: err.errmsg, message: 'Username already exists.' });
+            }
+         });
         } else {
-        User.create(user, function (err){
+        user.save((err) => {
             if (err) {
                 res.json({ error: err.errmsg, message: 'Username already exists.' });
             } else {

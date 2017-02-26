@@ -1,5 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { DialogWindowComponent } from '../../md-dialog/md-dialog.component';
+import { FacebookService, FacebookApiMethod, FacebookInitParams, FacebookLoginResponse } from 'ng2-facebook-sdk';
+import { MdDialogRef } from '@angular/material';
 import { UserService } from '../../user/user.service';
 
 @Component({
@@ -14,7 +16,7 @@ export class FacebookLoginComponent {
     @Output() userUpdated = new EventEmitter<Array<any>>();
     @Input() dialogRef: MdDialogRef<DialogWindowComponent>;
 
-    constructor(private userService: UserService) { }
+    constructor(private userService: UserService, private facebookService: FacebookService) { }
 
     ngOnInit() {
         let fbParams: FacebookInitParams = {
@@ -27,20 +29,17 @@ export class FacebookLoginComponent {
     }
 
     faceBookLogin(): void {
-        this.facebookService.login().then(
-            (response: FacebookLoginResponse) => {
-                this.facebookService.api('/me', this.fbApiMethod, { fields: ['id', 'name', 'picture'] }).then(
+       let user = '';
+        this.userService.facebookLogin(user).toPromise().then(
                     (response: any) => {
+                    console.log(response);
                         if (this.dialogRef) {
                             this.dialogRef.close([response.name, response.picture.data.url]);
                         } else {
                             this.userUpdated.emit([response.name, response.picture.data.url]);
                         }
-                    }
-                );
             },
             (error: any) => console.error(error)
         );
     }
-//TODO create a facebook method for AUTH TOKEN
 }
