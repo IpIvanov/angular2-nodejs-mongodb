@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   todaysDate = new Date().toLocaleDateString();
   tommorow = new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().slice(0, 10);
   todaysMatches: Array<Object>;
+  sideMenuState: string = 'predictionsClosed';
 
   constructor(public footballData: FootballDataService) {
   }
@@ -39,7 +40,6 @@ export class DashboardComponent implements OnInit {
   }
 
   handleAddPrediction(prediction) {
-    console.log(prediction)
     this.fixtures.forEach((fixture: any, index: number) => {
       if (fixture.homeTeamName === prediction.homeTeamName && fixture.awayTeamName === prediction.awayTeamName) {
         this.fixtures.splice(index, 1);
@@ -47,5 +47,14 @@ export class DashboardComponent implements OnInit {
     })
     let copy = Object.assign({}, prediction);
     this.fixtures.push(copy);
+    if (this.fixtures.length > 0) {
+      this.sideMenuState = 'predictionsOpened';
+    } else {
+      this.sideMenuState = 'predictionsClosed';
+    }
+  }
+
+  handleMenuClose(menuState) {
+    this.sideMenuState = menuState;
   }
 }

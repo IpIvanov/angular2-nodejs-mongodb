@@ -1,7 +1,7 @@
-<div class="predictions-container" *ngIf="predictions.length > 0">
+<div class="predictions-container" [@togglePanel]='state' (@togglePanel.done)="sidePanelClosed($event)">
     <div class="col-md-12" *ngFor="let prediction of predictions; let i = index">
         <p>{{prediction.homeTeamName}} vs {{prediction.awayTeamName}} --> {{prediction.userPrediction}} <span class="remove-pred" (click)="removePrediction(i)">Remove</span></p>
     </div>
     <button md-raised-button color="primary" (click)="savePredictions()">Save</button>
-    <button md-raised-button (click)="clearPredictions()">Clear</button>
+    <button md-raised-button (click)="closeSidePanel()">Clear</button>
 </div>
