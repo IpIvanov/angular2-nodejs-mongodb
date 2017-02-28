@@ -11,9 +11,15 @@ export class PredictionsComponent {
 
     constructor() { }
 
-    ngOnInit() {
+    removePrediction(index): void {
+        this.predictions.splice(index, 1);
     }
 
-    ngOnChanges(changes: SimpleChanges) {
+    savePredictions(): void {
+        //TODO
+    }
+
+    clearPredictions(): void {
+        this.predictions = [];
     }
 }

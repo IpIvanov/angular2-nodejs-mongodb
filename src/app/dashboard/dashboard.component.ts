@@ -39,6 +39,12 @@ export class DashboardComponent implements OnInit {
   }
 
   handleAddPrediction(prediction) {
+    console.log(prediction)
+    this.fixtures.forEach((fixture: any, index: number) => {
+      if (fixture.homeTeamName === prediction.homeTeamName && fixture.awayTeamName === prediction.awayTeamName) {
+        this.fixtures.splice(index, 1);
+      }
+    })
     let copy = Object.assign({}, prediction);
     this.fixtures.push(copy);
   }
