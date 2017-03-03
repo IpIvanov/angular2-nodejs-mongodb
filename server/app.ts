@@ -2,6 +2,7 @@ import * as express from 'express';
 import { json, urlencoded } from 'body-parser';
 import * as path from 'path';
 import * as compression from 'compression';
+import * as morgan from 'morgan';
 
 import { registerRouter } from './routes/register';
 import { protectedRouter } from './routes/protected';
@@ -27,12 +28,39 @@ DatabaseConInit();
 app.disable('x-powered-by');
 
 app.use(json());
+
+if (process.env.NODE_ENV === 'development') {
+app.use(morgan('dev'));
+} else if (process.env.NODE_ENV === 'production') {
 app.use(compression());
+}
+
 app.use(urlencoded({ extended: true }));
 
 app.use(passport.initialize());
 passport.use(new FacebookStrategy(facebookOptions, (accessToken, refreshToken, profile, callback) => {
-    console.log(profile)
+    let currentUser = new User({
+        "facebook.id": profile.id,
+        "facebook.gender": profile.gender,
+        "facebook.name": profile.name,
+        "facebook.accessToken": accessToken
+    });
+
+
+    User.find({"facebook.id":profile.id}, function(err, user){
+        if(err) {
+            ({ error: err.errmsg, message: 'Error with the connection to mongoDB' })
+        } else {
+            console.log(`This is the current user ${currentUser}`);
+            console.log(`This is the user returened from the database ${user}`)
+        // User.update(currentUser, function(err){
+        //     if(err){
+        //         throw err;
+        //     }
+        // });
+        }
+    })
+
     return callback(null, profile);
 }));
 
@@ -63,11 +91,10 @@ app.use(function (req: express.Request, res: express.Response, next) {
 // production error handler
 // no stacktrace leaked to user
 app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
-
     res.status(err.status || 500);
     res.json({
         error: {},
-        message: err.message
+        message: `Message: ${err.message}`
     });
 });
 

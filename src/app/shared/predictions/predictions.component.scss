@@ -1,1 +1,21 @@
-// component css goes here
+.predictions-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #fff;
+    z-index: 9999;
+    width: 280px;
+    overflow-y: auto;
+    p {
+        padding: 15px 10px;
+    }
+    button {
+        margin: 20px;
+    }
+}
+
+.remove-pred {
+    cursor: pointer;
+    color: #FF9800;
+}

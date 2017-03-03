@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-ui-card',
   templateUrl: './md-card.component.html',
   styleUrls: ['./md-card.component.scss']

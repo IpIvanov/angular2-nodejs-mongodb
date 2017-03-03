@@ -11,11 +11,11 @@ const schema = new mongoose.Schema({
     facebook: {
         id: { type: String, unique: true },
         gender: String,
-        token: String,
         email: String,
         name: String,
         birthday: String,
-        avatarImg: String
+        avatarImg: String,
+        accessToken: String
     },
     created_at: {
         type: Date,

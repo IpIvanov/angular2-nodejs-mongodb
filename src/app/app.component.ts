@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     username: string;
     userLogged: boolean;
     avatarImg: string;
+    state: string = 'predictionsClosed';
 
     constructor(
         public vRef: ViewContainerRef,
