@@ -8,5 +8,17 @@ facebookRouter.get('/', passport.authenticate('facebook', { session: false, scop
 
 facebookRouter.get('/callback',
     passport.authenticate('facebook', { session: false, successRedirect: 'http://localhost:4200/profile'
-    , failureRedirect: 'http://localhost:4200/dashboard' }));
+    , failureRedirect: 'http://localhost:4200/dashboard' }),(profile, accessToken) => {
+        let currentUser = new User({
+        'facebook.id': 'profile.id',
+        'facebook.gender': 'profile.gender',
+        'facebook.name': 'profile.username',
+        'facebook.accessToken': 'accessToken'
+    });
+        User.findOneAndUpdate({'facebook.id': 'profile.id'}, {$set:{}}, {new: true}, {upsert: true},
+        {setDefaultsOnInsert: true}, {fields: 'facebook.accessToken'}, (err, updatedUser) => {
+            console.log(updatedUser)
+        })
+        
+    });
 export { facebookRouter };

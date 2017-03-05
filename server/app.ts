@@ -33,10 +33,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(morgan('dev'));
 } else if (process.env.NODE_ENV === 'production') {
 app.use(compression());
-}
-if (app.get('env') === 'production') {
-    // in production mode run application from dist folder
-    app.use(express.static(path.join(__dirname, '/../client')));
+app.use(express.static(path.join(__dirname, '/../client')));
 }
 
 app.use(urlencoded({ extended: true }));
@@ -44,35 +41,6 @@ app.use(urlencoded({ extended: true }));
 app.use(passport.initialize());
 
 passport.use(new FacebookStrategy(facebookOptions, (accessToken, refreshToken, profile, callback) => {
-    let currentUser = new User({
-        'facebook.id': profile.id,
-        'facebook.gender': profile.gender,
-        'facebook.name': profile.username,
-        'facebook.accessToken': accessToken
-    });
-
-    User.find({"facebook.id": profile.id},(err, user) => {
-        if(err) {
-            ({ error: err.errmsg, message: 'Error with the connection to mongoDB' })
-        } else if(user){
-            console.log(`This is the current user ${currentUser}`);
-            console.log(`This is the user returened from the database ${user}`)
-        User.update(currentUser, function(err, updatedUser){
-            if(err){
-                throw err;
-            } else{
-                console.log(updatedUser);
-            }
-        });
-        } else {
-            User.create(currentUser, (err) => {
-                if(err){
-                    throw err;
-                }
-            })
-        }
-    })
-
     return callback(null, profile, accessToken);
 }));
 
