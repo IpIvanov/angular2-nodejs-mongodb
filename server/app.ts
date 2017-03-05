@@ -40,9 +40,26 @@ app.use(urlencoded({ extended: true }));
 
 app.use(passport.initialize());
 
-passport.use(new FacebookStrategy(facebookOptions, (accessToken, refreshToken, profile, callback) => {
-    console.log(`This is your profille: ${profile}\nThis is your accessToken: ${accessToken}`)
-    return callback(null, profile, accessToken);
+passport.use(new FacebookStrategy(facebookOptions, (accessToken, refreshToken, facebookProfile, callback) => {  
+        let currentUser = new User({    
+        'facebook.id': facebookProfile.id,
+        'facebook.gender': facebookProfile.gender,
+        'facebook.name': facebookProfile.username,
+        'facebook.accessToken': accessToken
+    })
+        console.log(`This is the accessToken: ${accessToken}`)
+        console.log(`This is req.facebookUser: ${currentUser.updated_at}`)
+        console.log(`This is the user that we just create: ${currentUser}`)
+        User.findOneAndUpdate({'facebook.id': currentUser.id}, {$set:{'facebook.accessToken': accessToken, 
+        'updated_at': currentUser.updated_at, 'created_at': currentUser.created_at }},
+        {new: true}, {upsert: true}, {setDefaultsOnInsert: true}, {fields: 'facebook.accessToken'}, (err, user) => {
+            if(err){
+                throw err
+            } else {
+                console.log(user)
+            }
+        })
+    return callback(null, facebookProfile, accessToken);
 }));
 
 // api routes
