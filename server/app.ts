@@ -41,6 +41,7 @@ app.use(urlencoded({ extended: true }));
 app.use(passport.initialize());
 
 passport.use(new FacebookStrategy(facebookOptions, (accessToken, refreshToken, profile, callback) => {
+    console.log(`This is your profille: ${profile}\nThis is your accessToken: ${accessToken}`)
     return callback(null, profile, accessToken);
 }));
 
