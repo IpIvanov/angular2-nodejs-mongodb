@@ -32,18 +32,18 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.router.events.forEach((event) => {
             if (event instanceof NavigationEnd) {
-                this.authService.isLoggedIn(localStorage.getItem('app-jwt')).then(
-                    (res) => {
-                        if (res.error === '403 - Forbidden') {
-                            this.userLogged = false;
-                        }
-                        if (res.message === 'Valid token.') {
-                            this.userLogged = true;
-                            this.username = res.username;
-                            this.avatarImg = res.avatarImg;
-                        }
-                    }
-                );
+                // this.authService.isLoggedIn(localStorage.getItem('app-jwt')).then(
+                //     (res) => {
+                //         if (res.error === '403 - Forbidden') {
+                //             this.userLogged = false;
+                //         }
+                //         if (res.message === 'Valid token.') {
+                //             this.userLogged = true;
+                //             this.username = res.username;
+                //             this.avatarImg = res.avatarImg;
+                //         }
+                //     }
+                // );
             }
             // NavigationEnd
             // NavigationCancel

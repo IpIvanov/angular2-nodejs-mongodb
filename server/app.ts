@@ -30,36 +30,62 @@ app.disable('x-powered-by');
 app.use(json());
 
 if (process.env.NODE_ENV === 'development') {
-app.use(morgan('dev'));
+    app.use(morgan('dev'));
 } else if (process.env.NODE_ENV === 'production') {
-app.use(compression());
-app.use(express.static(path.join(__dirname, '/../client')));
+    app.use(compression());
 }
 
 app.use(urlencoded({ extended: true }));
-
+app.use(express.static(path.join(__dirname, '/../client')));
 app.use(passport.initialize());
 
-passport.use(new FacebookStrategy(facebookOptions, (accessToken, refreshToken, facebookProfile, callback) => {  
-        let currentUser = new User({    
-        'facebook.id': facebookProfile.id,
-        'facebook.gender': facebookProfile.gender,
-        'facebook.name': facebookProfile.username,
-        'facebook.accessToken': accessToken
-    })
-        console.log(`This is the accessToken: ${accessToken}`)
-        console.log(`This is req.facebookUser: ${currentUser.updated_at}`)
-        console.log(`This is the user that we just create: ${currentUser}`)
-        User.findOneAndUpdate({'facebook.id': currentUser.id}, {$set:{'facebook.accessToken': accessToken, 
-        'updated_at': currentUser.updated_at, 'created_at': currentUser.created_at }},
-        {new: true}, {upsert: true}, {setDefaultsOnInsert: true}, {fields: 'facebook.accessToken'}, (err, user) => {
-            if(err){
-                throw err
-            } else {
-                console.log(user)
+passport.serializeUser((user: any, callback) => {
+    callback(null, user.id);
+});
+
+passport.deserializeUser((id, callback) => {
+    User.findById(id, function (err, user) {
+        callback(err, user);
+    });
+});
+
+passport.use(new FacebookStrategy(facebookOptions, (accessToken, refreshToken, facebookProfile, callback) => {
+    process.nextTick(() => {
+        User.findOne({ 'facebook.id': facebookProfile.id }, function (err, user) {
+            if (err) {
+                return callback(err);
             }
-        })
-    return callback(null, facebookProfile, accessToken);
+
+            // if the user is found, then log them in
+            if (user) {
+                console.log('User exists', user);
+                return callback(null, user); // user found, return that user
+            } else {
+                // user is not found in db so save it
+                const newUser = new User();
+                newUser.facebook = {
+                    id: facebookProfile.id,
+                    gender: facebookProfile.gender,
+                    email: facebookProfile.emails[0].value,
+                    name: facebookProfile.displayName,
+                    birthday: '',
+                    avatarImg: facebookProfile.photos[0].value,
+                    accessToken: accessToken
+                }
+
+                // save our user to the database
+                newUser.save(function (err) {
+                    if (err) {
+                        throw err;
+                    }
+                    // if successful, return the new user
+                    console.log('New user created', newUser)
+                    return callback(null, user);
+                });
+            }
+
+        });
+    })
 }));
 
 // api routes
@@ -70,9 +96,6 @@ app.use('/api/feed', feedRouter);
 app.use('/api/user', userRouter);
 app.use('/api/auth/facebook', facebookRouter);
 app.use('/api/static', express.static(path.join(__dirname, 'public')));
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function (req: express.Request, res: express.Response, next) {
