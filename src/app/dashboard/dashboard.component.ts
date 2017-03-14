@@ -7,19 +7,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  animations: [
-    trigger('toggleContainerWidth', [
-      state('predictionsClosed', style({
-        transform: 'translateX(0)'
-      })),
-      state('predictionsOpened', style({
-        transform: 'translateX(-280px)'
-      })),
-      transition('predictionsClosed => predictionsOpened', animate('200ms ease-in')),
-      transition('predictionsOpened => predictionsClosed', animate('200ms ease-out')),
-    ])
-  ]
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
   form: FormGroup;
@@ -39,7 +27,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getTodaysMatches(this.startDate, this.endDate);
-    this.containerWidth = this.el.nativeElement.querySelector('.predictions-list').offsetWidth;
   }
 
   getTodaysMatches(startDate, endDate): void {

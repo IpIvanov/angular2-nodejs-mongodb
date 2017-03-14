@@ -1,7 +1,13 @@
 <div class="predictions-container" [@togglePanel]='state' (@togglePanel.done)="sidePanelClosed($event)">
-    <div class="col-md-12" *ngFor="let prediction of predictions; let i = index" [@togglePrediction]='toggle'>
-        <p>{{prediction.homeTeamName}} vs {{prediction.awayTeamName}} --> {{prediction.userPrediction}} <span class="remove-pred" (click)="removePrediction(i)">Remove</span></p>
+    <div class="list-wrapper" *ngFor="let prediction of predictions; let i = index" [@togglePrediction]='toggle'>
+        <p>{{prediction.homeTeamName}} vs {{prediction.awayTeamName}} </p>
+
+        <div [ngSwitch]="prediction.userPrediction">
+            <p *ngSwitchCase="'homeWin'">Home win <span class="remove-pred float-right" (click)="removePrediction(i)">Remove</span></p>
+            <p *ngSwitchCase="'draw'">Draw <span class="remove-pred float-right" (click)="removePrediction(i)">Remove</span></p>
+            <p *ngSwitchCase="'awayWin'">Away win <span class="remove-pred float-right" (click)="removePrediction(i)">Remove</span></p>
+        </div>
     </div>
-    <button md-raised-button color="primary" (click)="savePredictions()">Save</button>
-    <button md-raised-button (click)="closeSidePanel()">Clear</button>
+    <button md-raised-button color="primary" (click)="savePredictions()" class="save-pred">Save</button>
+    <button md-raised-button (click)="closeSidePanel()" class="clear-pred">Clear</button>
 </div>
