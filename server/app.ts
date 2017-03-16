@@ -58,7 +58,6 @@ passport.use(new FacebookStrategy(facebookOptions, (accessToken, refreshToken, f
 
             // if the user is found, then log them in
             if (user) {
-                console.log('User exists', user);
                 return callback(null, user); // user found, return that user
             } else {
                 // user is not found in db so save it
@@ -79,7 +78,6 @@ passport.use(new FacebookStrategy(facebookOptions, (accessToken, refreshToken, f
                         throw err;
                     }
                     // if successful, return the new user
-                    console.log('New user created', newUser)
                     return callback(null, user);
                 });
             }

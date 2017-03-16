@@ -42,6 +42,13 @@ export class UserService {
             .catch(this.handleError);
     };
 
+    getUserInfoByFacebookId(facebookId): Observable<any> {
+        return this.http.post(`/api/user/get-facebookUser`, JSON.stringify({ id: facebookId }), this.options)
+            //convert the response object to a json
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    };
+
     private handleError(error: any) {
         let errMsg = (error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         console.error(errMsg); // log to console instead

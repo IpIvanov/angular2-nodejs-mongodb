@@ -37,20 +37,7 @@ userRouter.post('/add-user', async (request: Request, response: Response, next) 
 /** @description get facebook user by id from mongodb
 */
 userRouter.get('/get-facebookUser', async (request: Request, response: Response) => {
-    const user = await User.find({
-        'facebook.id': request.user.id
-    }, function (err, user) {
-        console.log(user);
-        if (user.length) {
-            response
-                .status(200)
-                .json({ message: 'User exists!' });
-        } else {
-            response
-                .status(200)
-                .json({ message: 'Username is free.' });
-        }
-    });
+    //TODO write logic to get user info
 });
 
 export { userRouter };
