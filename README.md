@@ -4,8 +4,6 @@
 <img width="150" src="http://logos-download.com/wp-content/uploads/2016/09/Heroku_logo.png" />
 <img width="100" src="https://mlab.com/company/brand/resources/mLab-logo-onlight.png" />
 
-#Build Status: [![Build Status](https://travis-ci.org/IpIvanov/angular2-nodejs-mongodb.svg?branch=master)](https://travis-ci.org/IpIvanov/angular2-nodejs-mongodb)
-
 ## Info
 Angular 2 app with nodejs as backend server. Integrated easy deploy to heroku and connected to mLab - mongodb database storage.
 
