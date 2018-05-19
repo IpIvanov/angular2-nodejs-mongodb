@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/IpIvanov/angular2-nodejs-mongodb.svg?branch=master)](https://travis-ci.org/IpIvanov/angular2-nodejs-mongodb)
+
 <img width="50" src="https://hackbulgaria.com/media/angilar2_75BKQAg.png" />
 <img width="150" src="https://i.cloudup.com/zfY6lL7eFa-3000x3000.png" />
 <img width="200" src="https://upload.wikimedia.org/wikipedia/en/4/45/MongoDB-Logo.svg" />
